@@ -35,6 +35,15 @@ importers:
       '@angular/service-worker':
         specifier: 19.1.7
         version: 19.1.7(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1)
+      '@primeng/themes':
+        specifier: ^19.0.6
+        version: 19.0.6
+      primeicons:
+        specifier: ^7.0.0
+        version: 7.0.0
+      primeng:
+        specifier: 19.0.7
+        version: 19.0.7(ybcx753hpu57f2y7b2jem3llwi)
       rxjs:
         specifier: 7.8.1
         version: 7.8.1
@@ -182,6 +191,13 @@ packages:
         optional: true
       tailwindcss:
         optional: true
+
+  '@angular/cdk@19.1.5':
+    resolution: {integrity: sha512-+g20LIvYHThKBD6oXTYWVL6+ecaOWtPJu08R5xIfGrwXoj0l/9prLwuSW8GlIATI3mDkSesyhQsomb9jAUzKwQ==}
+    peerDependencies:
+      '@angular/common': ^19.0.0 || ^20.0.0
+      '@angular/core': ^19.0.0 || ^20.0.0
+      rxjs: ^6.5.3 || ^7.4.0
 
   '@angular/cli@19.1.8':
     resolution: {integrity: sha512-JmdLj8110DNWaxL03K7I06+nLyBfXgiIqYyrQx5QO9AodGkKHK5rE+7VD8MjZhUymua57HToD0oHaQgThJwTJQ==}
@@ -1727,6 +1743,17 @@ packages:
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
+
+  '@primeng/themes@19.0.6':
+    resolution: {integrity: sha512-TZCMh8amw1u8tu1EyXe4TzYXp1dQpyf/kRIhdxASJLwOQJW74RUwT3U9NuT0BOPpU1uvAJEMndEr0PZO2CX5Wg==}
+
+  '@primeuix/styled@0.3.2':
+    resolution: {integrity: sha512-ColZes0+/WKqH4ob2x8DyNYf1NENpe5ZguOvx5yCLxaP8EIMVhLjWLO/3umJiDnQU4XXMLkn2mMHHw+fhTX/mw==}
+    engines: {node: '>=12.11.0'}
+
+  '@primeuix/utils@0.3.2':
+    resolution: {integrity: sha512-B+nphqTQeq+i6JuICLdVWnDMjONome2sNz0xI65qIOyeB4EF12CoKRiCsxuZ5uKAkHi/0d1LqlQ9mIWRSdkavw==}
+    engines: {node: '>=12.11.0'}
 
   '@rollup/rollup-android-arm-eabi@4.30.1':
     resolution: {integrity: sha512-pSWY+EVt3rJ9fQ3IqlrEUtXh3cGqGtPDH1FQlNZehO2yYxCHEX1SPsz1M//NXwYfbTlcKr9WObLnJX9FsS9K1Q==}
@@ -4115,6 +4142,21 @@ packages:
     resolution: {integrity: sha512-Pdlw/oPxN+aXdmM9R00JVC9WVFoCLTKJvDVLgmJ+qAffBMxsV85l/Lu7sNx4zSzPyoL2euImuEwHhOXdEgNFZQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
+  primeicons@7.0.0:
+    resolution: {integrity: sha512-jK3Et9UzwzTsd6tzl2RmwrVY/b8raJ3QZLzoDACj+oTJ0oX7L9Hy+XnVwgo4QVKlKpnP/Ur13SXV/pVh4LzaDw==}
+
+  primeng@19.0.7:
+    resolution: {integrity: sha512-Yr+mV3RJhx4w31N26MYoppwq8kqb6ZX/Tctn4gE46+kewhb/t1ac8JQNrS6xPtsL0M2EYL0wS6o5nE0jfL5viw==}
+    peerDependencies:
+      '@angular/animations': ^19.0.0
+      '@angular/cdk': ^19.0.0
+      '@angular/common': ^19.0.0
+      '@angular/core': ^19.0.0
+      '@angular/forms': ^19.0.0
+      '@angular/platform-browser': ^19.0.0
+      '@angular/router': ^19.0.0
+      rxjs: ^6.0.0 || ^7.8.1
+
   proc-log@5.0.0:
     resolution: {integrity: sha512-Azwzvl90HaF0aCz1JrDdXQykFakSSNPaPoiZ9fm5qJIMHioDZEi7OAdRwSm6rSoPtY3Qutnm3L7ogmg3dc+wbQ==}
     engines: {node: ^18.17.0 || >=20.5.0}
@@ -5231,6 +5273,15 @@ snapshots:
       - terser
       - tsx
       - yaml
+
+  '@angular/cdk@19.1.5(@angular/common@19.1.7(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1)':
+    dependencies:
+      '@angular/common': 19.1.7(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1)
+      '@angular/core': 19.1.7(rxjs@7.8.1)(zone.js@0.15.0)
+      rxjs: 7.8.1
+      tslib: 2.8.1
+    optionalDependencies:
+      parse5: 7.2.1
 
   '@angular/cli@19.1.8(@types/node@22.13.4)(chokidar@4.0.3)':
     dependencies:
@@ -6866,6 +6917,16 @@ snapshots:
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
+
+  '@primeng/themes@19.0.6':
+    dependencies:
+      '@primeuix/styled': 0.3.2
+
+  '@primeuix/styled@0.3.2':
+    dependencies:
+      '@primeuix/utils': 0.3.2
+
+  '@primeuix/utils@0.3.2': {}
 
   '@rollup/rollup-android-arm-eabi@4.30.1':
     optional: true
@@ -9593,6 +9654,22 @@ snapshots:
       '@jest/schemas': 29.6.3
       ansi-styles: 5.2.0
       react-is: 18.3.1
+
+  primeicons@7.0.0: {}
+
+  primeng@19.0.7(ybcx753hpu57f2y7b2jem3llwi):
+    dependencies:
+      '@angular/animations': 19.1.7(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))
+      '@angular/cdk': 19.1.5(@angular/common@19.1.7(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1)
+      '@angular/common': 19.1.7(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1)
+      '@angular/core': 19.1.7(rxjs@7.8.1)(zone.js@0.15.0)
+      '@angular/forms': 19.1.7(@angular/common@19.1.7(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))(@angular/platform-browser@19.1.7(@angular/animations@19.1.7(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0)))(@angular/common@19.1.7(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0)))(rxjs@7.8.1)
+      '@angular/platform-browser': 19.1.7(@angular/animations@19.1.7(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0)))(@angular/common@19.1.7(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))
+      '@angular/router': 19.1.7(@angular/common@19.1.7(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))(@angular/platform-browser@19.1.7(@angular/animations@19.1.7(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0)))(@angular/common@19.1.7(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.1.7(rxjs@7.8.1)(zone.js@0.15.0)))(rxjs@7.8.1)
+      '@primeuix/styled': 0.3.2
+      '@primeuix/utils': 0.3.2
+      rxjs: 7.8.1
+      tslib: 2.8.1
 
   proc-log@5.0.0: {}
 
