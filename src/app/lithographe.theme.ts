@@ -3,6 +3,11 @@ import {definePreset} from '@primeng/themes';
 import Nora from '@primeng/themes/aura';
 
 export const LithographeTheme: ThemeType = {
+  preset: definePreset(Nora, {})
+};
+
+/*
+export const LithographeTheme: ThemeType = {
   preset: definePreset(Nora, {
     semantic: {
       primary: {
@@ -58,4 +63,5 @@ export const LithographeTheme: ThemeType = {
     darkModeSelector: false
   }
 };
+*/
 
