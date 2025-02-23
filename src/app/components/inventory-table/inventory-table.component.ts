@@ -8,7 +8,6 @@ import {Specimen} from '../../inventory/specimen';
     TableModule
   ],
   templateUrl: './inventory-table.component.html',
-  styleUrl: './inventory-table.component.scss'
 })
 export class InventoryTableComponent {
 

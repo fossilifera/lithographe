@@ -4,7 +4,7 @@ import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
 import {provideServiceWorker} from '@angular/service-worker';
 import {providePrimeNG} from 'primeng/config';
-import {LithographeTheme} from './lithographe.theme';
+import Nora from '@primeng/themes/aura';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,6 +14,10 @@ export const appConfig: ApplicationConfig = {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    providePrimeNG({theme: LithographeTheme})
+    providePrimeNG({
+      theme: {
+        preset: Nora
+      }
+    })
   ]
 };

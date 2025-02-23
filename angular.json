@@ -10,6 +10,8 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
+          "changeDetection": "OnPush",
+          "inlineStyle": true,
           "style": "scss"
         }
       },
