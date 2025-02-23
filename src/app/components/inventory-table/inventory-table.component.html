@@ -1,20 +1,18 @@
-<p-table [columns]="columns" [value]="virtualSpecimens()" [scrollable]="true" scrollHeight="400px" [rows]="100"
-         [virtualScroll]="true" [virtualScrollItemSize]="46" [lazy]="true" (onLazyLoad)="lazyLoad($event)">
-  <ng-template #header let-columns>
-    <tr>
-      @for (col of columns; track $index) {
-        <th style="width: 20%;">{{ col }}</th>
-      }
-    </tr>
-  </ng-template>
-  <ng-template #body let-rowData let-columns="columns">
-    <tr style="height:46px">
-      @for (col of columns; track $index) {
-      <td>
-        {{col}}
-        {{ virtualSpecimens()[col] }}
-      </td>
-      }
-    </tr>
-  </ng-template>
+<p-table [value]="specimens" [scrollable]="true" scrollHeight="flex" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template #header>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Company</th>
+            <th>Representative</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-specimen>
+        <tr>
+            <td>{{specimen.id}}</td>
+            <td>{{specimen.name}}</td>
+            <td>{{specimen.name}}</td>
+            <td>{{specimen.name}}</td>
+        </tr>
+    </ng-template>
 </p-table>
