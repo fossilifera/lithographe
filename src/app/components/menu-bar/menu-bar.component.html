@@ -2,11 +2,6 @@
   <ng-template #start>
     <H1>Lithographe</H1>
   </ng-template>
-  <nav>
-    <ng-template #item let-item let-root="root">
-      <a pRipple class="flex items-center p-menubar-item-link" [routerLink]="item.href">{{ item.label }}</a>
-    </ng-template>
-  </nav>
   <ng-template #end>
     <button pButton pRipple severity="success">
       <span class="pi pi-play"></span>

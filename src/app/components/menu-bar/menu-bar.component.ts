@@ -22,12 +22,12 @@ export class MenuBarComponent {
       {
         label: 'Inventaire',
         icon: 'pi pi-home',
-        href: '/'
+        routerLink: '/'
       },
     {
       label: 'Paramètres',
       icon: 'pi pi-cog',
-      href: ROUTES_PATHS.settings
+      routerLink: '/'+ROUTES_PATHS.settings
     }
     ];
 
