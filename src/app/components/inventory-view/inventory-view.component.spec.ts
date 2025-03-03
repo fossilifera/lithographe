@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InventoryPageComponent } from './inventory-page.component';
+import { InventoryViewComponent } from './inventory-view.component';
 
-describe('InventoryPageComponent', () => {
-  let component: InventoryPageComponent;
-  let fixture: ComponentFixture<InventoryPageComponent>;
+describe('InventoryViewComponent', () => {
+  let component: InventoryViewComponent;
+  let fixture: ComponentFixture<InventoryViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InventoryPageComponent]
+      imports: [InventoryViewComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(InventoryPageComponent);
+    fixture = TestBed.createComponent(InventoryViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

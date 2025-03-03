@@ -1,6 +1,6 @@
 import {Component, signal, WritableSignal} from '@angular/core';
 import {TableLazyLoadEvent, TableModule} from 'primeng/table';
-import {Specimen} from '../../inventory/specimen';
+import {Specimen} from '../../model/specimen';
 
 @Component({
   selector: 'ltg-inventory-table',

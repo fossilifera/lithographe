@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'ltg-inventory-page',
+  selector: 'ltg-settings-view',
   imports: [],
-  templateUrl: './inventory-page.component.html',
+  templateUrl: './settings-view.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InventoryPageComponent {
+export class SettingsViewComponent {
 
 }

@@ -1,14 +1,14 @@
 import {Routes} from '@angular/router';
-import {InventoryPageComponent} from './pages/inventory-page/inventory-page.component';
-import {SettingsPageComponent} from './pages/settings-page/settings-page.component';
+import {InventoryViewComponent} from './components/inventory-view/inventory-view.component';
+import {SettingsViewComponent} from './components/settings-view/settings-view.component';
 
 export const ROUTES_PATHS = {
   settings: "settings"
 }
 
 export const routes: Routes = [
-  {path: '', component: InventoryPageComponent},
-  {path: ROUTES_PATHS.settings, component: SettingsPageComponent},
+  {path: '', component: InventoryViewComponent},
+  {path: ROUTES_PATHS.settings, component: SettingsViewComponent},
   {path: '*', redirectTo: ''},
 
 ];
