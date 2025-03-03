@@ -14,7 +14,6 @@ export class InventoryTableComponent {
   columns: string[] = ["Id", "name", "toto", "tata"];
 
 
-
   specimens: Specimen[] = [
     {id: 1, name: "Hildoceras biffrons"},
     {id: 2, name: "Hildoceras biffrons"},

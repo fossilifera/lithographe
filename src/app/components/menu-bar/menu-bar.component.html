@@ -1,11 +1,11 @@
-<p-menubar [model]="items">
-  <ng-template #start>
-    <H1>Lithographe</H1>
-  </ng-template>
-  <ng-template #end>
-    <button pButton pRipple severity="success">
-      <span class="pi pi-play"></span>
-      <span pButtonLabel>Créer étiquettes</span>
-    </button>
-  </ng-template>
-</p-menubar>
+<div class="menubar">
+  <div class="menu-left">
+    <H1 class="menu-item">Lithographe</H1>
+    <a class="menu-item" routerLink="/">Inventaire</a>
+    <a class="menu-item" [routerLink]="'/'+ROUTES_PATHS.settings">Paramètres</a>
+  </div>
+  <button pButton pRipple severity="success">
+    <span class="pi pi-play"></span>
+    <span pButtonLabel>Créer étiquettes</span>
+  </button>
+</div>

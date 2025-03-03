@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {Menubar} from 'primeng/menubar';
 import {ButtonDirective} from 'primeng/button';
-import {RouterLink} from '@angular/router';
 import {ROUTES_PATHS} from '../../app.routes';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'ltg-menu-bar',
@@ -11,7 +11,7 @@ import {ROUTES_PATHS} from '../../app.routes';
     Menubar,
     Menubar,
     ButtonDirective,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './menu-bar.component.html'
 })
@@ -31,4 +31,5 @@ export class MenuBarComponent {
     }
     ];
 
+  protected readonly ROUTES_PATHS = ROUTES_PATHS;
 }
