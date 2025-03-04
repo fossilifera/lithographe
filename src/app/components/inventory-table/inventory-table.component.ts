@@ -1,5 +1,5 @@
-import {Component, signal, WritableSignal} from '@angular/core';
-import {TableLazyLoadEvent, TableModule} from 'primeng/table';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {TableModule} from 'primeng/table';
 import {Specimen} from '../../model/specimen';
 
 @Component({
@@ -8,11 +8,11 @@ import {Specimen} from '../../model/specimen';
     TableModule
   ],
   templateUrl: './inventory-table.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InventoryTableComponent {
 
   columns: string[] = ["Id", "name", "toto", "tata"];
-
 
   specimens: Specimen[] = [
     {id: 1, name: "Hildoceras biffrons"},
@@ -92,12 +92,4 @@ export class InventoryTableComponent {
     {id: 75, name: "Hildoceras biffrons"}
   ];
 
-  virtualSpecimens: WritableSignal<Specimen[]> = signal([this.specimens[0]]);
-
-  lazyLoad(event: TableLazyLoadEvent) {
-    const first = event.first ?? 0;
-    const rows = event.rows ?? 10;
-    let loadedCars = this.specimens.slice(first, first + rows);
-    this.virtualSpecimens.set(loadedCars);
-  }
 }

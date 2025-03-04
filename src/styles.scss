@@ -47,13 +47,21 @@ h1 {
     left: 0;
     right: 0;
     bottom: 0;
+  }
+
+  .view-grid {
     display: grid;
     grid-template-columns: 1fr 4fr;
-
 
     .table-container {
       overflow: hidden;
       height: 100%;
     }
+  }
+
+  .view-flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
 }
