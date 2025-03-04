@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Signal} from '@angular/core';
 import {InventorySideBarComponent} from '../inventory-side-bar/inventory-side-bar.component';
 import {InventoryTableComponent} from '../inventory-table/inventory-table.component';
 import {InventoryService} from '../../services/inventory.service';
@@ -17,9 +17,7 @@ import {InventoryImportComponent} from '../inventory-import/inventory-import.com
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InventoryViewComponent {
-  protected isInventoryLoaded: Signal<boolean>;
+  private readonly inventoryService: InventoryService = inject(InventoryService);
+  protected isInventoryLoaded: Signal<boolean> = toSignal(this.inventoryService.isInventoryLoaded(), {requireSync: true});
 
-  constructor(private readonly inventoryService: InventoryService) {
-    this.isInventoryLoaded = toSignal(this.inventoryService.isInventoryLoaded(), {requireSync: true});
-  }
 }

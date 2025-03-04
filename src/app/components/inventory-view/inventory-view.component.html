@@ -1,8 +1,8 @@
 @if (this.isInventoryLoaded()) {
-  <div class="view view-grid">
+  <div id="inventory-view-grid" class="view view-grid">
     <ltg-inventory-side-bar/>
     <ltg-inventory-table class="table-container"/>
   </div>
 } @else {
-  <ltg-inventory-import class="view view-flex"/>
+  <ltg-inventory-import id="inventory-import-component" class="view view-flex"/>
 }
