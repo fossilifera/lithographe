@@ -1,8 +1,8 @@
 export class InventoryMetadata {
-  readonly columns: string[];
+  readonly columnNames: string[];
 
   constructor(columns: string[]) {
-    this.columns = columns;
+    this.columnNames = columns;
   }
 
 }
