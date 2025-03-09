@@ -2,8 +2,8 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {InventoryViewComponent} from './inventory-view.component';
 import {InventoryService} from '../../services/inventory.service';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {InventoryMetadata} from '../../model/inventory-metadata';
+import {BehaviorSubject, of} from 'rxjs';
+import {provideHttpClient} from '@angular/common/http';
 
 describe('InventoryViewComponent', () => {
   let component: InventoryViewComponent;
@@ -14,6 +14,7 @@ describe('InventoryViewComponent', () => {
     await TestBed.configureTestingModule({
       imports: [InventoryViewComponent],
       providers: [
+        provideHttpClient(),
         {
           provide: InventoryService, useValue: {
             isInventoryLoaded: jest.fn().mockReturnValue(inventoryServiceIsLoadedMock.asObservable()),

@@ -6,6 +6,7 @@ import {provideServiceWorker} from '@angular/service-worker';
 import {providePrimeNG} from 'primeng/config';
 import Nora from '@primeng/themes/aura';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+import {provideHttpClient} from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,7 @@ export const appConfig: ApplicationConfig = {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    provideHttpClient(),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {

@@ -1,2 +1,11 @@
 <H2>Importer un inventaire</H2>
-<p-button (onClick)="importDemoInventory()" ><span pButtonLabel>Importer inventaire de démo</span></p-button>
+<div class="ltg-import-choice-cards">
+  <p-card header="Inventaire de démonstration">
+    <p>Importer un inventaire de démonstration pour tester l'application</p>
+    <p-button (onClick)="importDemoInventory()"><span pButtonLabel>Ouvrir</span></p-button>
+  </p-card>
+  <p-card header="Fichier CSV">
+    <p>Importer depuis un fichier CSV</p>
+    <p-fileupload mode="basic" chooseIcon="pi pi-upload" accept="text/csv" (onSelect)="importCsv($event)" [auto]="true" chooseLabel="Choisir le fichier" />
+  </p-card>
+</div>
