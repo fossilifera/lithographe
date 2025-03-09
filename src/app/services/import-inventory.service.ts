@@ -10,6 +10,6 @@ export class ImportInventoryService {
   private inventoryService: InventoryService = inject(InventoryService);
 
   public loadDemoInventory(): void {
-    this.inventoryService.loadInventory(DEMO_INVENTORY_METADATA, DEMO_INVENTORY_SPECIMENS);
+    this.inventoryService.loadNewInventory(DEMO_INVENTORY_METADATA, DEMO_INVENTORY_SPECIMENS);
   }
 }

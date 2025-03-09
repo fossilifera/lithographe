@@ -1,1 +1,9 @@
-<p>inventory-side-bar works!</p>
+<div class="ltg-inventory-sidebar-container">
+  <p-card header="Inventaire">
+    <P><i>Fichier</i> {{this.inventoryMetadata()?.title}}</P>
+    <P><i>importé le</i> {{this.creationDate()}}</P>
+  </p-card>
+  <p-card header="Outils">
+    <p-button label="Nouvel inventaire" severity="warn" (onClick)="newInventory()"/>
+  </p-card>
+</div>

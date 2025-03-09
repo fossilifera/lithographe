@@ -2,7 +2,8 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {InventoryViewComponent} from './inventory-view.component';
 import {InventoryService} from '../../services/inventory.service';
-import {BehaviorSubject, of} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {InventoryMetadata} from '../../model/inventory-metadata';
 
 describe('InventoryViewComponent', () => {
   let component: InventoryViewComponent;
@@ -16,6 +17,7 @@ describe('InventoryViewComponent', () => {
         {
           provide: InventoryService, useValue: {
             isInventoryLoaded: jest.fn().mockReturnValue(inventoryServiceIsLoadedMock.asObservable()),
+            getMetadata: jest.fn().mockReturnValue(of(undefined)),
             getColumns: jest.fn().mockReturnValue(of(["One", "Two", "Three"])),
             getSpecimens: jest.fn().mockReturnValue(of([]))
           } as Partial<InventoryService>

@@ -15,9 +15,7 @@ const DEMO_INVENTORY_COLUMNS: ColumnMetadata[] = [
   new ColumnMetadata(9, "Locality"),
 ];
 
-export const DEMO_INVENTORY_METADATA: InventoryMetadata = new InventoryMetadata(
-  DEMO_INVENTORY_COLUMNS
-);
+export const DEMO_INVENTORY_METADATA: InventoryMetadata = new InventoryMetadata('demoInventory', DEMO_INVENTORY_COLUMNS);
 
 
 export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [

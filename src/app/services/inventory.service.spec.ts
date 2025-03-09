@@ -9,7 +9,7 @@ import {Specimen} from '../model/specimen';
 describe('InventoryService', () => {
   let service: InventoryService;
 
-  const metadata = new InventoryMetadata([new ColumnMetadata(0, 'Code'), new ColumnMetadata(1, 'Genus'), new ColumnMetadata(2, 'Species')]);
+  const metadata = new InventoryMetadata('demoInventory', [new ColumnMetadata(0, 'Code'), new ColumnMetadata(1, 'Genus'), new ColumnMetadata(2, 'Species')]);
   const specimens: Specimen[] = [{id: 0, data:{code:"LTG-001", genus:'Hildoceras', species:'bifrons'}}]
 
   beforeEach(() => {
@@ -25,7 +25,7 @@ describe('InventoryService', () => {
   describe('load inventory', () => {
 
     beforeEach(() => {
-      service.loadInventory(metadata, specimens);
+      service.loadNewInventory(metadata, specimens);
     })
 
     it('should load metadata', (done) => {
