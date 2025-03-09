@@ -19,5 +19,4 @@ import {InventoryImportComponent} from '../inventory-import/inventory-import.com
 export class InventoryViewComponent {
   private readonly inventoryService: InventoryService = inject(InventoryService);
   protected isInventoryLoaded: Signal<boolean> = toSignal(this.inventoryService.isInventoryLoaded(), {requireSync: true});
-
 }

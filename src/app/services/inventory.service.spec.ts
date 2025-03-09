@@ -1,12 +1,14 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { InventoryService } from './inventory.service';
+import {InventoryService} from './inventory.service';
 import {InventoryMetadata} from '../model/inventory-metadata';
+import {LOCAL_STORAGE_METADATA_KEY} from '../constants';
 
 describe('InventoryService', () => {
   let service: InventoryService;
 
-  const metadata = new InventoryMetadata(['One', 'Two', 'Three']);
+  const firstColumnName: string = 'One';
+  const metadata = new InventoryMetadata([{position:0, name:firstColumnName}, {position:1, name:'Two'}, {position:2, name:'Three'}]);
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -21,12 +23,17 @@ describe('InventoryService', () => {
   describe('load inventory', () => {
 
     beforeEach(() => {
-      service.loadInventory(metadata);
+      service.loadInventory(metadata, []);
     })
 
-    it('should load metadata', () => {
-      expect(service.getColumNames()).toBeDefined();
-      expect(service.getColumNames()?.at(0)).toBe('One');
+    it('should load metadata', (done) => {
+      expect(service.getColumns()).toBeDefined();
+
+      service.getColumns().subscribe(columns => {
+        expect(columns).toBeDefined();
+        expect(columns.at(0)?.name).toBe(firstColumnName);
+        done();
+      });
     });
 
     it('should notify loading', (done) => {
@@ -35,5 +42,13 @@ describe('InventoryService', () => {
         done();
       });
     });
+
+    it('should persist metadata in local storage', () => {
+      const metadataJson = window.localStorage.getItem(LOCAL_STORAGE_METADATA_KEY);
+      const metadata = metadataJson ? JSON.parse(metadataJson) as InventoryMetadata : null;
+      expect(metadata).toBeDefined();
+      expect(metadata?.columns.at(0)?.name).toBe(firstColumnName);
+    });
+
   });
 });

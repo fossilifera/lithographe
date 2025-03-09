@@ -1,18 +1,15 @@
 import {inject, Injectable} from '@angular/core';
 import {InventoryService} from './inventory.service';
-import {LoggerService} from './logger.service';
-import {InventoryMetadata} from '../model/inventory-metadata';
+import {DEMO_INVENTORY_METADATA, DEMO_INVENTORY_SPECIMENS} from './demo-inventory';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImportInventoryService {
 
-  private logger: LoggerService = inject(LoggerService);
   private inventoryService: InventoryService = inject(InventoryService);
 
   public loadDemoInventory(): void {
-    let metadata = new InventoryMetadata(["Number","Genus", "species"]);
-    this.inventoryService.loadInventory(metadata);
+    this.inventoryService.loadInventory(DEMO_INVENTORY_METADATA, DEMO_INVENTORY_SPECIMENS);
   }
 }
