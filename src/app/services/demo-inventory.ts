@@ -42,7 +42,7 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
       order: 'Scleractinia',
       genus: 'Chondrocoenia',
       species: 'clavellata',
-      author: 'Chondrocoenia clavellata Terquem and Piette, 1865',
+      author: 'Terquem and Piette, 1865',
       age: 'Sinemurian',
       country: 'Morocco',
       locality: 'Amellagou'
@@ -56,7 +56,7 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
       order: 'Hexanthiniaria ?',
       genus: 'Hispaniastraea',
       species: 'muricana',
-      author: 'Hispaniastraea muricana Turnsek and Geyer, 1975',
+      author: 'Turnsek and Geyer, 1975',
       age: 'Sinemurian',
       country: 'Morocco',
       locality: 'Amellagou'
