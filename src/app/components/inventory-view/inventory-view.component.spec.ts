@@ -2,8 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {InventoryViewComponent} from './inventory-view.component';
 import {InventoryService} from '../../services/inventory.service';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {Specimen} from '../../model/specimen';
+import {BehaviorSubject, of} from 'rxjs';
 
 describe('InventoryViewComponent', () => {
   let component: InventoryViewComponent;

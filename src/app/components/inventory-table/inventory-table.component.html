@@ -1,9 +1,9 @@
-<p-table [value]="specimens()" [scrollable]="true" scrollHeight="flex" stripedRows showGridlines>
+<p-table [value]="specimens()" [scrollable]="true" scrollHeight="flex"  [resizableColumns]="true" stripedRows showGridlines>
   <ng-template #header>
     <tr>
       <th></th>
       @for (column of columns(); track column.position) {
-        <th>{{ column.name }}</th>
+        <th>{{ column.displayName }}</th>
       }
     </tr>
   </ng-template>
@@ -11,7 +11,7 @@
     <tr>
       <td>{{specimen.id}}</td>
       @for (column of columns(); track column.position) {
-        <td>{{ specimen.name }}</td>
+        <td>{{ specimen.data[column.jsonName] }}</td>
       }
     </tr>
   </ng-template>

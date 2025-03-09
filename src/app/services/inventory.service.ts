@@ -2,9 +2,9 @@ import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject, map, Observable} from 'rxjs';
 import {LoggerService} from './logger.service';
 import {InventoryMetadata} from '../model/inventory-metadata';
-import {LOCAL_STORAGE_METADATA_KEY} from '../constants';
-import {ColumnMetadata} from '../model/column-metadata';
 import {Specimen} from '../model/specimen';
+import {ColumnMetadata} from '../model/column-metadata';
+import {KeysLocalStorage} from '../enums/local-storage-keys';
 
 
 @Injectable({
@@ -33,14 +33,21 @@ export class InventoryService {
 
   public loadInventory(metadata: InventoryMetadata, specimens: Specimen[]): void {
     this.logger.info("InventoryService", "Loading inventory");
+    this.persistMetadata(metadata);
     this.metadataSubject.next(metadata);
-    this.persistMetadataInLocalStorage(metadata);
+    this.persistSpecimens(specimens);
     this.specimensSubject.next(specimens);
     this.inventoryLoadingState.next(true);
   }
 
-  private persistMetadataInLocalStorage(metadata: InventoryMetadata): void {
-    window.localStorage.setItem(LOCAL_STORAGE_METADATA_KEY, JSON.stringify(metadata));
+  private persistMetadata(metadata: InventoryMetadata): void {
+    this.logger.debug("InventoryService", "Saving inventory metadata in local storage")
+    window.localStorage.setItem(KeysLocalStorage.inventoryMetadata, JSON.stringify(metadata));
+  }
+
+  private persistSpecimens(specimens: Specimen[]): void {
+    this.logger.debug("InventoryService", "Saving inventory specimens in local storage")
+    window.localStorage.setItem(KeysLocalStorage.inventorySpecimens, JSON.stringify(specimens));
   }
 
 }

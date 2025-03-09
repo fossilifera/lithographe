@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, inject, input, Signal, signal} from '@angular/core';
 import {TableModule} from 'primeng/table';
-import {Specimen} from '../../model/specimen';
 import {InventoryService} from '../../services/inventory.service';
 import {toSignal} from '@angular/core/rxjs-interop';
 

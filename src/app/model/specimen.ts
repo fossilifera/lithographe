@@ -1,4 +1,4 @@
 export interface Specimen {
   id: number;
-  name: string;
+  data: Record<string, string>
 }
