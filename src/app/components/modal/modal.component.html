@@ -1,0 +1,4 @@
+<p-dialog [header]="modalContent()?.title" [modal]="true" [visible]="isVisible()" closable="false" draggable="false">
+  <p>{{modalContent()?.message}}</p>
+  <p-progress-spinner aria-label="Loading" [hidden]="!modalContent()?.displaySpinner"/>
+</p-dialog>

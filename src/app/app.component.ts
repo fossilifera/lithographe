@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {MenuBarComponent} from './components/menu-bar/menu-bar.component';
+import {ModalComponent} from './components/modal/modal.component';
 
 @Component({
   selector: 'ltg-root',
-  imports: [RouterOutlet, MenuBarComponent],
+  imports: [RouterOutlet, MenuBarComponent, ModalComponent],
   templateUrl: './app.component.html',
 })
 export class AppComponent {
