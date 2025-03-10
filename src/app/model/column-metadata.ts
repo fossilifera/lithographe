@@ -3,10 +3,10 @@ export class ColumnMetadata {
   readonly displayName: string;
   readonly jsonName: string;
 
-  constructor(position: number, displayName: string) {
+  constructor(position: number, displayName: string, jsonName: string = this.transformToAsciiSafeName(displayName)) {
     this.position = position;
     this.displayName = displayName;
-    this.jsonName= this.transformToAsciiSafeName(displayName);
+    this.jsonName= jsonName;
   }
 
   private transformToAsciiSafeName(name: string) : string {

@@ -19,6 +19,7 @@ export class InventoryService {
 
   constructor() {
     const metadata: InventoryMetadata | undefined = this.getMetadataFromStorage();
+    console.log(metadata);
     if(metadata) {
       const specimens = this.getSpecimensFromStorage();
       if(specimens) {
@@ -68,7 +69,7 @@ export class InventoryService {
       return undefined;
     }
     try {
-      return JSON.parse(metadataLocalStorage) as InventoryMetadata;
+      return InventoryMetadata.fromJson(metadataLocalStorage);
     } catch (e: any) {
       this.logger.errorWithError("InventoryService", "Error during parsing inventory metadata from local storage", e);
       return undefined;

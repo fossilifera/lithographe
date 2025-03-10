@@ -18,11 +18,7 @@ export class InventorySideBarComponent {
 
   private inventoryService: InventoryService = inject(InventoryService);
   protected inventoryMetadata = toSignal(this.inventoryService.getMetadata());
-  protected creationDate = computed(() => {
-      const date: Date | undefined = this.inventoryMetadata()?.creationDate;
-      return date instanceof Date ? date.toLocaleDateString() : '';
-    }
-  );
+  protected creationDate = computed(() => this.inventoryMetadata()?.creationDate?.toLocaleDateString());
 
 
   newInventory(): void {
