@@ -7,7 +7,7 @@ import {Specimen} from '../model/specimen';
 @Injectable({
   providedIn: 'root'
 })
-export class LocalStorageService {
+export class StorageService {
   private logger: LoggerService = inject(LoggerService);
 
   constructor() { }
@@ -48,5 +48,8 @@ export class LocalStorageService {
     window.localStorage.setItem(KeysLocalStorage.inventorySpecimens, JSON.stringify(specimens));
   }
 
-
+  public deleteAllData(): void {
+    this.logger.info("LocalStorageService", "Clear local storage")
+    window.localStorage.clear();
+  }
 }
