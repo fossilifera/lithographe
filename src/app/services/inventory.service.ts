@@ -20,7 +20,6 @@ export class InventoryService {
 
   constructor() {
     const metadata: InventoryMetadata | undefined = this.storageService.getMetadataFromStorage();
-    console.log(metadata);
     if(metadata) {
       const specimens = this.storageService.getSpecimensFromStorage();
       if(specimens) {
