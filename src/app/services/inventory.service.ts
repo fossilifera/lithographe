@@ -5,6 +5,7 @@ import {InventoryMetadata} from '../model/inventory-metadata';
 import {Specimen} from '../model/specimen';
 import {ColumnMetadata} from '../model/column-metadata';
 import {KeysLocalStorage} from '../enums/local-storage-keys';
+import {LocalStorageService} from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +13,17 @@ import {KeysLocalStorage} from '../enums/local-storage-keys';
 export class InventoryService {
 
   private logger: LoggerService = inject(LoggerService);
-  private inventoryLoadingState = new BehaviorSubject<boolean>(false);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
 
+  private inventoryLoadingState = new BehaviorSubject<boolean>(false);
   private metadataSubject = new BehaviorSubject<InventoryMetadata | undefined>(undefined)
   private specimensSubject = new BehaviorSubject<Specimen[]>([]);
 
   constructor() {
-    const metadata: InventoryMetadata | undefined = this.getMetadataFromStorage();
+    const metadata: InventoryMetadata | undefined = this.localStorageService.getMetadataFromStorage();
     console.log(metadata);
     if(metadata) {
-      const specimens = this.getSpecimensFromStorage();
+      const specimens = this.localStorageService.getSpecimensFromStorage();
       if(specimens) {
         this.logger.info("InventoryService", "Load inventory from storage")
         this.loadInventory(metadata, specimens);
@@ -54,8 +56,8 @@ export class InventoryService {
 
   public loadNewInventory(metadata: InventoryMetadata, specimens: Specimen[]): void {
     this.logger.info("InventoryService", "Load new inventory");
-    this.persistMetadata(metadata);
-    this.persistSpecimens(specimens);
+    this.localStorageService.persistMetadata(metadata);
+    this.localStorageService.persistSpecimens(specimens);
     this.loadInventory(metadata, specimens);
   }
 
@@ -63,40 +65,5 @@ export class InventoryService {
     this.inventoryLoadingState.next(false);
   }
 
-  private getMetadataFromStorage(): InventoryMetadata | undefined {
-    const metadataLocalStorage = window.localStorage.getItem(KeysLocalStorage.inventoryMetadata);
-    if (!metadataLocalStorage) {
-      return undefined;
-    }
-    try {
-      return InventoryMetadata.fromJson(metadataLocalStorage);
-    } catch (e: any) {
-      this.logger.errorWithError("InventoryService", "Error during parsing inventory metadata from local storage", e);
-      return undefined;
-    }
-  }
-
-  private persistMetadata(metadata: InventoryMetadata): void {
-    this.logger.debug("InventoryService", "Saving inventory metadata in local storage")
-    window.localStorage.setItem(KeysLocalStorage.inventoryMetadata, JSON.stringify(metadata));
-  }
-
-  private getSpecimensFromStorage(): Specimen[] | undefined {
-    const specimenLocalStorage = window.localStorage.getItem(KeysLocalStorage.inventorySpecimens);
-    if(!specimenLocalStorage){
-      return undefined;
-    }
-    try {
-      return JSON.parse(specimenLocalStorage) as Specimen[];
-    } catch (e) {
-      this.logger.errorWithError("InventoryService", "Error during parsing specimens from local storage", e);
-      return undefined;
-    }
-  }
-
-  private persistSpecimens(specimens: Specimen[]): void {
-    this.logger.debug("InventoryService", "Saving inventory specimens in local storage")
-    window.localStorage.setItem(KeysLocalStorage.inventorySpecimens, JSON.stringify(specimens));
-  }
 
 }
