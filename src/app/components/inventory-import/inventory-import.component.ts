@@ -25,15 +25,7 @@ export class InventoryImportComponent {
   }
 
   importCsv(event: FileSelectEvent): void {
-    console.dir(event.files);
-    const reader = new FileReader()
-    reader.addEventListener("loadend", () => {
-      let text = reader.result;
-      console.log(text);
-    })
-    reader.readAsText(event.files[0]);
-
-
+    this.importInventoryService.importCsv(event.files[0]);
   }
 
 }
