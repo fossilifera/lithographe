@@ -25,7 +25,8 @@ export class InventoryImportComponent {
   }
 
   importCsv(event: FileSelectEvent): void {
-    this.importInventoryService.importCsv(event.files[0]);
+    //TODO sélecteur options
+    this.importInventoryService.readCsvFileForImport(event.files[0], {firstLineAsHeader: true, separator: ';'});
   }
 
 }

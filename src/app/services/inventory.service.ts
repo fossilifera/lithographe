@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {inject, Injectable, OnInit} from '@angular/core';
 import {BehaviorSubject, map, Observable} from 'rxjs';
 import {LoggerService} from './logger.service';
 import {InventoryMetadata} from '../model/inventory-metadata';
@@ -9,7 +9,7 @@ import {StorageService} from './storage.service';
 @Injectable({
   providedIn: 'root'
 })
-export class InventoryService {
+export class InventoryService implements OnInit {
 
   private logger: LoggerService = inject(LoggerService);
   private storageService: StorageService = inject(StorageService);
@@ -28,6 +28,10 @@ export class InventoryService {
       }
     }
   }
+
+  ngOnInit(): void {
+        throw new Error('Method not implemented.');
+    }
 
   public isInventoryLoaded(): Observable<boolean> {
     return this.inventoryLoadingState.asObservable();
