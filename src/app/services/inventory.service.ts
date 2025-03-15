@@ -23,7 +23,7 @@ export class InventoryService implements OnInit {
     if(metadata) {
       const specimens = this.storageService.getSpecimensFromStorage();
       if(specimens) {
-        this.logger.info("InventoryService", "Load inventory from storage")
+        this.logger.info("Load inventory from storage")
         this.loadInventory(metadata, specimens);
       }
     }
@@ -57,7 +57,7 @@ export class InventoryService implements OnInit {
   }
 
   public loadNewInventory(metadata: InventoryMetadata, specimens: Specimen[]): void {
-    this.logger.info("InventoryService", "Load new inventory");
+    this.logger.info("Load new inventory");
     this.storageService.persistMetadata(metadata);
     this.storageService.persistSpecimens(specimens);
     this.loadInventory(metadata, specimens);

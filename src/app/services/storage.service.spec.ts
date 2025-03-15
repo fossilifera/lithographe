@@ -6,7 +6,7 @@ import {InventoryMetadata} from '../model/inventory-metadata';
 import {Specimen} from '../model/specimen';
 import {ColumnMetadata} from '../model/column-metadata';
 
-describe('LocalStorageService', () => {
+describe('StorageService', () => {
   let service: StorageService;
 
   const metadata = new InventoryMetadata('demoInventory', [new ColumnMetadata(0, 'Code'), new ColumnMetadata(1, 'Genus'), new ColumnMetadata(2, 'Species')]);

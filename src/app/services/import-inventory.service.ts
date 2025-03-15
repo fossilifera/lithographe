@@ -29,7 +29,7 @@ export class ImportInventoryService {
       delimiter: params.separator,
     };
 
-    this.logger.info("ImportInventoryService", "Import csv file");
+    this.logger.info("Import csv file");
     this.modalService.displayModal(
       {title: "Import fichier CSV", message: "Veuillez patientez pendant l'import du fichier", displaySpinner: true}
     );
@@ -58,7 +58,7 @@ export class ImportInventoryService {
       },
       error: err => {
         // TODO gestion erreur
-        this.logger.errorWithError("ImportInventoryService", "Error during parsing csv file", err);
+        this.logger.errorWithError("Error during parsing csv file", err);
       }
     });
   }
@@ -67,7 +67,7 @@ export class ImportInventoryService {
     const reader = new FileReader();
     const readerLoadEnd = fromEvent(reader, 'loadend').pipe(map((event) => {
       console.log(event);
-      this.logger.debug("ImportInventoryService", "Reading csv file ended");
+      this.logger.debug("Reading csv file ended");
       return reader.result as string;
     }));
     reader.readAsText(textFile);

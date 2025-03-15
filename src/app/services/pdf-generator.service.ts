@@ -1,10 +1,10 @@
 import {inject, Injectable} from '@angular/core';
 import {InventoryService} from './inventory.service';
-import {Logger} from '../model/logger';
 import {from, map, Observable, switchMap} from 'rxjs';
 import {Specimen} from '../model/specimen';
 import {BLANK_PDF, Template} from '@pdfme/common';
 import {generate} from '@pdfme/generator';
+import {LoggerService} from './logger.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class PdfGeneratorService {
 
   private inventoryService: InventoryService = inject(InventoryService);
 
-  private logger = new Logger('PdfGeneratorService');
+  private logger: LoggerService = inject(LoggerService);
 
   public generateLabels(): void {
 

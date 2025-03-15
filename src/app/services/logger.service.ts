@@ -1,32 +1,44 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {LogLevel} from '../enums/log-level';
+import {SettingsService} from './settings.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoggerService {
 
-  public error(loggerName: string, message: string): void {
-    console.error(this.formatMessage(loggerName, LogLevel.ERROR, message));
+  private logLevelConfigure: LogLevel = inject(SettingsService).getLogLevel();
+
+  public error(message: string): void {
+    if (this.logLevelConfigure >= LogLevel.ERROR) {
+      console.error(this.formatMessage(LogLevel.ERROR, message));
+    }
   }
-  public errorWithError(loggerName: string, message: string, error: any): void {
+
+  public errorWithError(message: string, error: any): void {
     const errorMessage: string = (error instanceof Error) ? ` ${error.name} : ${error.message}` : "Unknown error";
-    this.error(loggerName, `${message}  --  ${errorMessage}`)
+    this.error(`${message}  --  ${errorMessage}`)
   }
 
-  public warn(loggerName: string, message: string): void {
-    console.warn(this.formatMessage(loggerName, LogLevel.WARN, message));
+  public warn(message: string): void {
+    if (this.logLevelConfigure >= LogLevel.WARN) {
+      console.warn(this.formatMessage(LogLevel.WARN, message));
+    }
   }
 
-  public info(loggerName: string, message: string): void {
-    console.log(this.formatMessage(loggerName, LogLevel.INFO, message));
+  public info(message: string): void {
+    if (this.logLevelConfigure >= LogLevel.INFO) {
+      console.log(this.formatMessage(LogLevel.INFO, message));
+    }
   }
 
-  public debug(loggerName: string, message: string): void {
-      console.log(this.formatMessage(loggerName, LogLevel.DEBUG, message));
+  public debug(message: string): void {
+    if (this.logLevelConfigure >= LogLevel.DEBUG) {
+      console.log(this.formatMessage(LogLevel.DEBUG, message));
+    }
   }
 
-  private formatMessage(loggerName: string, level: LogLevel, message: string): string {
-    return `${new Date().toISOString()}  ${LogLevel[level]}  ---  [${loggerName}] ${message}`;
+  private formatMessage(level: LogLevel, message: string): string {
+    return `${new Date().toISOString()}  ${LogLevel[level]}  ---  ${message}`;
   }
 }
