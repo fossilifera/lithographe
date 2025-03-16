@@ -1,7 +1,16 @@
-<p-table [value]="specimens()" [scrollable]="true" scrollHeight="flex"  [resizableColumns]="true" stripedRows showGridlines>
+<p-table
+  [value]="specimens()"
+  dataKey="id"
+  [scrollable]="true"
+  scrollHeight="flex"
+  [resizableColumns]="true"
+  stripedRows
+  showGridlines>
   <ng-template #header>
     <tr>
-      <th></th>
+      <th>
+        <p-checkbox [ngModel]="isAllSpecimensSelected()" binary="true" (onChange)="toogleAllSpecimens()" />
+      </th>
       @for (column of columns(); track column.position) {
         <th>{{ column.displayName }}</th>
       }
@@ -9,7 +18,9 @@
   </ng-template>
   <ng-template #body let-specimen>
     <tr>
-      <td>{{specimen.id}}</td>
+      <td>
+        <p-checkbox [ngModel]="specimen.selected" binary="true" (onChange)="toogleSelect(specimen.id)" />
+      </td>
       @for (column of columns(); track column.position) {
         <td>{{ specimen.data[column.jsonName] }}</td>
       }

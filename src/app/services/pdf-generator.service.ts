@@ -44,7 +44,7 @@ export class PdfGeneratorService {
   }
 
   private calculateInputs(): Observable<Record<string, string>[]> {
-    return this.inventoryService.getSpecimens().pipe(
+    return this.inventoryService.getSelectedSpecimens().pipe(
       map((specimens: Specimen[]) => {
         return specimens.map((specimen: Specimen) => this.mapInput(String(specimen.id)));
       })

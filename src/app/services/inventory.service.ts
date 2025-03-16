@@ -17,12 +17,13 @@ export class InventoryService implements OnInit {
   private inventoryLoadingState = new BehaviorSubject<boolean>(false);
   private metadataSubject = new BehaviorSubject<InventoryMetadata | undefined>(undefined)
   private specimensSubject = new BehaviorSubject<Specimen[]>([]);
+  private isAllSpecimenSelectedSubject = new BehaviorSubject<boolean>(true);
 
   constructor() {
     const metadata: InventoryMetadata | undefined = this.storageService.getMetadataFromStorage();
-    if(metadata) {
+    if (metadata) {
       const specimens = this.storageService.getSpecimensFromStorage();
-      if(specimens) {
+      if (specimens) {
         this.logger.info("Load inventory from storage")
         this.loadInventory(metadata, specimens);
       }
@@ -30,11 +31,15 @@ export class InventoryService implements OnInit {
   }
 
   ngOnInit(): void {
-        throw new Error('Method not implemented.');
-    }
+    throw new Error('Method not implemented.');
+  }
 
   public isInventoryLoaded(): Observable<boolean> {
     return this.inventoryLoadingState.asObservable();
+  }
+
+  public isAllSpecimensSelected(): Observable<boolean> {
+    return this.isAllSpecimenSelectedSubject.asObservable();
   }
 
   public getMetadata(): Observable<InventoryMetadata | undefined> {
@@ -50,9 +55,15 @@ export class InventoryService implements OnInit {
     return this.specimensSubject.asObservable();
   }
 
+  public getSelectedSpecimens(): Observable<Specimen[]> {
+    return this.specimensSubject.asObservable()
+      .pipe(map(specimens => specimens.filter(specimen => specimen.selected)));
+  }
+
   private loadInventory(metadata: InventoryMetadata, specimens: Specimen[]): void {
     this.metadataSubject.next(metadata);
     this.specimensSubject.next(specimens);
+    this.updateAllSpecimenSelected();
     this.inventoryLoadingState.next(true);
   }
 
@@ -67,5 +78,31 @@ export class InventoryService implements OnInit {
     this.inventoryLoadingState.next(false);
   }
 
+  public toogleSpecimenSelection(id: number): void {
+    this.logger.debug(`Toogle selection for id ${id}`);
+    this.specimensSubject.next(
+      this.specimensSubject.getValue()
+        .map((specimen: Specimen) => specimen.id === id ? {...specimen, selected: !specimen.selected} : specimen)
+    );
+    this.updateAllSpecimenSelected();
+  }
+
+  public toogleAllSpecimen(): void {
+    const targetSelection = !this.isAllSpecimenSelectedSubject.getValue();
+    this.logger.debug(`${targetSelection ? 'Select' : 'Unselect'} all specimens`);
+    this.specimensSubject.next(
+      this.specimensSubject.getValue()
+        .map((specimen: Specimen) => {
+          return {...specimen, selected: targetSelection};
+        })
+    );
+    this.isAllSpecimenSelectedSubject.next(targetSelection);
+  }
+
+  private updateAllSpecimenSelected(): void {
+    this.isAllSpecimenSelectedSubject.next(
+      this.specimensSubject.getValue().every(specimen => specimen.selected)
+    );
+  }
 
 }
