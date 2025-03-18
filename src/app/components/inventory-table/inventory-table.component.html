@@ -8,7 +8,7 @@
   showGridlines>
   <ng-template #header>
     <tr>
-      <th>
+      <th pFrozenColumn>
         <p-checkbox [ngModel]="isAllSpecimensSelected()" binary="true" (onChange)="toogleAllSpecimens()" />
       </th>
       @for (column of columns(); track column.position) {
@@ -18,8 +18,8 @@
   </ng-template>
   <ng-template #body let-specimen>
     <tr>
-      <td>
-        <p-checkbox [ngModel]="specimen.selected" binary="true" (onChange)="toogleSelect(specimen.id)" />
+      <td pFrozenColumn>
+        <p-checkbox [ngModel]="this.selectedSpecimens().includes(specimen.id)" binary="true" (onChange)="toogleSelect(specimen.id)" />
       </td>
       @for (column of columns(); track column.position) {
         <td>{{ specimen.data[column.jsonName] }}</td>

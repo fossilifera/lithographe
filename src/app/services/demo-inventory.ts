@@ -20,7 +20,6 @@ export const DEMO_INVENTORY_METADATA: InventoryMetadata = new InventoryMetadata(
 
 export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
   {id: 0,
-    selected: true,
     data: {
       number: 'LTG-001',
       phyllum: 'Mollusca',
@@ -36,7 +35,6 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
   },
 
   {id: 1,
-    selected: true,
     data: {
       number: 'LTG-002',
       phyllum: 'Cnidaria',
@@ -51,7 +49,6 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     }
   },
   {id: 2,
-    selected: true,
     data: {
       number: 'LTG-003',
       phyllum: 'Cnidaria',
@@ -66,7 +63,6 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     }
   },
   {id: 3,
-    selected: true,
     data: {
       number: 'LTG-004',
       phyllum: 'Cnidaria',
@@ -81,7 +77,6 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     }
   },
   {id: 4,
-    selected: true,
     data: {
       number: 'LTG-005',
       phyllum: 'Cnidaria',
@@ -96,7 +91,6 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     }
   },
   {id: 5,
-    selected: true,
     data: {
       number: 'LTG-006',
       phyllum: 'Cnidaria',
@@ -111,7 +105,6 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     }
   },
   {id: 6,
-    selected: true,
     data: {
       number: 'LTG-007',
       phyllum: 'Cnidaria',
@@ -126,7 +119,6 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     }
   },
   {id: 7,
-    selected: true,
     data: {
       number: 'LTG-008',
       phyllum: 'Cnidaria',
@@ -141,7 +133,6 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     }
   },
   {id: 8,
-    selected: true,
     data: {
       number: 'LTG-009',
       phyllum: 'Cnidaria',
@@ -156,7 +147,6 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     }
   },
   {id: 9,
-    selected: true,
     data: {
       number: 'LTG-010',
       phyllum: 'Cnidaria',
@@ -171,7 +161,6 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     }
   },
   {id: 10,
-    selected: true,
     data: {
       number: 'LTG-011',
       phyllum: 'Cnidaria',
@@ -186,7 +175,6 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     }
   },
   {id: 11,
-    selected: true,
     data: {
       number: 'LTG-012',
       phyllum: 'Cnidaria',

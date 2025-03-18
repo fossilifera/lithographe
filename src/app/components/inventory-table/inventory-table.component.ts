@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, input, Signal, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, inject, input, Signal, signal} from '@angular/core';
 import {TableModule} from 'primeng/table';
 import {InventoryService} from '../../services/inventory.service';
 import {toSignal} from '@angular/core/rxjs-interop';
@@ -21,7 +21,8 @@ export class InventoryTableComponent {
 
   readonly columns = toSignal(this.inventoryService.getColumns(), {initialValue: []});
   readonly specimens = toSignal(this.inventoryService.getSpecimens(), {initialValue: []});
-  readonly isAllSpecimensSelected = toSignal(this.inventoryService.isAllSpecimensSelected());
+  readonly selectedSpecimens = toSignal(this.inventoryService.getSpeciemenSelectedIds(), {initialValue: []});
+  readonly isAllSpecimensSelected = computed(() => this.specimens().length === this.selectedSpecimens().length);
 
   public toogleSelect(id: number) {
     this.inventoryService.toogleSpecimenSelection(id);

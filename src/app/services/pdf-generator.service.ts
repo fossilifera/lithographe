@@ -22,7 +22,7 @@ export class PdfGeneratorService {
     const labelWidht: number = 54;
     const labelHeight: number = 40;
 
-    this.inventoryService.getSelectedSpecimens().subscribe((specimens: Specimen[]) => {
+    let specimen: Specimen = this.inventoryService.getSpecimenById(0) ?? {} as Specimen;
 
 
       const doc = new jsPDF({
@@ -36,8 +36,8 @@ export class PdfGeneratorService {
       // Second rectangle
       doc.setLineWidth(0.25);
       doc.rect(initialX + 2, initialY + 2, 50, 36);
-      console.log(specimens.at(0));
-      const text : string = (specimens.at(0)?.data["genre"]??'')+' '+(specimens.at(0)?.data["espce"]??'');
+      console.log(specimen);
+      const text : string = (specimen.data["genre"]??'')+' '+(specimen.data["espce"]??'');
       console.log(text);
       doc.text(text, initialX + (labelWidht / 2), initialY + 5, {
         align: 'center',
@@ -45,7 +45,6 @@ export class PdfGeneratorService {
         maxWidth: 50
       });
       doc.save("labels.pdf");
-    });
 
   }
 }
