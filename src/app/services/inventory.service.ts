@@ -59,6 +59,10 @@ export class InventoryService implements OnInit {
     return this.selectionSubject.asObservable();
   }
 
+  public getSpeciemenSelectedIdsSync(): number[] {
+    return this.selectionSubject.getValue();
+  }
+
   private loadInventory(metadata: InventoryMetadata, specimens: Specimen[]): void {
     this.metadataSubject.next(metadata);
     this.specimensSubject.next(specimens);

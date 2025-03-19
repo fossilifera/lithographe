@@ -19,7 +19,7 @@ export class MenuBarComponent {
   private pdfGeneratorService: PdfGeneratorService = inject(PdfGeneratorService);
 
   protected createLabels(): void {
-    this.pdfGeneratorService.generateLabels();
+    this.pdfGeneratorService.generatePDF();
   }
 
 }
