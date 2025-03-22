@@ -1,10 +1,11 @@
 import {inject, Injectable} from '@angular/core';
 import {TagTemplate} from '../model/templates/tag-template';
 import {LittleTags} from '@templates/little-tags';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Specimen} from '../model/specimen';
 import {VariableText} from '../model/templates/variable-text';
 import {LoggerService} from './logger.service';
+import {TemplateRegistry} from '@templates/template-registry';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,14 @@ export class TemplateService {
 
   public getTemplateSync(): TagTemplate {
     return this.templateSubject.getValue();
+  }
+
+  public getTemplate(): Observable<TagTemplate> {
+    return this.templateSubject.asObservable();
+  }
+
+  public getTemplatesAvailables(): TagTemplate[] {
+    return TemplateRegistry;
   }
 
   public injectVariablesInText(variableText: VariableText, specimen: Specimen): string {

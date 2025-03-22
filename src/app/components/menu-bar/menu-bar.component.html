@@ -4,8 +4,15 @@
     <a class="menu-item" routerLink="/">Inventaire</a>
     <a class="menu-item" routerLink="/settings">Paramètres</a>
   </div>
-  <button pButton pRipple severity="success" (click)="createLabels()">
-    <span class="pi pi-play"></span>
-    <span pButtonLabel>Créer étiquettes</span>
-  </button>
+  <div>
+    <p-select
+      [options]="this.templatesOptions"
+      [ngModel]="this.templateSelected()"
+      optionLabel = name
+      class="w-full md:w-56" />
+    <button pButton pRipple severity="success" (click)="createLabels()">
+      <span class="pi pi-play"></span>
+      <span pButtonLabel>Créer étiquettes</span>
+    </button>
+  </div>
 </div>
