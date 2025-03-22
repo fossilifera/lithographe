@@ -5,12 +5,19 @@ import {TagItem} from './tag-item';
  * @prop {number} yOffset offset against upper edge of the tag
  * @prop {string} value string of texte with "<<value>>" for inject variables
  * @prop {string[]} variables name of variables to inject in value string
- * @prop {'left' | 'center' | 'right' | 'justify'} align alignement of the text (if center the x coordinate is the center of text
+ * @prop {string} fontName font name
+ * @prop {string} fontStyle style (eg. normal, bold, italic...)
+ * @prop {number} fontSize size in points
+ * @prop {string} align alignement of the text (if center the x coordinate is the center of text
+ *
  * */
 export interface VariableText extends TagItem {
   xOffset: number;
   yOffset: number;
   value: string;
   variables: string[];
+  fontName: 'Helvetica' |'helvetica' | 'Courrier' | 'Times' ;
+  fontStyle: 'normal' | 'bold' | 'italic' | 'BoldItalic' | 'BoldOblique' | 'Oblique';
+  fontSize: number;
   align: 'left' | 'center' | 'right' | 'justify';
 }

@@ -3,12 +3,11 @@ import {InventoryService} from './inventory.service';
 import {LoggerService} from './logger.service';
 import {jsPDF} from 'jspdf';
 import {Specimen} from '../model/specimen';
-import {TagTemplate} from '../model/templates/tag-template';
-import {LittleTags} from '@templates/little-tags';
 import {TagItem} from '../model/templates/tag-item';
 import {Rectangle} from '../model/templates/rectangle';
 import {dateForFileNameFormat} from '../utils';
 import {VariableText} from '../model/templates/variable-text';
+import {TemplateService} from './template.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +15,10 @@ import {VariableText} from '../model/templates/variable-text';
 export class PdfGeneratorService {
 
   private inventoryService: InventoryService = inject(InventoryService);
+  private templateService: TemplateService = inject(TemplateService);
   private logger: LoggerService = inject(LoggerService);
-  private labelWidht: number = 54;
-  private labelHeight: number = 40;
-
-  // LittleTags as default template to avoid undefined
-  private template: TagTemplate = LittleTags;
 
   public generatePDF(): void {
-    this.template = LittleTags;
-    console.log(this.template.name);
     const speciemenSelectedIds: number[] = this.inventoryService.getSpeciemenSelectedIdsSync();
 
     this.logger.info('Generating PDF');
@@ -40,7 +33,9 @@ export class PdfGeneratorService {
     console.log(doc.getFontList());
     for (const id of speciemenSelectedIds) {
       let specimen: Specimen = this.inventoryService.getSpecimenById(id) ?? {} as Specimen;
-      this.generateTag(doc, specimen, initialX, initialY);
+      //FIXME
+      console.log(specimen);
+      this.drawTag(doc, specimen, initialX, initialY);
       doc.addPage();
     }
 
@@ -48,52 +43,51 @@ export class PdfGeneratorService {
 
   }
 
-  private generateTag(doc: jsPDF, specimen: Specimen, tagCoordX: number, tagCoordY: number) {
-    console.log(this.template.items);
-    this.template.items.forEach((item: TagItem) => {
-      switch (item.type) {
-        case 'Rectangle':
-          const rectangle = item as Rectangle;
-          doc.setLineWidth(rectangle.lineWidth);
-          doc.rect(
-            tagCoordX + rectangle.xOffset, // Coordinate against left edge of the page
-            tagCoordY + rectangle.yOffset, // Coordinate against upper edge of the page
-            rectangle.width,
-            rectangle.height
-          );
-          break;
-        case 'VariableText':
-          const variableText = item as VariableText;
-          let text: string = variableText.value;
-          variableText.variables.forEach(variable => {
-            text = text.replace(`<<${variable}>>`, this.injectVariable(specimen, variable));
-          });
-          doc.text(text,
-            tagCoordX + variableText.xOffset, // Coordinate against left edge of the page
-            tagCoordY + variableText.yOffset, // Coordinate against upper edge of the page
-            {
-            align: variableText.align,
-            baseline: 'top',
-            maxWidth: 50
-          });
-          break;
-        default:
-          this.logger.error("Unknown Item type");
-          break;
-      }
-    });
+  private drawTag(doc: jsPDF, specimen: Specimen, tagCoordX: number, tagCoordY: number) {
+    this.logger.debug(`Draw tag for specimen id ${specimen.id}`);
+    this.templateService.getTemplateSync().items
+      .forEach((item: TagItem) => {
+        switch (item.type) {
+          case 'Rectangle':
+            this.drawRectangle(doc, item as Rectangle, tagCoordX, tagCoordY);
+            break;
+          case 'VariableText':
+            this.writeText(doc, item as VariableText, specimen, tagCoordX, tagCoordY);
+            break;
+          default:
+            this.logger.error("Unknown Item type");
+            break;
+        }
+      });
   }
 
-  private injectVariable(specimen: Specimen, variable: string): string {
-    // TODO
-    switch (variable) {
-      case 'genus':
-        return (specimen.data['genre'] as string) ?? '';
-      case 'species':
-        return (specimen.data['espce'] as string) ?? '';
-      default:
-        return '';
-    }
+  private drawRectangle(doc: jsPDF, rectangle:Rectangle, tagCoordX: number, tagCoordY: number): void {
+    doc.setLineWidth(rectangle.lineWidth);
+    doc.rect(
+      tagCoordX + rectangle.xOffset, // Coordinate against left edge of the page
+      tagCoordY + rectangle.yOffset, // Coordinate against upper edge of the page
+      rectangle.width,
+      rectangle.height
+    );
   }
+
+  private writeText(doc: jsPDF, variableText: VariableText, specimen: Specimen, tagCoordX: number, tagCoordY: number): void {
+    //FIXME bug bold italic not working
+    doc.setFont(
+      variableText.fontName ?? 'helvetica',
+      variableText.fontStyle ?? 'normal',
+      400 // font weight
+    );
+    doc.setFontSize(variableText.fontSize ?? 11);
+    doc.text(this.templateService.injectVariablesInText(variableText, specimen),
+      tagCoordX + variableText.xOffset, // Coordinate against left edge of the page
+      tagCoordY + variableText.yOffset, // Coordinate against upper edge of the page
+      {
+        align: variableText.align,
+        baseline: 'top',
+        maxWidth: 0 // 0 for no line break
+      });
+  }
+
 
 }

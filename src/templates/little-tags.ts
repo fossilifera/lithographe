@@ -25,11 +25,58 @@ export const LittleTags: TagTemplate = {
     } as Rectangle,
     {
       type: 'VariableText',
-      xOffset: 26,
-      yOffset: 0,
+      xOffset: 26, // center of tag
+      yOffset: 7,
       align: 'center',
       value: '<<genus>> <<species>>',
-      variables: ['genus', 'species']
+      variables: ['genus', 'species'],
+      fontName: 'helvetica',
+      fontStyle: 'italic',
+      fontSize: 12
+    } as VariableText,
+    {
+      type: 'VariableText',
+      xOffset: 26, // center of tag
+      yOffset: 12,
+      align: 'center',
+      value: '<<author>> <<year>>',
+      variables: ['author', 'year'],
+      fontName: 'helvetica',
+      fontStyle: 'normal',
+      fontSize: 12
+    } as VariableText,
+    {
+      type: 'VariableText',
+      xOffset: 26, // center of tag
+      yOffset: 17,
+      align: 'center',
+      value: '<<locality>>',
+      variables: ['locality'],
+      fontName: 'helvetica',
+      fontStyle: 'normal',
+      fontSize: 12
+    } as VariableText,
+    {
+      type: 'VariableText',
+      xOffset: 26, // center of tag
+      yOffset: 22,
+      align: 'center',
+      value: '<<age>>',
+      variables: ['age'],
+      fontName: 'helvetica',
+      fontStyle: 'normal',
+      fontSize: 12
+    } as VariableText,
+    {
+      type: 'VariableText',
+      xOffset: 26, // center of tag
+      yOffset: 27,
+      align: 'center',
+      value: '<<number>>',
+      variables: ['number'],
+      fontName: 'helvetica',
+      fontStyle: 'normal',
+      fontSize: 12
     } as VariableText
   ]
 }
