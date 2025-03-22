@@ -5,4 +5,8 @@ export interface TagTemplate {
   items: TagItem[];
   tagWidth: number;
   tagHeight: number;
+  marginX: number;
+  marginY: number;
+  tagsPerLine: number;
+  tagsPerColumns: number;
 }

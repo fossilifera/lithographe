@@ -23,20 +23,41 @@ export class PdfGeneratorService {
 
     this.logger.info('Generating PDF');
 
-    const initialX: number = 10;
-    const initialY: number = 10;
+
 
     const doc = new jsPDF({
       unit: 'mm',
       format: 'a4'
     });
-    console.log(doc.getFontList());
+
+    // FIXME
+    console.log("FONTS = ",doc.getFontList());
+    let coordTagX: number = 0;
+    let coordTagY: number = 0;
+    let index: number = 0;
+    const nbTagsPerPage: number = this.templateService.getTemplateSync().tagsPerLine * this.templateService.getTemplateSync().tagsPerColumns;
     for (const id of speciemenSelectedIds) {
+      if(index % this.templateService.getTemplateSync().tagsPerLine !== 0) {
+        // shift tag to the right
+        coordTagX += this.templateService.getTemplateSync().tagWidth;
+      } else {
+        // new line, return to the left margin
+        coordTagX = this.templateService.getTemplateSync().marginX;
+        if (index % nbTagsPerPage !== 0) {
+          // breaking line
+          coordTagY += this.templateService.getTemplateSync().tagHeight;
+        } else {
+          // last line reached, need a new page
+          if(index !== 0) doc.addPage(); // no new page for the first tag
+          coordTagY = this.templateService.getTemplateSync().marginY;
+        }
+      }
+
       let specimen: Specimen = this.inventoryService.getSpecimenById(id) ?? {} as Specimen;
       //FIXME
       console.log(specimen);
-      this.drawTag(doc, specimen, initialX, initialY);
-      doc.addPage();
+      this.drawTag(doc, specimen, coordTagX, coordTagY);
+      index++;
     }
 
     doc.save(`tags-${dateForFileNameFormat()}.pdf`);
@@ -44,7 +65,7 @@ export class PdfGeneratorService {
   }
 
   private drawTag(doc: jsPDF, specimen: Specimen, tagCoordX: number, tagCoordY: number) {
-    this.logger.debug(`Draw tag for specimen id ${specimen.id}`);
+    this.logger.debug(`Draw tag for specimen id ${specimen.id} - at coordinates: X ${tagCoordX} Y ${tagCoordY}`);
     this.templateService.getTemplateSync().items
       .forEach((item: TagItem) => {
         switch (item.type) {

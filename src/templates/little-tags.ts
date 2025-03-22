@@ -6,6 +6,10 @@ export const LittleTags: TagTemplate = {
   name: "Petites étiquettes",
   tagWidth: 54,
   tagHeight: 40,
+  marginX: 20,
+  marginY: 20,
+  tagsPerLine: 3,
+  tagsPerColumns: 6,
   items: [
     {
       type: 'Rectangle',
@@ -25,58 +29,58 @@ export const LittleTags: TagTemplate = {
     } as Rectangle,
     {
       type: 'VariableText',
-      xOffset: 26, // center of tag
+      xOffset: 27, // center of tag
       yOffset: 7,
       align: 'center',
       value: '<<genus>> <<species>>',
       variables: ['genus', 'species'],
       fontName: 'helvetica',
       fontStyle: 'italic',
-      fontSize: 12
+      fontSize: 11
     } as VariableText,
     {
       type: 'VariableText',
-      xOffset: 26, // center of tag
+      xOffset: 27, // center of tag
       yOffset: 12,
       align: 'center',
       value: '<<author>> <<year>>',
       variables: ['author', 'year'],
       fontName: 'helvetica',
       fontStyle: 'normal',
-      fontSize: 12
+      fontSize: 11
     } as VariableText,
     {
       type: 'VariableText',
-      xOffset: 26, // center of tag
+      xOffset: 27, // center of tag
       yOffset: 17,
       align: 'center',
       value: '<<locality>>',
       variables: ['locality'],
       fontName: 'helvetica',
       fontStyle: 'normal',
-      fontSize: 12
+      fontSize: 11
     } as VariableText,
     {
       type: 'VariableText',
-      xOffset: 26, // center of tag
+      xOffset: 27, // center of tag
       yOffset: 22,
       align: 'center',
       value: '<<age>>',
       variables: ['age'],
       fontName: 'helvetica',
       fontStyle: 'normal',
-      fontSize: 12
+      fontSize: 11
     } as VariableText,
     {
       type: 'VariableText',
-      xOffset: 26, // center of tag
+      xOffset: 27, // center of tag
       yOffset: 27,
       align: 'center',
       value: '<<number>>',
       variables: ['number'],
       fontName: 'helvetica',
       fontStyle: 'normal',
-      fontSize: 12
+      fontSize: 11
     } as VariableText
   ]
 }
