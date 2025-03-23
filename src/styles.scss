@@ -71,6 +71,7 @@ h1 {
         .p-card-title {
           text-align: center;
         }
+
         .p-card-content {
           display: flex;
           flex-direction: column;
@@ -92,4 +93,57 @@ h1 {
       width: 100%;
     }
   }
+
+  ltg-inventory-table {
+    .variables-unmapped-message {
+
+      .p-message {
+        margin: 10px 5px;
+      }
+
+      .variable-tag {
+        margin: 0 5px;
+      }
+    }
+
+    .column-head {
+      background: var(--ltg-amber-500);
+      padding: 0;
+
+      .column-head-button {
+        padding: 10px;
+        display: flex;
+        justify-content: space-around;
+
+        .p-button {
+          display: flex;
+          flex-direction: column;
+
+          &:hover {
+            background: var(--ltg-amber-600);
+          }
+
+          .p-button-label {
+            color: white;
+            text-align: center;
+            font-weight: 800;
+          }
+        }
+      }
+    }
+
+
+  }
+}
+
+.popover-selection-variables-options {
+  padding: 5px;
+}
+
+.ui-table-scrollable-wrapper {
+  overflow: auto !important;
+}
+
+.ui-table-scrollable-header, .ui-table-scrollable-body, .ui-table-scrollable-footer {
+  overflow: visible !important;
 }

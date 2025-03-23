@@ -4,6 +4,7 @@ import {InventoryViewComponent} from './inventory-view.component';
 import {InventoryService} from '../../services/inventory.service';
 import {BehaviorSubject, of} from 'rxjs';
 import {provideHttpClient} from '@angular/common/http';
+import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('InventoryViewComponent', () => {
   let component: InventoryViewComponent;
@@ -15,6 +16,7 @@ describe('InventoryViewComponent', () => {
       imports: [InventoryViewComponent],
       providers: [
         provideHttpClient(),
+        provideAnimations(),
         {
           provide: InventoryService, useValue: {
             isInventoryLoaded: jest.fn().mockReturnValue(inventoryServiceIsLoadedMock.asObservable()),
