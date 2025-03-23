@@ -6,8 +6,9 @@ export const LittleTags: TagTemplate = {
   name: "Petites étiquettes",
   tagWidth: 54,
   tagHeight: 40,
-  marginX: 20,
-  marginY: 20,
+  orientation: 'portrait',
+  marginX: 24,
+  marginY: 28.5,
   tagsPerLine: 3,
   tagsPerColumns: 6,
   items: [

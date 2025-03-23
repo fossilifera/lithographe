@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {inject, Injectable, OnInit} from '@angular/core';
 import {InventoryService} from './inventory.service';
 import {LoggerService} from './logger.service';
 import {jsPDF} from 'jspdf';
@@ -8,6 +8,8 @@ import {Rectangle} from '../model/templates/rectangle';
 import {dateForFileNameFormat} from '../utils';
 import {VariableText} from '../model/templates/variable-text';
 import {TemplateService} from './template.service';
+import {TagTemplate} from '../model/templates/tag-template';
+import {LittleTags} from '@templates/little-tags';
 
 @Injectable({
   providedIn: 'root'
@@ -18,38 +20,53 @@ export class PdfGeneratorService {
   private templateService: TemplateService = inject(TemplateService);
   private logger: LoggerService = inject(LoggerService);
 
+  // LittleTags as default template to avoid undefined
+  private template: TagTemplate;
+
+
+  constructor() {
+    this.template = LittleTags;
+    this.templateService.getTemplate().subscribe(
+      (template: TagTemplate)=> {
+        console.log("Nouveau template!", template);
+        this.template = template;
+        console.log("this.template", this.template);
+      });
+  }
+
+
   public generatePDF(): void {
-    const speciemenSelectedIds: number[] = this.inventoryService.getSpeciemenSelectedIdsSync();
+    const specimenSelectedIds: number[] = this.inventoryService.getSpeciemenSelectedIdsSync();
 
     this.logger.info('Generating PDF');
 
 
-
     const doc = new jsPDF({
       unit: 'mm',
-      format: 'a4'
+      format: 'a4',
+      orientation: this.template.orientation ?? 'portrait'
     });
 
     // FIXME
-    console.log("FONTS = ",doc.getFontList());
+    console.log("FONTS = ", doc.getFontList());
     let coordTagX: number = 0;
     let coordTagY: number = 0;
     let index: number = 0;
-    const nbTagsPerPage: number = this.templateService.getTemplateSync().tagsPerLine * this.templateService.getTemplateSync().tagsPerColumns;
-    for (const id of speciemenSelectedIds) {
-      if(index % this.templateService.getTemplateSync().tagsPerLine !== 0) {
+    const nbTagsPerPage: number = this.template.tagsPerLine * this.template.tagsPerColumns;
+    for (const id of specimenSelectedIds) {
+      if (index % this.template.tagsPerLine !== 0) {
         // shift tag to the right
-        coordTagX += this.templateService.getTemplateSync().tagWidth;
+        coordTagX += this.template.tagWidth;
       } else {
         // new line, return to the left margin
-        coordTagX = this.templateService.getTemplateSync().marginX;
+        coordTagX = this.template.marginX;
         if (index % nbTagsPerPage !== 0) {
           // breaking line
-          coordTagY += this.templateService.getTemplateSync().tagHeight;
+          coordTagY += this.template.tagHeight;
         } else {
           // last line reached, need a new page
-          if(index !== 0) doc.addPage(); // no new page for the first tag
-          coordTagY = this.templateService.getTemplateSync().marginY;
+          if (index !== 0) doc.addPage(); // no new page for the first tag
+          coordTagY = this.template.marginY;
         }
       }
 
@@ -66,7 +83,7 @@ export class PdfGeneratorService {
 
   private drawTag(doc: jsPDF, specimen: Specimen, tagCoordX: number, tagCoordY: number) {
     this.logger.debug(`Draw tag for specimen id ${specimen.id} - at coordinates: X ${tagCoordX} Y ${tagCoordY}`);
-    this.templateService.getTemplateSync().items
+    this.template.items
       .forEach((item: TagItem) => {
         switch (item.type) {
           case 'Rectangle':
@@ -82,7 +99,7 @@ export class PdfGeneratorService {
       });
   }
 
-  private drawRectangle(doc: jsPDF, rectangle:Rectangle, tagCoordX: number, tagCoordY: number): void {
+  private drawRectangle(doc: jsPDF, rectangle: Rectangle, tagCoordX: number, tagCoordY: number): void {
     doc.setLineWidth(rectangle.lineWidth);
     doc.rect(
       tagCoordX + rectangle.xOffset, // Coordinate against left edge of the page
@@ -100,6 +117,7 @@ export class PdfGeneratorService {
       400 // font weight
     );
     doc.setFontSize(variableText.fontSize ?? 11);
+    doc.setTextColor(variableText.fontColor ?? "#000")
     doc.text(this.templateService.injectVariablesInText(variableText, specimen),
       tagCoordX + variableText.xOffset, // Coordinate against left edge of the page
       tagCoordY + variableText.yOffset, // Coordinate against upper edge of the page

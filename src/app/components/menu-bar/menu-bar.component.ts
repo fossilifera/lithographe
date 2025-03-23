@@ -3,7 +3,7 @@ import {ButtonDirective, ButtonLabel} from 'primeng/button';
 import {RouterLink} from '@angular/router';
 import {Ripple} from 'primeng/ripple';
 import {PdfGeneratorService} from '../../services/pdf-generator.service';
-import {Select} from 'primeng/select';
+import {Select, SelectChangeEvent} from 'primeng/select';
 import {TemplateService} from '../../services/template.service';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {FormsModule} from '@angular/forms';
@@ -29,7 +29,9 @@ export class MenuBarComponent {
   protected templatesOptions = this.templateService.getTemplatesAvailables();
   protected templateSelected = toSignal(this.templateService.getTemplate());
 
-
+  protected onChangeTemplate(event: SelectChangeEvent) {
+    this.templateService.updateTemplateSelection(event.value);
+  }
 
   protected createLabels(): void {
     this.pdfGeneratorService.generatePDF();

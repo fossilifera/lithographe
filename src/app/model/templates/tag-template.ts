@@ -5,6 +5,7 @@ export interface TagTemplate {
   items: TagItem[];
   tagWidth: number;
   tagHeight: number;
+  orientation?: 'portrait' | 'landscape';
   marginX: number;
   marginY: number;
   tagsPerLine: number;

@@ -9,15 +9,16 @@ import {TagItem} from './tag-item';
  * @prop {string} fontStyle style (eg. normal, bold, italic...)
  * @prop {number} fontSize size in points
  * @prop {string} align alignement of the text (if center the x coordinate is the center of text
- *
+ * @prop {string} fontColor color of the font in hexadecimal (eg. #FFFFFF)
  * */
 export interface VariableText extends TagItem {
   xOffset: number;
   yOffset: number;
   value: string;
   variables: string[];
-  fontName: 'Helvetica' |'helvetica' | 'Courrier' | 'Times' ;
-  fontStyle: 'normal' | 'bold' | 'italic' | 'BoldItalic' | 'BoldOblique' | 'Oblique';
+  fontName?: 'Helvetica' |'helvetica' | 'Courrier' | 'Times' ;
+  fontStyle?: 'normal' | 'bold' | 'italic' | 'BoldItalic' | 'BoldOblique' | 'Oblique';
   fontSize: number;
   align: 'left' | 'center' | 'right' | 'justify';
+  fontColor?: string;
 }

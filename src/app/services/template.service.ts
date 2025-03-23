@@ -31,16 +31,17 @@ export class TemplateService {
     this.variableMappingSubject.next(mappingMap);
   }
 
-  public getTemplateSync(): TagTemplate {
-    return this.templateSubject.getValue();
-  }
-
   public getTemplate(): Observable<TagTemplate> {
     return this.templateSubject.asObservable();
   }
 
   public getTemplatesAvailables(): TagTemplate[] {
     return TemplateRegistry;
+  }
+
+  public updateTemplateSelection(templateSelected: TagTemplate): void {
+    this.logger.debug(`Template selected: ${templateSelected.name}`)
+    this.templateSubject.next(templateSelected);
   }
 
   public injectVariablesInText(variableText: VariableText, specimen: Specimen): string {
