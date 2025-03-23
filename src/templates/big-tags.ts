@@ -88,8 +88,8 @@ export const BigTags: TagTemplate = {
       xOffset: 55.5, // center of tag
       yOffset: 31,
       align: 'center',
-      value: 'Holotype',
-      variables: [],
+      value: '<<type>>',
+      variables: ['type'],
       fontName: 'helvetica',
       fontStyle: 'normal',
       fontSize: 11,

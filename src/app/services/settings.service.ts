@@ -10,6 +10,6 @@ export class SettingsService {
 
   public getLogLevel(): LogLevel {
     // FIXME
-    return LogLevel.DEBUG;
+    return LogLevel.TRACE;
   }
 }

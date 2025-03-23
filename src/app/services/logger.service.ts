@@ -38,6 +38,12 @@ export class LoggerService {
     }
   }
 
+  public trace(message: string): void {
+    if (this.logLevelConfigure >= LogLevel.TRACE) {
+      console.log(this.formatMessage(LogLevel.TRACE, message));
+    }
+  }
+
   private formatMessage(level: LogLevel, message: string): string {
     return `${new Date().toISOString()}  ${LogLevel[level]}  ---  ${message}`;
   }
