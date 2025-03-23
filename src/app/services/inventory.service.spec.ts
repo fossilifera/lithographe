@@ -9,7 +9,7 @@ describe('InventoryService', () => {
   let service: InventoryService;
 
   const metadata = new InventoryMetadata('demoInventory', [new ColumnMetadata(0, 'Code'), new ColumnMetadata(1, 'Genus'), new ColumnMetadata(2, 'Species')]);
-  const specimens: Specimen[] = [{id: 0, selected: true, data:{code:"LTG-001", genus:'Hildoceras', species:'bifrons'}}]
+  const specimens: Specimen[] = [{id: 0, data:{code:"LTG-001", genus:'Hildoceras', species:'bifrons'}}]
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

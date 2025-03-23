@@ -4,4 +4,7 @@ import presets from 'jest-preset-angular/presets';
 export default {
   ...presets.createCjsPreset(),
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
+  moduleNameMapper: {
+    '^@templates/(.*)$': '<rootDir>/src/templates/$1'
+  }
 } satisfies Config;

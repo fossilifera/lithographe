@@ -6,3 +6,6 @@ setupZoneTestEnv();
 jest.mock('csv-parse/browser/esm/sync', () => ({
   parse: jest.fn()
 }));
+
+jest.mock('jspdf', () => ({
+}));
