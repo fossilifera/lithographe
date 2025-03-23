@@ -1,19 +1,22 @@
 <div class="menubar">
-  <div class="menu-left">
-    <H1 class="menu-item">Lithographe</H1>
-    <a class="menu-item" routerLink="/">Inventaire</a>
-    <a class="menu-item" routerLink="/settings">Paramètres</a>
-  </div>
-  <div>
-    <p-select
-      [options]="this.templatesOptions"
-      [ngModel]="this.templateSelected()"
-      (onChange)="onChangeTemplate($event)"
-      optionLabel = name
-      class="w-full md:w-56" />
-    <button pButton pRipple severity="success" (click)="createLabels()">
-      <span class="pi pi-play"></span>
-      <span pButtonLabel>Créer étiquettes</span>
-    </button>
+    <p-button variant="text" routerLink="/">
+      <span pButtonLabel class="app-title" >Lithographe</span>
+    </p-button>
+  <div class="menu-right">
+    <div class="menu-block-template">
+      <p-select
+        [options]="this.templatesOptions"
+        [ngModel]="this.templateSelected()"
+        (onChange)="onChangeTemplate($event)"
+        optionLabel=name
+        class="w-full md:w-56"/>
+      <button pButton pRipple severity="success" (click)="createLabels()">
+        <span class="pi pi-play"></span>
+        <span pButtonLabel>Créer étiquettes</span>
+      </button>
+    </div>
+    <div>
+      <p-button icon="pi pi-cog" routerLink="/settings"/>
+    </div>
   </div>
 </div>

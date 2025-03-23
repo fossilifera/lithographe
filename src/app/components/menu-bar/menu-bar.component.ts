@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {ButtonDirective, ButtonLabel} from 'primeng/button';
+import {Button, ButtonDirective, ButtonLabel} from 'primeng/button';
 import {RouterLink} from '@angular/router';
 import {Ripple} from 'primeng/ripple';
 import {PdfGeneratorService} from '../../services/pdf-generator.service';
@@ -16,7 +16,8 @@ import {FormsModule} from '@angular/forms';
     ButtonLabel,
     Ripple,
     Select,
-    FormsModule
+    FormsModule,
+    Button
 
   ],
   templateUrl: './menu-bar.component.html'
