@@ -10,6 +10,7 @@ import {TemplateService} from './template.service';
 import {TagTemplate} from '../model/templates/tag-template';
 import {concatMap, first, from, map, switchMap, toArray} from 'rxjs';
 import {dateForFileNameFormat} from '../utils';
+import {VariablesMapperService} from './variables-mapper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class PdfGeneratorService {
 
   private inventoryService: InventoryService = inject(InventoryService);
   private templateService: TemplateService = inject(TemplateService);
+  private variablesMapperService: VariablesMapperService = inject(VariablesMapperService);
   private logger: LoggerService = inject(LoggerService);
 
   public generatePDF(): void {
@@ -126,7 +128,7 @@ export class PdfGeneratorService {
     );
     doc.setFontSize(variableText.fontSize ?? 11);
     doc.setTextColor(variableText.fontColor ?? "#000")
-    doc.text(this.templateService.injectVariablesInText(variableText, specimen),
+    doc.text(this.variablesMapperService.injectVariablesInText(variableText, specimen),
       tagCoordX + variableText.xOffset, // Coordinate against left edge of the page
       tagCoordY + variableText.yOffset, // Coordinate against upper edge of the page
       {
