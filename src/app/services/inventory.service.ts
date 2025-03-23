@@ -1,5 +1,5 @@
 import {inject, Injectable, OnInit} from '@angular/core';
-import {BehaviorSubject, filter, map, Observable} from 'rxjs';
+import {BehaviorSubject, map, Observable} from 'rxjs';
 import {LoggerService} from './logger.service';
 import {InventoryMetadata} from '../model/inventory-metadata';
 import {Specimen} from '../model/specimen';
@@ -94,20 +94,26 @@ export class InventoryService implements OnInit {
   }
 
   public toogleAllSpecimen(): void {
-    if(this.specimensSubject.getValue().length === this.selectionSubject.getValue().length) {
+    if (this.specimensSubject.getValue().length === this.selectionSubject.getValue().length) {
       this.logger.debug('Unselect all specimens');
       this.selectionSubject.next([]);
     } else {
       this.logger.debug('Select all specimens');
-        this.selectAllSpecimens();
+      this.selectAllSpecimens();
     }
   }
 
-  private selectAllSpecimens(): void  {
+  public resetData(): void {
+    this.inventoryLoadingState.next(false);
+    this.metadataSubject.next(undefined);
+    this.specimensSubject.next([]);
+    this.selectionSubject.next([]);
+  }
+
+  private selectAllSpecimens(): void {
     this.selectionSubject.next(
       this.specimensSubject.getValue().map((specimen: Specimen) => specimen.id)
     );
   }
-
 
 }

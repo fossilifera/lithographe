@@ -1,4 +1,15 @@
 <p-dialog [header]="modalContent()?.title" [modal]="true" [visible]="isVisible()" closable="false" draggable="false">
-  <p>{{modalContent()?.message}}</p>
-  <p-progress-spinner aria-label="Loading" [hidden]="!modalContent()?.displaySpinner"/>
+  <p>{{ modalContent()?.message }}</p>
+  @if (modalContent()?.displaySpinner ?? false) {
+    <p-progress-spinner aria-label="Loading"/>
+  }
+  @if (modalContent()?.closable ?? false) {
+    <p-button [label]="modalContent()?.confirmationMessage ?? 'OK'" (click)="closeModal()"/>
+
+  } @else if (modalContent()?.answerable ?? false) {
+    <div class="modal-question-buttons">
+      <p-button [label]="modalContent()?.answerFalse" severity="secondary" (click)="awswer(false)"/>
+      <p-button [label]="modalContent()?.answerTrue" (click)="awswer(true)"/>
+    </div>
+  }
 </p-dialog>

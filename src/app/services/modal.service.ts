@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, filter, Observable, tap} from 'rxjs';
 import {ModalContent} from '../model/modal-content';
 import {LoggerService} from './logger.service';
 
@@ -12,6 +12,8 @@ export class ModalService {
 
   private visibleModalSubject = new BehaviorSubject<boolean>(false);
   private modalContentSubject = new BehaviorSubject<ModalContent|undefined>(undefined);
+  private responseToQuestionSubject = new BehaviorSubject<boolean|undefined>(undefined);
+
 
   public isVisible(): Observable<boolean> {
     return this.visibleModalSubject.asObservable();
@@ -25,6 +27,21 @@ export class ModalService {
     this.logger.debug("Display modal");
     this.modalContentSubject.next(modalContent);
     this.visibleModalSubject.next(true);
+  }
+
+  public displayModalQuestion(modalContent: ModalContent): Observable<boolean> {
+    this.displayModal(modalContent);
+    return this.responseToQuestionSubject.asObservable().pipe(
+      filter(value => value!== undefined),
+      tap(() => {
+        this.hideModal();
+        this.responseToQuestionSubject.next(undefined);
+      })
+    );
+  }
+
+  public answerToQuestion(answer: boolean): void {
+    this.responseToQuestionSubject.next(answer);
   }
 
   public hideModal(): void {

@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {Button} from 'primeng/button';
-import {StorageService} from '../../services/storage.service';
+import {ToolsService} from '../../services/tools.service';
 
 @Component({
   selector: 'ltg-settings-view',
@@ -13,9 +13,9 @@ import {StorageService} from '../../services/storage.service';
 })
 export class SettingsViewComponent {
 
-  private localStorageService: StorageService = inject(StorageService);
+  private toolsService: ToolsService = inject(ToolsService);
 
   protected deleteAllData() {
-    this.localStorageService.deleteAllData();
+    this.toolsService.deleteAllData();
   }
 }

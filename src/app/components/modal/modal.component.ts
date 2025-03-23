@@ -3,12 +3,14 @@ import {Dialog} from 'primeng/dialog';
 import {ModalService} from '../../services/modal.service';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {ProgressSpinner} from 'primeng/progressspinner';
+import {Button} from 'primeng/button';
 
 @Component({
   selector: 'ltg-modal',
   imports: [
     Dialog,
-    ProgressSpinner
+    ProgressSpinner,
+    Button
   ],
   templateUrl: './modal.component.html',
   styles: ``,
@@ -18,4 +20,12 @@ export class ModalComponent {
   private modalService: ModalService = inject(ModalService);
   protected isVisible = toSignal(this.modalService.isVisible(), {initialValue: false});
   protected modalContent = toSignal(this.modalService.getModalContent());
+
+  protected awswer(answer: boolean): void {
+    this.modalService.answerToQuestion(answer);
+  }
+
+  protected closeModal(): void {
+    this.modalService.hideModal();
+  }
 }
