@@ -24,12 +24,12 @@ export class InventoryTableComponent {
   readonly selectedSpecimens = toSignal(this.inventoryService.getSpeciemenSelectedIds(), {initialValue: []});
   readonly isAllSpecimensSelected = computed(() => this.specimens().length === this.selectedSpecimens().length);
 
-  public toogleSelect(id: number) {
-    this.inventoryService.toogleSpecimenSelection(id);
+  public toggleSelect(id: number) {
+    this.inventoryService.toggleSpecimenSelection(id);
   }
 
-  public toogleAllSpecimens(): void {
-    this.inventoryService.toogleAllSpecimen();
+  public toggleAllSpecimens(): void {
+    this.inventoryService.toggleAllSpecimen();
   }
 
 }

@@ -9,7 +9,7 @@
   <ng-template #header>
     <tr>
       <th pFrozenColumn>
-        <p-checkbox [ngModel]="isAllSpecimensSelected()" binary="true" (onChange)="toogleAllSpecimens()" />
+        <p-checkbox [ngModel]="isAllSpecimensSelected()" binary="true" (onChange)="toggleAllSpecimens()" />
       </th>
       @for (column of columns(); track column.position) {
         <th>{{ column.displayName }}</th>
@@ -19,7 +19,7 @@
   <ng-template #body let-specimen>
     <tr>
       <td pFrozenColumn>
-        <p-checkbox [ngModel]="this.selectedSpecimens().includes(specimen.id)" binary="true" (onChange)="toogleSelect(specimen.id)" />
+        <p-checkbox [ngModel]="this.selectedSpecimens().includes(specimen.id)" binary="true" (onChange)="toggleSelect(specimen.id)" />
       </td>
       @for (column of columns(); track column.position) {
         <td>{{ specimen.data[column.jsonName] }}</td>

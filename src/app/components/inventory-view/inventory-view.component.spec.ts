@@ -26,8 +26,8 @@ describe('InventoryViewComponent', () => {
             getSpeciemenSelectedIdsSync: jest.fn().mockReturnValue([]),
             loadNewInventory: jest.fn(),
             triggerImportNewInventory: jest.fn(),
-            toogleSpecimenSelection: jest.fn(),
-            toogleAllSpecimen: jest.fn()
+            toggleSpecimenSelection: jest.fn(),
+            toggleAllSpecimen: jest.fn()
           } as Partial<InventoryService>
         }
       ]

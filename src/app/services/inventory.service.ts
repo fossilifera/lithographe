@@ -84,8 +84,8 @@ export class InventoryService implements OnInit {
     this.inventoryLoadingState.next(false);
   }
 
-  public toogleSpecimenSelection(id: number): void {
-    this.logger.debug(`Toogle selection for id ${id}`);
+  public toggleSpecimenSelection(id: number): void {
+    this.logger.debug(`Toggle selection for id ${id}`);
     if (this.selectionSubject.getValue().includes(id)) {
       this.selectionSubject.next(this.selectionSubject.getValue().filter((value: number) => value !== id));
     } else {
@@ -93,7 +93,7 @@ export class InventoryService implements OnInit {
     }
   }
 
-  public toogleAllSpecimen(): void {
+  public toggleAllSpecimen(): void {
     if (this.specimensSubject.getValue().length === this.selectionSubject.getValue().length) {
       this.logger.debug('Unselect all specimens');
       this.selectionSubject.next([]);
