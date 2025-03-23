@@ -1,5 +1,5 @@
 import {inject, Injectable, OnInit} from '@angular/core';
-import {BehaviorSubject, map, Observable} from 'rxjs';
+import {BehaviorSubject, filter, map, Observable} from 'rxjs';
 import {LoggerService} from './logger.service';
 import {InventoryMetadata} from '../model/inventory-metadata';
 import {Specimen} from '../model/specimen';
@@ -51,8 +51,11 @@ export class InventoryService implements OnInit {
     return this.specimensSubject.asObservable();
   }
 
-  public getSpecimenById(id: number): Specimen | undefined {
-    return this.specimensSubject.getValue().find(specimen => specimen.id === id);
+  public getSpecimenById(id: number): Observable<Specimen | undefined> {
+    return this.specimensSubject.asObservable().pipe(
+      map(specimens => {
+        return specimens.find(specimen => specimen.id === id);
+      }));
   }
 
   public getSpeciemenSelectedIds(): Observable<number[]> {
