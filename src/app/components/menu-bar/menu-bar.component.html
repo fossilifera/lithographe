@@ -1,18 +1,22 @@
 <div class="menubar">
-    <p-button variant="text" routerLink="/">
-      <span pButtonLabel class="app-title" >Lithographe</span>
-    </p-button>
+  <p-button variant="text" routerLink="/">
+    <span pButtonLabel class="app-title">Lithographe</span>
+  </p-button>
   <div class="menu-right">
     <div class="menu-block-template">
-      <p-select
-        [options]="this.templatesOptions"
-        [ngModel]="this.templateSelected()"
-        (onChange)="onChangeTemplate($event)"
-        optionLabel=name
-        class="w-full md:w-56"/>
+      <p-iftalabel class="w-full md:w-56">
+        <p-select
+          [options]="this.templatesOptions"
+          [ngModel]="this.templateSelected()"
+          (onChange)="onChangeTemplate($event)"
+          id="template"
+          optionLabel=name
+          class="w-full md:w-56"/>
+        <label for="template">Modèle d'étiquette</label>
+      </p-iftalabel>
       <button pButton pRipple severity="success" (click)="createLabels()">
         <span class="pi pi-play"></span>
-        <span pButtonLabel>Créer étiquettes</span>
+        <span pButtonLabel>Créer les étiquettes</span>
       </button>
     </div>
     <div>

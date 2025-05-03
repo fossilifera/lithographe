@@ -7,6 +7,7 @@ import {Select, SelectChangeEvent} from 'primeng/select';
 import {TemplateService} from '../../services/template.service';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {FormsModule} from '@angular/forms';
+import {IftaLabel} from 'primeng/iftalabel';
 
 @Component({
   selector: 'ltg-menu-bar',
@@ -17,7 +18,8 @@ import {FormsModule} from '@angular/forms';
     Ripple,
     Select,
     FormsModule,
-    Button
+    Button,
+    IftaLabel
 
   ],
   templateUrl: './menu-bar.component.html'
