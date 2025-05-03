@@ -3,14 +3,16 @@ import {Button, ButtonLabel} from 'primeng/button';
 import {ImportInventoryService} from '../../services/import-inventory.service';
 import {Card} from 'primeng/card';
 import {FileSelectEvent, FileUpload} from 'primeng/fileupload';
+import {Fieldset} from 'primeng/fieldset';
 
 @Component({
-  selector: 'ltg-inventory-import',
+  selector: 'inventory-import',
   imports: [
     ButtonLabel,
     Button,
     Card,
-    FileUpload
+    FileUpload,
+    Fieldset
   ],
   templateUrl: './inventory-import.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

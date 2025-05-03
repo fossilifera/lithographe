@@ -1,11 +1,28 @@
-<H2>Importer un inventaire</H2>
-<div class="ltg-import-choice-cards">
-  <p-card header="Inventaire de démonstration">
-    <p>Importer un inventaire de démonstration pour tester l'application</p>
+<div class="about-card">
+  <p-fieldset>
+    <ng-template #header>
+      <div class="flex items-center gap-2 px-2">
+        <i class="pi pi-tag"></i>
+        <span class="font-bold">À propos</span>
+      </div>
+    </ng-template>
+    <p>
+      <!--      TODO-->
+      Lorem ipsum dolor sit amet...
+    </p>
+  </p-fieldset>
+</div>
+
+<div class="import-choice-cards">
+  <p-card header="Utiliser un fichier de démonstration">
+    <p>Ouvrir un inventaire de démonstration pour tester l'application</p>
+    <i class="pi pi-lightbulb icon-import-choice-cards"></i>
     <p-button (onClick)="importDemoInventory()"><span pButtonLabel>Ouvrir</span></p-button>
   </p-card>
-  <p-card header="Fichier CSV">
-    <p>Importer depuis un fichier CSV</p>
-    <p-fileupload mode="basic" chooseIcon="pi pi-upload" accept="text/csv" (onSelect)="importCsv($event)" [auto]="true" chooseLabel="Choisir le fichier" />
+  <p-card header="Importer un fichier CSV">
+    <p>Ouvrir votre inventaire depuis le format CSV</p>
+    <i class="pi pi-table icon-import-choice-cards"></i>
+    <p-fileupload mode="basic" chooseIcon="pi pi-upload" accept="text/csv" (onSelect)="importCsv($event)"
+                  [auto]="true" chooseLabel="Choisir le fichier"/>
   </p-card>
 </div>

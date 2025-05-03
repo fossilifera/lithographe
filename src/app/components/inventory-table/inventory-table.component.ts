@@ -12,7 +12,7 @@ import {Popover} from 'primeng/popover';
 import {ColumnMetadata} from '../../model/column-metadata';
 
 @Component({
-  selector: 'ltg-inventory-table',
+  selector: 'inventory-table',
   imports: [
     TableModule,
     Checkbox,
