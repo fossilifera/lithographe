@@ -35,8 +35,6 @@ export class ImportInventoryService {
     );
     this.readFile(csvFile).pipe(map(readTextFile => {
       const columnMetadataList: ColumnMetadata[] = this.getColumnsHeaders(readTextFile, globalOptions, params.firstLineAsHeader);
-      //FIXME
-      console.log(columnMetadataList);
       const listSpecimens = parse(readTextFile, {
         ...globalOptions,
         columns: columnMetadataList.map(columnMetadata => columnMetadata.jsonName),
@@ -57,8 +55,11 @@ export class ImportInventoryService {
         this.modalService.hideModal();
       },
       error: err => {
-        // TODO gestion erreur
         this.logger.errorWithError("Error during parsing csv file", err);
+        this.modalService.displayModal({
+          title: "Une erreur s'est produite durant l'import du fichier csv. Merci de vérifier les options d'import.",
+          closable: true
+        });
       }
     });
   }

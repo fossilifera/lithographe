@@ -4,6 +4,10 @@ import {ImportInventoryService} from '../../services/import-inventory.service';
 import {Card} from 'primeng/card';
 import {FileSelectEvent, FileUpload} from 'primeng/fileupload';
 import {Fieldset} from 'primeng/fieldset';
+import {ToggleSwitch} from 'primeng/toggleswitch';
+import {FormsModule} from '@angular/forms';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import {CsvImportParam} from '../../model/csv-import-param';
 
 @Component({
   selector: 'inventory-import',
@@ -11,24 +15,29 @@ import {Fieldset} from 'primeng/fieldset';
     ButtonLabel,
     Button,
     Card,
+    FormsModule,
     FileUpload,
-    Fieldset
+    Fieldset,
+    ToggleSwitch,
+    RadioButtonModule
   ],
   templateUrl: './inventory-import.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./inventory-import.component.scss'],
   host: {'class': 'view'}
 })
 export class InventoryImportComponent {
 
   private importInventoryService: ImportInventoryService = inject(ImportInventoryService);
 
+  csvImportParams: CsvImportParam = {firstLineAsHeader: true, separator: ';'};
+
   importDemoInventory(): void {
     this.importInventoryService.loadDemoInventory();
   }
 
   importCsv(event: FileSelectEvent): void {
-    //TODO sélecteur options
-    this.importInventoryService.readCsvFileForImport(event.files[0], {firstLineAsHeader: true, separator: ';'});
+    this.importInventoryService.readCsvFileForImport(event.files[0], this.csvImportParams);
   }
 
 }

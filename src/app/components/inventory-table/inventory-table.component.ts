@@ -24,6 +24,7 @@ import {ColumnMetadata} from '../../model/column-metadata';
     ButtonLabel
   ],
   templateUrl: './inventory-table.component.html',
+  styleUrl: './inventory-table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InventoryTableComponent {
@@ -40,7 +41,6 @@ export class InventoryTableComponent {
   readonly listOfVariables = toSignal(this.variablesMapperService.getAllVariables(), {initialValue: []});
   readonly columnAssignationMap = toSignal(this.variablesMapperService.getColumnsAssignation(), {initialValue: new Map<string, string>});
   readonly listOfVariablesNotMapped = toSignal(this.variablesMapperService.getUnmappedVariables(), {initialValue: []});
-  readonly isAllVariablesAreMapped = computed(() => this.listOfVariablesNotMapped().length === 0);
 
   protected openMenuColumn: ColumnMetadata | undefined = undefined;
 

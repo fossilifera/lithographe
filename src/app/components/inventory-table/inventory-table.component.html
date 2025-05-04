@@ -1,13 +1,3 @@
-<p-message class="variables-unmapped-message" severity="warn" [hidden]="this.isAllVariablesAreMapped()">
-  <ng-template #icon>
-    <i class="pi pi-exclamation-triangle"></i>
-  </ng-template>
-  <span class="ml-2">Pour créer les étiquettes, les variables suivantes doivent être assignées à une des colonnes :
-    @for (variable of this.listOfVariablesNotMapped(); track $index) {
-      <p-tag class="variable-tag" severity="secondary" [value]="variable"/>
-    }
-    </span>
-</p-message>
 <p-table
   [value]="specimens()"
   dataKey="id"

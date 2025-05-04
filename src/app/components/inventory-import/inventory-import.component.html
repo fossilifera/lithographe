@@ -7,21 +7,32 @@
       </div>
     </ng-template>
     <p>
-      <!--      TODO-->
-      Lorem ipsum dolor sit amet...
+      Lithographe est une application web de création d'étiquettes pour collections muséales à partir d'un fichier
+      d'inventaire.
     </p>
   </p-fieldset>
 </div>
 
 <div class="import-choice-cards">
-  <p-card header="Utiliser un fichier de démonstration">
+  <p-card header="Inventaire de démonstration">
     <p>Ouvrir un inventaire de démonstration pour tester l'application</p>
     <i class="pi pi-lightbulb icon-import-choice-cards"></i>
     <p-button (onClick)="importDemoInventory()"><span pButtonLabel>Ouvrir</span></p-button>
   </p-card>
   <p-card header="Importer un fichier CSV">
-    <p>Ouvrir votre inventaire depuis le format CSV</p>
+    <p>Ouvrir un inventaire depuis le format CSV</p>
     <i class="pi pi-table icon-import-choice-cards"></i>
+    <div class="form-options">
+      <label class="label-text" for="first-line-header-switch">Première ligne comme entêtes</label>
+      <p-toggleswitch [(ngModel)]="csvImportParams.firstLineAsHeader" id="first-line-header-switch"/>
+    </div>
+    <div class="form-options">
+      <span class="label-text">Séparateur de colonnes</span>
+      <p-radiobutton value=";" [(ngModel)]="csvImportParams.separator" inputId="separator-option-comma"></p-radiobutton>
+      <label for="separator-option-comma">;</label>
+      <p-radiobutton value="," [(ngModel)]="csvImportParams.separator" inputId="separator-option-semicolon"></p-radiobutton>
+      <label for="separator-option-semicolon">,</label>
+    </div>
     <p-fileupload mode="basic" chooseIcon="pi pi-upload" accept="text/csv" (onSelect)="importCsv($event)"
                   [auto]="true" chooseLabel="Choisir le fichier"/>
   </p-card>

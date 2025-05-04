@@ -2,6 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {InventoryImportComponent} from './inventory-import.component';
 import {provideHttpClient} from '@angular/common/http';
+import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 
 describe('InventoryImportComponent', () => {
   let component: InventoryImportComponent;
@@ -11,7 +12,8 @@ describe('InventoryImportComponent', () => {
     await TestBed.configureTestingModule({
       imports: [InventoryImportComponent],
       providers: [
-        provideHttpClient()
+        provideHttpClient(),
+        provideAnimationsAsync()
       ]
     })
       .compileComponents();

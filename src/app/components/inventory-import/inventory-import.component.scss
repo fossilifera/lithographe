@@ -1,0 +1,13 @@
+.import-choice-cards {
+
+
+  .form-options {
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px;
+
+     > * {
+      padding-right: 10px;
+    }
+  }
+}
