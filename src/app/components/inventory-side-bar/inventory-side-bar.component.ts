@@ -17,7 +17,6 @@ import {Tag} from 'primeng/tag';
     Tag
   ],
   templateUrl: './inventory-side-bar.component.html',
-  styleUrl: './inventory-side-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InventorySideBarComponent {

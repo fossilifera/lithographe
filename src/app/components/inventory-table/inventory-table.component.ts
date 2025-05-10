@@ -5,7 +5,6 @@ import {toSignal} from '@angular/core/rxjs-interop';
 import {Checkbox} from 'primeng/checkbox';
 import {FormsModule} from '@angular/forms';
 import {VariablesMapperService} from '../../services/variables-mapper.service';
-import {Message} from 'primeng/message';
 import {Tag} from 'primeng/tag';
 import {Button, ButtonLabel} from 'primeng/button';
 import {Popover} from 'primeng/popover';
@@ -17,14 +16,12 @@ import {ColumnMetadata} from '../../model/column-metadata';
     TableModule,
     Checkbox,
     FormsModule,
-    Message,
     Tag,
     Button,
     Popover,
     ButtonLabel
   ],
   templateUrl: './inventory-table.component.html',
-  styleUrl: './inventory-table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InventoryTableComponent {
