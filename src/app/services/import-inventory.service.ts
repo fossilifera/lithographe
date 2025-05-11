@@ -3,7 +3,7 @@ import {InventoryService} from './inventory.service';
 import {DEMO_INVENTORY_METADATA, DEMO_INVENTORY_SPECIMENS} from './demo-inventory';
 import {LoggerService} from './logger.service';
 import {ModalService} from './modal.service';
-import {BehaviorSubject, fromEvent, map, Observable, of} from 'rxjs';
+import {BehaviorSubject, fromEvent, map, Observable} from 'rxjs';
 import {Options, parse} from 'csv-parse/browser/esm/sync';
 import {CsvImportParam} from '../model/csv-import-param';
 import {ColumnMetadata} from '../model/column-metadata';
@@ -107,7 +107,6 @@ export class ImportInventoryService {
     try {
       const columnMetadataList: ColumnMetadata[] = this.getColumnsHeaders(globalOptions, params.firstLineAsHeader);
 
-      // Todo import séquentiel?
       const listSpecimens = parse(this.readTextFile, {
         ...globalOptions,
         columns: columnMetadataList.map(columnMetadata => columnMetadata.jsonName),
