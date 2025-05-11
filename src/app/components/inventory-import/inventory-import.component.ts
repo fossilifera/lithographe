@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, inject, signal} from '@angular/core';
 import {Button, ButtonLabel} from 'primeng/button';
 import {ImportInventoryService} from '../../services/import-inventory.service';
 import {Card} from 'primeng/card';
@@ -8,6 +8,9 @@ import {ToggleSwitch} from 'primeng/toggleswitch';
 import {FormsModule} from '@angular/forms';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {CsvImportParam} from '../../model/csv-import-param';
+import {delay, first} from 'rxjs';
+import {InventoryImportPreviewComponent} from '../inventory-import-preview/inventory-import-preview.component';
+import {toSignal} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'inventory-import',
@@ -19,7 +22,8 @@ import {CsvImportParam} from '../../model/csv-import-param';
     FileUpload,
     Fieldset,
     ToggleSwitch,
-    RadioButtonModule
+    RadioButtonModule,
+    InventoryImportPreviewComponent
   ],
   templateUrl: './inventory-import.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,15 +32,35 @@ import {CsvImportParam} from '../../model/csv-import-param';
 export class InventoryImportComponent {
 
   private importInventoryService: ImportInventoryService = inject(ImportInventoryService);
-
+  protected inventoryPreview = toSignal(this.importInventoryService.getColumnMetadataList());
+  protected displayImportConfiguration = signal(false);
   csvImportParams: CsvImportParam = {firstLineAsHeader: true, separator: ';'};
 
   importDemoInventory(): void {
     this.importInventoryService.loadDemoInventory();
   }
 
-  importCsv(event: FileSelectEvent): void {
-    this.importInventoryService.readCsvFileForImport(event.files[0], this.csvImportParams);
+  triggerCsvImport(event: FileSelectEvent): void {
+    this.importInventoryService.openCsvFile(event.files[0])
+      .pipe(first())
+      .subscribe(() => {
+        this.displayImportConfiguration.set(true);
+        // FIXME virer le timer
+        setTimeout(() => {
+
+          this.updateHeader();
+        }, 1000);
+      });
+  }
+
+  updateHeader(): void {
+    console.log("TOTO");
+    this.importInventoryService.getOrUpdatePreview(this.csvImportParams);
+
+  }
+
+  importCsv(): void {
+    this.importInventoryService.importCsvInventory(this.csvImportParams);
   }
 
 }

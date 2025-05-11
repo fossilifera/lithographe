@@ -10,178 +10,222 @@ h1 {
   font-size: large;
 }
 
+.flex-display-columns {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.flex-display-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .container {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+}
 
+.menubar {
+  height: $menubar-height;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  border-bottom: 2px solid var(--ltg-primary-300);
 
-  .menubar {
-    height: $menubar-height;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+  .app-title {
+    font-size: x-large;
+    font-weight: 800;
+    color: var(--ltg-primary-600);
+  }
+
+  .menu-right {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 25px;
-    border-bottom: 2px solid var(--ltg-primary-300);
 
-    .app-title {
-      font-size: x-large;
-      font-weight: 800;
-      color: var(--ltg-primary-600);
-    }
-
-    .menu-right {
+    .menu-block-template {
       display: flex;
       flex-direction: row;
       align-items: center;
+      margin-right: 50px;
 
-      .menu-block-template {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-right: 50px;
+      button {
+        margin-left: 25px;
+      }
+    }
+  }
+}
 
-        button {
-          margin-left: 25px;
+
+.view {
+  position: absolute;
+  top: $menubar-height + 10px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 25px;
+  overflow: scroll;
+}
+
+.view-grid {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+
+  .table-container {
+    overflow: hidden;
+    height: 100%;
+  }
+}
+
+.about-card {
+  padding: 15px 15px 35px 15px;
+}
+
+inventory-import {
+
+  .import-choice-cards {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    min-width: 300px;
+
+    p-card {
+      flex: 1;
+      margin-left: 15px;
+      margin-right: 15px;
+
+      .p-card-body {
+
+        .p-card-title {
+          text-align: center;
+        }
+
+        .p-card-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .icon-import-choice-cards {
+            font-size: 5rem;
+            color: var(--ltg-primary-600);
+            margin: 25px;
+          }
+
         }
       }
     }
   }
 
+  .import-option-card {
+    margin: 15px;
 
-  .view {
-    position: absolute;
-    top: $menubar-height + 10px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 0 25px;
-    overflow: scroll;
-  }
+    .p-card-content {
 
-  .view-grid {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
+      margin: 15px;
 
-    .table-container {
-      overflow: hidden;
-      height: 100%;
+      .form-options {
+        display: flex;
+        align-items: center;
+        padding-bottom: 15px;
+
+        > * {
+          padding-right: 10px;
+        }
+      }
     }
   }
 
-  .about-card {
-    padding: 15px 15px 35px 15px;
+  .inventory_preview_card {
+    max-width: 60vw;
+
+    .p-card-content {
+
+      margin: 15px;
+
+      .skeleton-table {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+
+        p-skeleton {
+          margin: 5px;
+        }
+
+      }
+    }
+  }
+  .import-confirmation-button {
+    margin: 25px auto;
+  }
+}
+
+.inventory-sidebar-container {
+  margin-right: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p-card {
+    margin-bottom: 15px;
   }
 
-  inventory-import {
+  .variables-unmapped-message {
 
-    .import-choice-cards {
-      width: 100%;
+    margin: 20px 0;
+
+    .message-description {
+      margin: 5px 15px;
+    }
+
+    .variable-tag {
+      margin: 7px;
+    }
+  }
+
+}
+
+.table-container {
+
+  .column-head {
+    background: var(--ltg-amber-500);
+    padding: 0;
+
+    .column-head-button {
+      padding: 10px;
       display: flex;
       justify-content: space-around;
 
-      p-card {
-        min-width: 300px;
-
-        .p-card-body {
-
-          .p-card-title {
-            text-align: center;
-          }
-
-          .p-card-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            .icon-import-choice-cards {
-              font-size: 5rem;
-              color: var(--ltg-primary-600);
-              margin: 25px;
-            }
-
-          }
-        }
-
-        .form-options {
-          display: flex;
-          align-items: center;
-          padding-bottom: 15px;
-
-          > * {
-            padding-right: 10px;
-          }
-        }
-      }
-
-    }
-
-  }
-
-  .inventory-sidebar-container {
-    margin-right: 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    p-card {
-      margin-bottom: 15px;
-      width: 100%;
-    }
-
-    .variables-unmapped-message {
-
-      margin: 20px 0;
-
-      .message-description {
-        margin: 5px 15px;
-      }
-      .variable-tag {
-        margin: 7px;
-      }
-    }
-
-  }
-
-  inventory-table {
-
-
-    .column-head {
-      background: var(--ltg-amber-500);
-      padding: 0;
-
-      .column-head-button {
-        padding: 10px;
+      .p-button {
         display: flex;
-        justify-content: space-around;
+        flex-direction: column;
 
-        .p-button {
-          display: flex;
-          flex-direction: column;
+        &:hover {
+          background: var(--ltg-amber-600);
+        }
 
-          &:hover {
-            background: var(--ltg-amber-600);
-          }
-
-          .p-button-label {
-            color: white;
-            text-align: center;
-            font-weight: 800;
-          }
+        .p-button-label {
+          color: white;
+          text-align: center;
+          font-weight: 800;
         }
       }
     }
-
-
   }
+
+
 }
+
 
 .popover-selection-variables-options {
   padding: 5px;
