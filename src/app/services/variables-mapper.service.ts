@@ -2,8 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {VariableText} from '../model/templates/variable-text';
 import {Specimen} from '../model/specimen';
 import {LoggerService} from './logger.service';
-import {TemplateService} from './template.service';
-import {TagTemplate} from '../model/templates/tag-template';
+import {Template} from '../model/templates/template';
 import {BehaviorSubject, map, Observable} from 'rxjs';
 
 @Injectable({
@@ -12,15 +11,10 @@ import {BehaviorSubject, map, Observable} from 'rxjs';
 export class VariablesMapperService {
 
   private logger: LoggerService = inject(LoggerService);
-  private templateService: TemplateService = inject(TemplateService);
 
   private variableMappingMapSubject = new BehaviorSubject<Map<string, string | undefined>>(new Map<string, string | undefined>);
 
   constructor() {
-    this.templateService.getTemplate().subscribe((template: TagTemplate) => {
-      this.applyTemplateOnMap(template);
-    });
-
   }
 
   public getAllVariables(): Observable<string[]> {
@@ -75,7 +69,10 @@ export class VariablesMapperService {
     return (specimen.data[colName] as string) ?? '';
   }
 
-  private applyTemplateOnMap(template: TagTemplate) {
+  /**
+   * @deprecated
+   */
+  public applyTemplateOnMap(template: Template) {
     this.logger.debug(`Update variable map with new template ${template.name}`);
     const variableMappingMap = this.variableMappingMapSubject.getValue();
     const listOfTemplateVariables: string[] = this.extractVariableListFromTemplate(template);
@@ -96,7 +93,7 @@ export class VariablesMapperService {
     this.variableMappingMapSubject.next(variableMappingMap);
   }
 
-  private extractVariableListFromTemplate(template: TagTemplate): string[] {
+  private extractVariableListFromTemplate(template: Template): string[] {
     const variablesList: string[] = [];
     template.items.filter(item => item.type === "VariableText")
       .map(item => item as VariableText)

@@ -1,8 +1,8 @@
-import {TagTemplate} from "../app/model/templates/tag-template";
+import {Template} from "../app/model/templates/template";
 import {Rectangle} from '../app/model/templates/rectangle';
 import {VariableText} from '../app/model/templates/variable-text';
 
-export const LittleTags: TagTemplate = {
+export const LittleTags: Template = {
   name: "Petites étiquettes",
   tagWidth: 54,
   tagHeight: 40,

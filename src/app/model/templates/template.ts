@@ -1,6 +1,6 @@
 import {TagItem} from './tag-item';
 
-export interface TagTemplate {
+export interface Template {
   name: string;
   items: TagItem[];
   tagWidth: number;

@@ -63,6 +63,9 @@ export class InventoryService implements OnInit {
     return of(this.specimens.find(specimen => specimen.id === id));
   }
 
+  /**
+   * @deprecated
+   */
   public getSpeciemenSelectedIds(): Observable<number[]> {
     return this.selectionSubject.asObservable();
   }

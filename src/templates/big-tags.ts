@@ -1,8 +1,8 @@
-import {TagTemplate} from '../app/model/templates/tag-template';
+import {Template} from '../app/model/templates/template';
 import {Rectangle} from '../app/model/templates/rectangle';
 import {VariableText} from '../app/model/templates/variable-text';
 
-export const BigTags: TagTemplate = {
+export const BigTags: Template = {
   name: "Grandes étiquettes",
   tagWidth: 111,
   tagHeight: 40,
