@@ -47,6 +47,10 @@ export class InventoryService implements OnInit {
       .pipe(map(metadata => metadata?.columns ?? []));
   }
 
+  public getInventorySize(): number {
+    return this.specimens.length;
+  }
+
   public getSpecimens(): Specimen[] {
     return this.specimens;
   }
@@ -58,15 +62,8 @@ export class InventoryService implements OnInit {
   /**
    * @deprecated
    */
-  public getSpecimenByIdObs(id: number): Observable<Specimen | undefined> {
-    // FIXME
-    return of(this.specimens.find(specimen => specimen.id === id));
-  }
-
-  /**
-   * @deprecated
-   */
   public getSpeciemenSelectedIds(): Observable<number[]> {
+    // TODO enlever
     return this.selectionSubject.asObservable();
   }
 

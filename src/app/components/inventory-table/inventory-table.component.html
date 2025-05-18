@@ -1,8 +1,10 @@
 <p-table
-  [value]="specimens()"
+  [value]="specimens"
   dataKey="id"
   scrollable="true"
   scrollHeight="flex"
+  [virtualScroll]="true"
+  [virtualScrollItemSize]="46"
   resizableColumns="true"
   stripedRows
   showGridlines>
