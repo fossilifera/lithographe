@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, computed, inject, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, inject, signal, ViewChild} from '@angular/core';
 import {TableModule} from 'primeng/table';
 import {InventoryService} from '../../services/inventory.service';
 import {toSignal} from '@angular/core/rxjs-interop';
@@ -32,7 +32,7 @@ export class InventoryTableComponent {
   @ViewChild('op') op!: Popover;
 
   readonly columns = toSignal(this.inventoryService.getColumns(), {initialValue: []});
-  readonly specimens = toSignal(this.inventoryService.getSpecimens(), {initialValue: []});
+  readonly specimens = signal(this.inventoryService.getSpecimens());
   readonly selectedSpecimens = toSignal(this.inventoryService.getSpeciemenSelectedIds(), {initialValue: []});
   readonly isAllSpecimensSelected = computed(() => this.specimens().length === this.selectedSpecimens().length);
   readonly listOfVariables = toSignal(this.variablesMapperService.getAllVariables(), {initialValue: []});

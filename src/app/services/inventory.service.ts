@@ -1,5 +1,5 @@
 import {inject, Injectable, OnInit} from '@angular/core';
-import {BehaviorSubject, map, Observable} from 'rxjs';
+import {BehaviorSubject, map, Observable, of} from 'rxjs';
 import {LoggerService} from './logger.service';
 import {InventoryMetadata} from '../model/inventory-metadata';
 import {Specimen} from '../model/specimen';
@@ -16,7 +16,7 @@ export class InventoryService implements OnInit {
 
   private inventoryLoadingState = new BehaviorSubject<boolean>(false);
   private metadataSubject = new BehaviorSubject<InventoryMetadata | undefined>(undefined)
-  private specimensSubject = new BehaviorSubject<Specimen[]>([]);
+  private specimens: Specimen[] = [];
   private selectionSubject = new BehaviorSubject<number[]>([]);
 
   constructor() {
@@ -47,15 +47,20 @@ export class InventoryService implements OnInit {
       .pipe(map(metadata => metadata?.columns ?? []));
   }
 
-  public getSpecimens(): Observable<Specimen[]> {
-    return this.specimensSubject.asObservable();
+  public getSpecimens(): Specimen[] {
+    return this.specimens;
   }
 
-  public getSpecimenById(id: number): Observable<Specimen | undefined> {
-    return this.specimensSubject.asObservable().pipe(
-      map(specimens => {
-        return specimens.find(specimen => specimen.id === id);
-      }));
+  public getSpecimenById(id: number): Specimen | undefined {
+    return this.specimens.find(specimen => specimen.id === id);
+  }
+
+  /**
+   * @deprecated
+   */
+  public getSpecimenByIdObs(id: number): Observable<Specimen | undefined> {
+    // FIXME
+    return of(this.specimens.find(specimen => specimen.id === id));
   }
 
   public getSpeciemenSelectedIds(): Observable<number[]> {
@@ -68,7 +73,7 @@ export class InventoryService implements OnInit {
 
   private loadInventory(metadata: InventoryMetadata, specimens: Specimen[]): void {
     this.metadataSubject.next(metadata);
-    this.specimensSubject.next(specimens);
+    this.specimens = specimens;
     this.selectAllSpecimens();
     this.inventoryLoadingState.next(true);
   }
@@ -94,7 +99,7 @@ export class InventoryService implements OnInit {
   }
 
   public toggleAllSpecimen(): void {
-    if (this.specimensSubject.getValue().length === this.selectionSubject.getValue().length) {
+    if (this.specimens.length === this.selectionSubject.getValue().length) {
       this.logger.debug('Unselect all specimens');
       this.selectionSubject.next([]);
     } else {
@@ -106,13 +111,13 @@ export class InventoryService implements OnInit {
   public resetData(): void {
     this.inventoryLoadingState.next(false);
     this.metadataSubject.next(undefined);
-    this.specimensSubject.next([]);
+    this.specimens = [];
     this.selectionSubject.next([]);
   }
 
   private selectAllSpecimens(): void {
     this.selectionSubject.next(
-      this.specimensSubject.getValue().map((specimen: Specimen) => specimen.id)
+      this.specimens.map((specimen: Specimen) => specimen.id)
     );
   }
 

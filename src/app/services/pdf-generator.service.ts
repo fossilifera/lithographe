@@ -48,7 +48,7 @@ export class PdfGeneratorService {
           first(),
           concatMap((ids) => from(ids)),
           switchMap(id => {
-            return this.inventoryService.getSpecimenById(id)
+            return this.inventoryService.getSpecimenByIdObs(id)
               .pipe(
                 first(),
                 map((specimen: Specimen | undefined) => {
