@@ -10,6 +10,7 @@ import {ColumnMetadata} from '../model/column-metadata';
 import {InventoryMetadata} from '../model/inventory-metadata';
 import {Specimen} from '../model/specimen';
 import {InventoryPreview} from '../model/inventory-preview';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class ImportInventoryService {
   private logger: LoggerService = inject(LoggerService);
   private inventoryService: InventoryService = inject(InventoryService);
   private modalService: ModalService = inject(ModalService);
+  private readonly router = inject(Router);
 
   private fileName: string | undefined;
   private readTextFile: string | undefined;
@@ -31,6 +33,7 @@ export class ImportInventoryService {
 
   public loadDemoInventory(): void {
     this.inventoryService.loadNewInventory(DEMO_INVENTORY_METADATA, DEMO_INVENTORY_SPECIMENS);
+    this.router.navigate(['/inventory']);
   }
 
 
@@ -123,6 +126,7 @@ export class ImportInventoryService {
         })
       );
       this.modalService.hideModal();
+      this.router.navigate(['/inventory']);
     } catch (error) {
       this.logger.errorWithError("Error during parsing csv file", error);
       this.modalService.displayModal({

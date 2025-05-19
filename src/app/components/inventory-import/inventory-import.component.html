@@ -1,33 +1,12 @@
-@if (!this.displayImportConfiguration()) {
-  <div class="about-card">
-    <p-fieldset>
-      <ng-template #header>
-        <div class="flex items-center gap-2 px-2">
-          <i class="pi pi-tag"></i>
-          <span class="font-bold">À propos</span>
-        </div>
-      </ng-template>
-      <p>
-        Lithographe est une application web de création d'étiquettes pour collections muséales à partir d'un fichier
-        d'inventaire.
-      </p>
-    </p-fieldset>
-  </div>
-
-  <div class="import-choice-cards">
-    <p-card header="Inventaire de démonstration">
-      <p>Ouvrir un inventaire de démonstration pour tester l'application</p>
-      <i class="pi pi-lightbulb icon-import-choice-cards"></i>
-      <p-button (onClick)="importDemoInventory()"><span pButtonLabel>Ouvrir</span></p-button>
-    </p-card>
-    <p-card header="Importer un fichier CSV">
-      <p>Ouvrir un inventaire depuis le format CSV</p>
-      <i class="pi pi-table icon-import-choice-cards"></i>
-      <p-fileupload mode="basic" chooseIcon="pi pi-upload" accept="text/csv" (onSelect)="triggerCsvImport($event)"
-                    [auto]="true" chooseLabel="Choisir le fichier"/>
-    </p-card>
-  </div>
-} @else {
+<div class="import-choice-cards">
+  <p-card>
+    <P>Pour commencer importer un inventaire</P>
+    <p-fileupload mode="basic" chooseIcon="pi pi-upload" accept="text/csv" (onSelect)="triggerCsvImport($event)"
+                  [auto]="true" chooseLabel="Choisir le fichier"/>
+      </p-card>
+<!--  TODO ajouter choix simple d'accéder au fichier s'il y a un fichier ouvert -->
+</div>
+@if (this.displayImportConfiguration()) {
 
 
   <div class="flex-display-row">
@@ -61,7 +40,9 @@
         <ltg-inventory-import-preview [inventoryPreview]="this.inventoryPreview()"/>
       </p-card>
       <div class="import-confirmation-button">
-        <p-button label="Valider et importer" icon="pi pi-check" severity="success" [disabled]="!this.inventoryPreview() || this.inventoryPreview()?.isError" (onClick)="this.importCsv()" />
+        <p-button label="Valider et importer" icon="pi pi-check" severity="success"
+                  [disabled]="!this.inventoryPreview() || this.inventoryPreview()?.isError"
+                  (onClick)="this.importCsv()"/>
       </div>
     </div>
   </div>

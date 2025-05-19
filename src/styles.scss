@@ -91,36 +91,9 @@ h1 {
 inventory-import {
 
   .import-choice-cards {
-    width: 100%;
     display: flex;
     justify-content: space-around;
     min-width: 300px;
-
-    p-card {
-      flex: 1;
-      margin-left: 15px;
-      margin-right: 15px;
-
-      .p-card-body {
-
-        .p-card-title {
-          text-align: center;
-        }
-
-        .p-card-content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-
-          .icon-import-choice-cards {
-            font-size: 5rem;
-            color: var(--ltg-primary-600);
-            margin: 25px;
-          }
-
-        }
-      }
-    }
   }
 
   .import-option-card {

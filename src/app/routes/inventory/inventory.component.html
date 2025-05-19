@@ -1,8 +1,11 @@
-@if (this.isInventoryLoaded()) {
-  <div id="inventory-view-grid" class="view view-grid">
+<div id="inventory-view-grid" class="view view-grid">
+  @if (this.isInventoryLoaded()) {
+
     <ltg-inventory-side-bar/>
     <inventory-table class="table-container"/>
-  </div>
-} @else {
-  <h2>?</h2>
-}
+
+  } @else {
+    <!--  TODO gérer si on arrive sur cette page et qu'que l'inventaire n'est pas chargé -->
+    <h1>?</h1>
+  }
+</div>

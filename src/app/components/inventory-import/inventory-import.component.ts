@@ -3,14 +3,14 @@ import {Button, ButtonLabel} from 'primeng/button';
 import {ImportInventoryService} from '../../services/import-inventory.service';
 import {Card} from 'primeng/card';
 import {FileSelectEvent, FileUpload} from 'primeng/fileupload';
-import {Fieldset} from 'primeng/fieldset';
 import {ToggleSwitch} from 'primeng/toggleswitch';
 import {FormsModule} from '@angular/forms';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {CsvImportParam} from '../../model/csv-import-param';
-import {delay, first} from 'rxjs';
+import { first} from 'rxjs';
 import {InventoryImportPreviewComponent} from '../inventory-import-preview/inventory-import-preview.component';
 import {toSignal} from '@angular/core/rxjs-interop';
+import {StorageService} from '../../services/storage.service';
 
 @Component({
   selector: 'inventory-import',
@@ -20,27 +20,26 @@ import {toSignal} from '@angular/core/rxjs-interop';
     Card,
     FormsModule,
     FileUpload,
-    Fieldset,
     ToggleSwitch,
     RadioButtonModule,
     InventoryImportPreviewComponent
   ],
   templateUrl: './inventory-import.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {'class': 'view'}
 })
 export class InventoryImportComponent {
 
+  private storageService: StorageService = inject(StorageService);
   private importInventoryService: ImportInventoryService = inject(ImportInventoryService);
+
   protected inventoryPreview = toSignal(this.importInventoryService.getColumnMetadataList());
   protected displayImportConfiguration = signal(false);
   csvImportParams: CsvImportParam = {firstLineAsHeader: true, separator: ';'};
 
-  importDemoInventory(): void {
-    this.importInventoryService.loadDemoInventory();
-  }
+
 
   triggerCsvImport(event: FileSelectEvent): void {
+    console.log("trigger csv import");
     this.importInventoryService.openCsvFile(event.files[0])
       .pipe(first())
       .subscribe(() => {
