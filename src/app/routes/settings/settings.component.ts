@@ -7,11 +7,11 @@ import {ToolsService} from '../../services/tools.service';
   imports: [
     Button
   ],
-  templateUrl: './settings-view.component.html',
+  templateUrl: './settings.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsViewComponent {
+export class SettingsComponent {
 
   private toolsService: ToolsService = inject(ToolsService);
 

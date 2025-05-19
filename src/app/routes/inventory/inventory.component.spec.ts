@@ -1,19 +1,19 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {InventoryViewComponent} from './inventory-view.component';
+import {InventoryComponent} from './inventory.component';
 import {InventoryService} from '../../services/inventory.service';
 import {BehaviorSubject, of} from 'rxjs';
 import {provideHttpClient} from '@angular/common/http';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('InventoryViewComponent', () => {
-  let component: InventoryViewComponent;
-  let fixture: ComponentFixture<InventoryViewComponent>;
+  let component: InventoryComponent;
+  let fixture: ComponentFixture<InventoryComponent>;
   let inventoryServiceIsLoadedMock = new BehaviorSubject<boolean>(true);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InventoryViewComponent],
+      imports: [InventoryComponent],
       providers: [
         provideHttpClient(),
         provideAnimations(),
@@ -36,7 +36,7 @@ describe('InventoryViewComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(InventoryViewComponent);
+    fixture = TestBed.createComponent(InventoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
