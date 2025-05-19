@@ -10,40 +10,17 @@
   showGridlines>
   <ng-template #header>
     <tr>
-      <th pFrozenColumn>
+      <th class="column-head" >
         <p-checkbox [ngModel]="isAllSpecimensSelected()" binary="true" (onChange)="toggleAllSpecimens()"/>
       </th>
       @for (column of columns(); track column.position) {
-        <th class="column-head">
-          <p-button class="column-head-button" variant="text"
-                    (onClick)="displayVaraiblesMappingOptions($event, column)">
-            <span pButtonLabel>{{ column.displayName }}</span>
-            @if (this.columnAssignationMap().has(column.jsonName)) {
-              <p-tag icon="pi pi-link" severity="secondary" [value]="this.columnAssignationMap().get(column.jsonName)"/>
-            }
-          </p-button>
-        </th>
+        <th class="column-head">{{ column.displayName }}</th>
       }
     </tr>
-    <p-popover #op>
-      <div class="flex flex-col gap-4">
-        <span class="font-medium block mb-2">Assigner à la variable :</span>
-        @for (variable of this.listOfVariables(); track $index) {
-          <p-button class="popover-selection-variables-options" size="small"
-                    [severity]="this.columnAssignationMap().get(this.openMenuColumn?.jsonName ?? '') === variable ? 'primary':'secondary'"
-                    (click)="selectVariable(variable)">
-            @if (!this.listOfVariablesNotMapped().includes(variable)) {
-              <i class="pi pi-link"></i>
-            }
-            <span pButtonLabel>{{ variable }}</span>
-          </p-button>
-        }
-      </div>
-    </p-popover>
   </ng-template>
   <ng-template #body let-specimen>
     <tr>
-      <td pFrozenColumn>
+      <td>
         <p-checkbox [ngModel]="this.selectedSpecimens().includes(specimen.id)" binary="true"
                     (onChange)="toggleSelect(specimen.id)"/>
       </td>

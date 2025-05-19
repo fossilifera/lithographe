@@ -1,17 +1,4 @@
 <div class="inventory-sidebar-container">
-  @if (!isAllVariablesAreMapped()) {
-    <p-message class="variables-unmapped-message" severity="warn">
-      <ng-template #icon>
-        <i class="pi pi-exclamation-triangle"></i>
-      </ng-template>
-      <div>
-        <div class="message-description">Cliquer sur les en-têtes des colones pour y assigner les variables suivantes :</div>
-        @for (variable of this.listOfVariablesNotMapped(); track $index) {
-          <p-tag class="variable-tag" severity="secondary" [value]="variable"/>
-        }
-      </div>
-    </p-message>
-  }
   <p-card header="Inventaire">
     <P><i>Fichier</i> {{ this.inventoryMetadata()?.title }}</P>
     <P><i>importé le</i> {{ this.creationDate() }}</P>

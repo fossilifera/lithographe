@@ -165,6 +165,7 @@ inventory-import {
       }
     }
   }
+
   .import-confirmation-button {
     margin: 25px auto;
   }
@@ -199,30 +200,10 @@ inventory-import {
 
   .column-head {
     background: var(--ltg-amber-500);
-    padding: 0;
-
-    .column-head-button {
-      padding: 10px;
-      display: flex;
-      justify-content: space-around;
-
-      .p-button {
-        display: flex;
-        flex-direction: column;
-
-        &:hover {
-          background: var(--ltg-amber-600);
-        }
-
-        .p-button-label {
-          color: white;
-          text-align: center;
-          font-weight: 800;
-        }
-      }
-    }
+    color: white;
+    text-align: center;
+    font-weight: 800;
   }
-
 
 }
 
