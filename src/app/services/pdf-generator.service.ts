@@ -8,7 +8,6 @@ import {Rectangle} from '../model/templates/rectangle';
 import {VariableText} from '../model/templates/variable-text';
 import {Template} from '../model/templates/template';
 import {dateForFileNameFormat} from '../utils';
-import {VariablesMapperService} from './variables-mapper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +15,6 @@ import {VariablesMapperService} from './variables-mapper.service';
 export class PdfGeneratorService {
 
   private inventoryService: InventoryService = inject(InventoryService);
-  private variablesMapperService: VariablesMapperService = inject(VariablesMapperService);
   private logger: LoggerService = inject(LoggerService);
 
   public generatePDF(template: Template): void {
@@ -102,7 +100,10 @@ export class PdfGeneratorService {
     );
     doc.setFontSize(variableText.fontSize ?? 11);
     doc.setTextColor(variableText.fontColor ?? "#000")
-    doc.text(this.variablesMapperService.injectVariablesInText(variableText, specimen),
+    // FIXME remplacer par nouveau système orienté métier
+    let text: string = '';
+    variableText.variables.forEach(variable => text += specimen.data[variable] ?? ' ');
+    doc.text(text,
       tagCoordX + variableText.xOffset, // Coordinate against left edge of the page
       tagCoordY + variableText.yOffset, // Coordinate against upper edge of the page
       {

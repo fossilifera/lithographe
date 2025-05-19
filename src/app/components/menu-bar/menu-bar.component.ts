@@ -8,7 +8,6 @@ import {FormsModule} from '@angular/forms';
 import {IftaLabel} from 'primeng/iftalabel';
 import {TemplateRegistry} from '@templates/template-registry';
 import {Template} from '../../model/templates/template';
-import {VariablesMapperService} from '../../services/variables-mapper.service';
 
 @Component({
   selector: 'ltg-menu-bar',
@@ -28,15 +27,11 @@ import {VariablesMapperService} from '../../services/variables-mapper.service';
 export class MenuBarComponent {
 
   private pdfGeneratorService: PdfGeneratorService = inject(PdfGeneratorService);
-  // FIXME Mapper Service à dégager
-  private variablesMapperService: VariablesMapperService = inject(VariablesMapperService);
 
   protected templatesOptions = TemplateRegistry;
   protected templateSelected: Template = TemplateRegistry[0];
 
   protected createLabels(): void {
-    //FIXME
-    this.variablesMapperService.applyTemplateOnMap(this.templateSelected);
     this.pdfGeneratorService.generatePDF(this.templateSelected);
   }
 
