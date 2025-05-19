@@ -14,6 +14,7 @@ import {TagItem} from './tag-item';
 export interface VariableText extends TagItem {
   xOffset: number;
   yOffset: number;
+  //FIXME à enlever
   value: string;
   variables: string[];
   fontName?: 'Helvetica' |'helvetica' | 'Courrier' | 'Times' ;

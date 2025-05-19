@@ -22,6 +22,7 @@ describe('InventoryViewComponent', () => {
             isInventoryLoaded: jest.fn().mockReturnValue(inventoryServiceIsLoadedMock.asObservable()),
             getMetadata: jest.fn().mockReturnValue(of(undefined)),
             getColumns: jest.fn().mockReturnValue(of(["One", "Two", "Three"])),
+            getInventorySize: jest.fn().mockReturnValue(100),
             getSpecimens: jest.fn().mockReturnValue([]),
             getSpecimenById: jest.fn().mockReturnValue(undefined),
             getSpeciemenSelectedIds: jest.fn().mockReturnValue(of([])),
