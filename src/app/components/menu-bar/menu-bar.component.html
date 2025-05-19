@@ -1,26 +1,39 @@
-<div class="menubar">
-  <p-button variant="text" routerLink="/">
-    <i class="pi pi-tag"  style="font-size: 1.5rem"></i>
-    <span pButtonLabel class="app-title">Lithographe</span>
-  </p-button>
-  <div class="menu-right">
-    <div class="menu-block-template">
-      <p-iftalabel class="w-full md:w-56">
-        <p-select
-          [options]="this.templatesOptions"
-          [(ngModel)]="this.templateSelected"
-          id="template"
-          optionLabel=name
-          class="w-full md:w-56"/>
-        <label for="template">Modèle d'étiquette</label>
-      </p-iftalabel>
-      <button pButton pRipple severity="success" (click)="createLabels()">
-        <span class="pi pi-play"></span>
-        <span pButtonLabel>Créer les étiquettes</span>
-      </button>
+<p-menubar class="menubar" [model]="links">
+  <ng-template #start>
+    <div class="app-title">
+      <i class="pi pi-tag" style="font-size: 1.5rem"></i>
+      Lithographe</div>
+  </ng-template>
+  <ng-template #item let-item>
+    <ng-container>
+      <a [routerLink]="item.route" class="p-menubar-item-link">
+        <span [class]="item.icon"></span>
+        <span class="ml-2">{{ item.label }}</span>
+      </a>
+    </ng-container>
+  </ng-template>
+  <ng-template #end>
+
+    <div class="menu-right">
+      <div class="menu-block-template">
+        <p-iftalabel class="w-full md:w-56">
+          <p-select
+            [options]="this.templatesOptions"
+            [(ngModel)]="this.templateSelected"
+            id="template"
+            optionLabel=name
+            class="w-full md:w-56"/>
+          <label for="template">Modèle d'étiquette</label>
+        </p-iftalabel>
+        <button pButton pRipple severity="success" (click)="createLabels()">
+          <span class="pi pi-play"></span>
+          <span pButtonLabel>Créer les étiquettes</span>
+        </button>
+      </div>
+      <div>
+        <p-button icon="pi pi-cog" routerLink="/settings"/>
+      </div>
     </div>
-    <div>
-      <p-button icon="pi pi-cog" routerLink="/settings"/>
-    </div>
-  </div>
-</div>
+
+  </ng-template>
+</p-menubar>
