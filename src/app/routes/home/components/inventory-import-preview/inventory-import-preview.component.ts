@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, computed, input, model, Signal} from
 import {TableModule} from 'primeng/table';
 import {Message} from 'primeng/message';
 import {Skeleton} from 'primeng/skeleton';
-import {InventoryPreview} from '../../model/inventory-preview';
+import {InventoryPreview} from '../../../../model/inventory-preview';
 
 @Component({
   selector: 'ltg-inventory-import-preview',

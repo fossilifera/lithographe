@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {MenuBarComponent} from './components/menu-bar/menu-bar.component';
-import {ModalComponent} from './components/modal/modal.component';
+import {MenuBarComponent} from './shared/menu-bar/menu-bar.component';
+import {ModalComponent} from './shared/modal/modal.component';
 
 @Component({
   selector: 'ltg-root',
