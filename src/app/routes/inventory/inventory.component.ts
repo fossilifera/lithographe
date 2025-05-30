@@ -24,7 +24,6 @@ export class InventoryComponent implements OnInit {
   private logger: LoggerService = inject(LoggerService);
   private readonly router = inject(Router);
 
-  protected readonly columns = toSignal(this.inventoryService.getColumns(), {initialValue: []});
   protected readonly selectedSpecimens = toSignal(this.inventoryService.getSpeciemenSelectedIds(), {initialValue: []});
   protected readonly isAllSpecimensSelected = computed(() => this.inventoryService.getInventorySize() === this.selectedSpecimens().length);
 

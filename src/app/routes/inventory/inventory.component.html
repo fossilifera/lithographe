@@ -15,7 +15,7 @@
         <th class="column-head">
           <p-checkbox [ngModel]="isAllSpecimensSelected()" binary="true" (onChange)="toggleAllSpecimens()"/>
         </th>
-        @for (column of columns(); track column.position) {
+        @for (column of this.inventoryService.getColumns(); track column.position) {
           <th class="column-head">{{ column.displayName }}</th>
         }
       </tr>
@@ -26,7 +26,7 @@
           <p-checkbox [ngModel]="this.selectedSpecimens().includes(specimen.id)" binary="true"
                       (onChange)="toggleSelect(specimen.id)"/>
         </td>
-        @for (column of columns(); track column.position) {
+        @for (column of this.inventoryService.getColumns(); track column.position) {
           <td>{{ specimen.data[column.jsonName] }}</td>
         }
       </tr>

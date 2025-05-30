@@ -1,7 +1,6 @@
 import {inject, Injectable, signal, WritableSignal} from '@angular/core';
-import {BehaviorSubject, map, Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {LoggerService} from './logger.service';
-import {InventoryMetadata} from '../model/inventory-metadata';
 import {Specimen} from '../model/specimen';
 import {ColumnMetadata} from '../model/column-metadata';
 import {StorageService} from './storage.service';
@@ -14,9 +13,7 @@ export class InventoryService {
   private logger: LoggerService = inject(LoggerService);
   private storageService: StorageService = inject(StorageService);
 
-  // FIXME à retirer
-  private metadataSubject = new BehaviorSubject<InventoryMetadata | undefined>(undefined)
-
+  private columns: ColumnMetadata[] = [];
   private specimens: Specimen[] = [];
   private selectionSubject = new BehaviorSubject<number[]>([]);
 
@@ -30,16 +27,8 @@ export class InventoryService {
     return this.getInventoryFileName() !== null;
   }
 
-  /**
-   *@deprecated
-   */
-  public getMetadata(): Observable<InventoryMetadata | undefined> {
-    return this.metadataSubject.asObservable();
-  }
-
-  public getColumns(): Observable<ColumnMetadata[]> {
-    return this.metadataSubject.asObservable()
-      .pipe(map(metadata => metadata?.columns ?? []));
+  public getColumns(): ColumnMetadata[] {
+    return this.columns;
   }
 
   public getInventorySize(): number {
@@ -66,9 +55,8 @@ export class InventoryService {
     return this.selectionSubject.getValue();
   }
 
-  private loadInventory(metadata: InventoryMetadata, specimens: Specimen[]): void {
-    // FIXME virer metadata
-    this.metadataSubject.next(metadata);
+  private loadInventory(columns: ColumnMetadata[], specimens: Specimen[]): void {
+    this.columns = columns;
     this.specimens = specimens;
     this.selectAllSpecimens();
     this.isInventoryLoaded.set(true);
@@ -76,12 +64,13 @@ export class InventoryService {
 
   public loadInventoryFromStorage(): boolean {
     this.logger.info("Open inventory from storage");
-    const metadata: InventoryMetadata | undefined = this.storageService.getMetadataFromStorage();
+    const columns: ColumnMetadata[] | null = this.storageService.getColumnMetadata();
     // FIXME revoir gestion erreurs
-    if (metadata) {
+
+    if (columns) {
       const specimens = this.storageService.getSpecimensFromStorage();
       if (specimens) {
-        this.loadInventory(metadata, specimens);
+        this.loadInventory(columns, specimens);
         return true;
       }
     }
@@ -90,9 +79,9 @@ export class InventoryService {
 
   public loadNewInventory(fileName: string, columns: ColumnMetadata[], specimens: Specimen[]): void {
     this.logger.info("Load new inventory");
-    this.loadInventory(new InventoryMetadata(fileName, columns), specimens);
+    this.loadInventory(columns, specimens);
     this.storageService.persistInventoryFileName(fileName);
-    this.storageService.persistMetadata(new InventoryMetadata(fileName, columns));
+    this.storageService.persistColumns(columns);
     this.storageService.persistSpecimens(specimens);
   }
 

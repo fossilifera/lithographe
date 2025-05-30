@@ -19,7 +19,6 @@ describe('InventoryViewComponent', () => {
         provideAnimations(),
         {
           provide: InventoryService, useValue: {
-            getMetadata: jest.fn().mockReturnValue(of(undefined)),
             getColumns: jest.fn().mockReturnValue(of(["One", "Two", "Three"])),
             getInventorySize: jest.fn().mockReturnValue(100),
             getSpecimens: jest.fn().mockReturnValue([]),

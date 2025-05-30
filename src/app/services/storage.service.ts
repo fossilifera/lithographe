@@ -1,8 +1,8 @@
 import {inject, Injectable} from '@angular/core';
-import {InventoryMetadata} from '../model/inventory-metadata';
 import {KeysLocalStorage} from '../enums/local-storage-keys';
 import {Specimen} from '../model/specimen';
 import {LoggerService} from './logger.service';
+import {ColumnMetadata} from '../model/column-metadata';
 
 @Injectable({
   providedIn: 'root'
@@ -19,28 +19,23 @@ export class StorageService {
     window.localStorage.setItem(KeysLocalStorage.inventoryFileName, fileName);
   }
 
-  /**
-   *@deprecated
-   */
-  public getMetadataFromStorage(): InventoryMetadata | undefined {
-    const metadataLocalStorage = window.localStorage.getItem(KeysLocalStorage.inventoryMetadata);
-    if (!metadataLocalStorage) {
-      return undefined;
+
+  public getColumnMetadata(): ColumnMetadata[] | null {
+    const columnsInStorage = window.localStorage.getItem(KeysLocalStorage.inventoryColumns);
+    if(!columnsInStorage) {
+      return null;
     }
     try {
-      return InventoryMetadata.fromJson(metadataLocalStorage);
-    } catch (e: any) {
-      this.logger.errorWithError("Error during parsing inventory metadata from local storage", e);
-      return undefined;
+      return JSON.parse(columnsInStorage) as ColumnMetadata[];
+    } catch (e) {
+      this.logger.errorWithError("Error during parsing columns from local storage", e);
+      return null;
     }
   }
 
-  /**
-   *@deprecated
-   */
-  public persistMetadata(metadata: InventoryMetadata): void {
-    this.logger.debug("Saving inventory metadata in local storage")
-    window.localStorage.setItem(KeysLocalStorage.inventoryMetadata, JSON.stringify(metadata));
+  public persistColumns(columns: ColumnMetadata[]): void {
+    this.logger.debug("Saving columns metadata in local storage")
+    window.localStorage.setItem(KeysLocalStorage.inventoryColumns, JSON.stringify(columns));
   }
 
   public getSpecimensFromStorage(): Specimen[] | undefined {
