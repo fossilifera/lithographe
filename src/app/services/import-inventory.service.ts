@@ -1,13 +1,12 @@
-import {inject, Injectable} from '@angular/core';
+import {inject, Injectable, OnInit} from '@angular/core';
 import {InventoryService} from './inventory.service';
-import {DEMO_INVENTORY_METADATA, DEMO_INVENTORY_SPECIMENS} from './demo-inventory';
+import {DEMO_INVENTORY_COLUMNS, DEMO_INVENTORY_NAME, DEMO_INVENTORY_SPECIMENS} from './demo-inventory';
 import {LoggerService} from './logger.service';
 import {ModalService} from './modal.service';
 import {BehaviorSubject, fromEvent, map, Observable} from 'rxjs';
 import {Options, parse} from 'csv-parse/browser/esm/sync';
 import {CsvImportParam} from '../model/csv-import-param';
 import {ColumnMetadata} from '../model/column-metadata';
-import {InventoryMetadata} from '../model/inventory-metadata';
 import {Specimen} from '../model/specimen';
 import {InventoryPreview} from '../model/inventory-preview';
 import {Router} from '@angular/router';
@@ -15,7 +14,7 @@ import {Router} from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class ImportInventoryService {
+export class ImportInventoryService implements OnInit {
 
   private logger: LoggerService = inject(LoggerService);
   private inventoryService: InventoryService = inject(InventoryService);
@@ -26,16 +25,19 @@ export class ImportInventoryService {
   private readTextFile: string | undefined;
   private inventoryPreviewSubject = new BehaviorSubject<InventoryPreview | undefined>(undefined);
 
+
+  ngOnInit(): void {
+  }
+
+
   public getColumnMetadataList(): Observable<InventoryPreview | undefined> {
     return this.inventoryPreviewSubject.asObservable();
   }
 
-
   public loadDemoInventory(): void {
-    this.inventoryService.loadNewInventory(DEMO_INVENTORY_METADATA, DEMO_INVENTORY_SPECIMENS);
+    this.inventoryService.loadNewInventory(DEMO_INVENTORY_NAME, DEMO_INVENTORY_COLUMNS, DEMO_INVENTORY_SPECIMENS);
     this.router.navigate(['/inventory']);
   }
-
 
   public openCsvFile(csvFile: File): Observable<void> {
     this.fileName = csvFile.name;
@@ -120,7 +122,8 @@ export class ImportInventoryService {
       console.log(listSpecimens);
       let i: number = 0;
       this.inventoryService.loadNewInventory(
-        this.getInventoryMetadata(this.fileName, columnMetadataList),
+        this.fileName,
+        columnMetadataList,
         listSpecimens.map((values: Record<string, string>) => {
           return {id: i++, data: values} as Specimen;
         })
@@ -157,10 +160,6 @@ export class ImportInventoryService {
         firstLineAsHeader ? value : ("Column_" + (index + 1))
       );
     });
-  }
-
-  private getInventoryMetadata(fileName: string, columnsHeadersList: ColumnMetadata[]): InventoryMetadata {
-    return new InventoryMetadata(fileName, columnsHeadersList);
   }
 
 }

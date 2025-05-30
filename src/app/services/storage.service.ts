@@ -10,9 +10,18 @@ import {LoggerService} from './logger.service';
 export class StorageService {
   private logger: LoggerService = inject(LoggerService);
 
-  constructor() {
+  public getInventoryFileName(): string | null {
+      return window.localStorage.getItem(KeysLocalStorage.inventoryFileName);
   }
 
+  public persistInventoryFileName(fileName: string): void {
+    this.logger.debug("Saving file name in local storage")
+    window.localStorage.setItem(KeysLocalStorage.inventoryFileName, fileName);
+  }
+
+  /**
+   *@deprecated
+   */
   public getMetadataFromStorage(): InventoryMetadata | undefined {
     const metadataLocalStorage = window.localStorage.getItem(KeysLocalStorage.inventoryMetadata);
     if (!metadataLocalStorage) {
@@ -26,6 +35,9 @@ export class StorageService {
     }
   }
 
+  /**
+   *@deprecated
+   */
   public persistMetadata(metadata: InventoryMetadata): void {
     this.logger.debug("Saving inventory metadata in local storage")
     window.localStorage.setItem(KeysLocalStorage.inventoryMetadata, JSON.stringify(metadata));

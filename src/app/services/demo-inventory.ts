@@ -1,8 +1,9 @@
-import {InventoryMetadata} from '../model/inventory-metadata';
 import {Specimen} from '../model/specimen';
 import {ColumnMetadata} from '../model/column-metadata';
 
-const DEMO_INVENTORY_COLUMNS: ColumnMetadata[] = [
+export const DEMO_INVENTORY_NAME: string = 'demoInventory';
+
+export const DEMO_INVENTORY_COLUMNS: ColumnMetadata[] = [
   new ColumnMetadata(0, "Number"),
   new ColumnMetadata(1, "Phyllum"),
   new ColumnMetadata(2, "Class"),
@@ -14,9 +15,6 @@ const DEMO_INVENTORY_COLUMNS: ColumnMetadata[] = [
   new ColumnMetadata(8, "Country"),
   new ColumnMetadata(9, "Locality"),
 ];
-
-export const DEMO_INVENTORY_METADATA: InventoryMetadata = new InventoryMetadata('demoInventory', DEMO_INVENTORY_COLUMNS);
-
 
 export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
   {id: 0,

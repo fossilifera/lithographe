@@ -38,7 +38,7 @@ export class MenuBarComponent implements OnInit {
   ngOnInit(): void {
     this.links = [
       {
-        label: 'Ouvrir un fichier',
+        label: 'Fichier',
         route: '/',
       },
       {

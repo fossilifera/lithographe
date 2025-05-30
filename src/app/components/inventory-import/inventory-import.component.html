@@ -1,11 +1,17 @@
-<div class="import-choice-cards">
-  <p-card>
-    <P>Pour commencer importer un inventaire</P>
+<p-card class="import-choice-card">
+  @if (this.inventoryService.isImportInventoryAvailableInStorage()) {
+    <div class="import-choice-option">
+      <P>Ouvrir l'inventaire précédemment importé : {{this.inventoryService.getInventoryFileName()}}</P>
+      <p-button  label="Ouvrir" icon="pi pi-check" (onClick)="openStoredInventory()" />
+    </div>
+    <p-divider layout="vertical"/>
+  }
+  <div>
+    <P>Importer un fichier au format CSV, celui-ci sera sauvegardé dans votre navigateur</P>
     <p-fileupload mode="basic" chooseIcon="pi pi-upload" accept="text/csv" (onSelect)="triggerCsvImport($event)"
                   [auto]="true" chooseLabel="Choisir le fichier"/>
-      </p-card>
-<!--  TODO ajouter choix simple d'accéder au fichier s'il y a un fichier ouvert -->
-</div>
+  </div>
+</p-card>
 @if (this.displayImportConfiguration()) {
 
 
@@ -16,17 +22,17 @@
           <label class="label-text" for="first-line-header-switch">Première ligne comme entêtes</label>
           <p-toggleswitch
             [(ngModel)]="csvImportParams.firstLineAsHeader"
-            (ngModelChange)="this.updateHeader()"
+            (ngModelChange)="this.updatePreview()"
             id="first-line-header-switch"/>
         </div>
         <div class="form-options">
           <span class="label-text">Séparateur de colonnes</span>
           <p-radiobutton value=";" [(ngModel)]="csvImportParams.separator"
-                         (ngModelChange)="this.updateHeader()"
+                         (ngModelChange)="this.updatePreview()"
                          inputId="separator-option-comma"></p-radiobutton>
           <label for="separator-option-comma">;</label>
           <p-radiobutton value="," [(ngModel)]="csvImportParams.separator"
-                         (ngModelChange)="this.updateHeader()"
+                         (ngModelChange)="this.updatePreview()"
                          inputId="separator-option-semicolon"></p-radiobutton>
           <label for="separator-option-semicolon">,</label>
         </div>

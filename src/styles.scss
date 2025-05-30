@@ -90,10 +90,17 @@ h1 {
 
 inventory-import {
 
-  .import-choice-cards {
-    display: flex;
-    justify-content: space-around;
-    min-width: 300px;
+  .import-choice-card {
+    .p-card-content {
+      display: flex;
+      justify-content: space-around;
+
+      .import-choice-option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   }
 
   .import-option-card {

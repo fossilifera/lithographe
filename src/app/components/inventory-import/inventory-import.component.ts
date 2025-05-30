@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, computed, inject, signal} from '@angular/core';
-import {Button, ButtonLabel} from 'primeng/button';
+import {Button} from 'primeng/button';
 import {ImportInventoryService} from '../../services/import-inventory.service';
 import {Card} from 'primeng/card';
 import {FileSelectEvent, FileUpload} from 'primeng/fileupload';
@@ -10,33 +10,37 @@ import {CsvImportParam} from '../../model/csv-import-param';
 import { first} from 'rxjs';
 import {InventoryImportPreviewComponent} from '../inventory-import-preview/inventory-import-preview.component';
 import {toSignal} from '@angular/core/rxjs-interop';
-import {StorageService} from '../../services/storage.service';
+import {Divider} from 'primeng/divider';
+import {InventoryService} from '../../services/inventory.service';
 
 @Component({
   selector: 'inventory-import',
   imports: [
-    ButtonLabel,
     Button,
     Card,
     FormsModule,
     FileUpload,
     ToggleSwitch,
     RadioButtonModule,
-    InventoryImportPreviewComponent
+    InventoryImportPreviewComponent,
+    Divider
   ],
   templateUrl: './inventory-import.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InventoryImportComponent {
 
-  private storageService: StorageService = inject(StorageService);
-  private importInventoryService: ImportInventoryService = inject(ImportInventoryService);
+  protected readonly importInventoryService: ImportInventoryService = inject(ImportInventoryService);
+  protected readonly inventoryService: InventoryService = inject(InventoryService);
+
 
   protected inventoryPreview = toSignal(this.importInventoryService.getColumnMetadataList());
   protected displayImportConfiguration = signal(false);
   csvImportParams: CsvImportParam = {firstLineAsHeader: true, separator: ';'};
 
-
+  openStoredInventory(): void {
+    this.inventoryService.loadInventoryFromStorage();
+  }
 
   triggerCsvImport(event: FileSelectEvent): void {
     console.log("trigger csv import");
@@ -47,12 +51,12 @@ export class InventoryImportComponent {
         // FIXME virer le timer
         setTimeout(() => {
 
-          this.updateHeader();
+          this.updatePreview();
         }, 1000);
       });
   }
 
-  updateHeader(): void {
+  updatePreview(): void {
     console.log("TOTO");
     this.importInventoryService.getOrUpdatePreview(this.csvImportParams);
 
