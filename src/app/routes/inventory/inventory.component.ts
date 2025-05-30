@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, computed, inject, OnInit} from '@angular/core';
 import {InventoryService} from '../../services/inventory.service';
-import {toSignal} from '@angular/core/rxjs-interop';
 import {Checkbox} from 'primeng/checkbox';
 import {TableModule} from 'primeng/table';
 import {FormsModule} from '@angular/forms';
@@ -24,10 +23,6 @@ export class InventoryComponent implements OnInit {
   private logger: LoggerService = inject(LoggerService);
   private readonly router = inject(Router);
 
-  protected readonly selectedSpecimens = toSignal(this.inventoryService.getSpeciemenSelectedIds(), {initialValue: []});
-  protected readonly isAllSpecimensSelected = computed(() => this.inventoryService.getInventorySize() === this.selectedSpecimens().length);
-
-
   ngOnInit(): void {
     if (!this.inventoryService.isInventoryLoaded()) {
       if (this.inventoryService.isImportInventoryAvailableInStorage()) {
@@ -38,14 +33,6 @@ export class InventoryComponent implements OnInit {
         this.router.navigate(['/']);
       }
     }
-  }
-
-  public toggleSelect(id: number) {
-    this.inventoryService.toggleSpecimenSelection(id);
-  }
-
-  public toggleAllSpecimens(): void {
-    this.inventoryService.toggleAllSpecimen();
   }
 
 }

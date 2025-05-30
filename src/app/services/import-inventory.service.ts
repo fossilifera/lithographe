@@ -125,7 +125,7 @@ export class ImportInventoryService implements OnInit {
         this.fileName,
         columnMetadataList,
         listSpecimens.map((values: Record<string, string>) => {
-          return {id: i++, data: values} as Specimen;
+          return {id: i++, selected: true, data: values} as Specimen;
         })
       );
       this.modalService.hideModal();

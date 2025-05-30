@@ -21,10 +21,7 @@ describe('InventoryViewComponent', () => {
           provide: InventoryService, useValue: {
             getColumns: jest.fn().mockReturnValue(of(["One", "Two", "Three"])),
             getInventorySize: jest.fn().mockReturnValue(100),
-            getSpecimens: jest.fn().mockReturnValue([]),
             getSpecimenById: jest.fn().mockReturnValue(undefined),
-            getSpeciemenSelectedIds: jest.fn().mockReturnValue(of([])),
-            getSpeciemenSelectedIdsSync: jest.fn().mockReturnValue([]),
             loadNewInventory: jest.fn(),
             toggleSpecimenSelection: jest.fn(),
             toggleAllSpecimen: jest.fn()

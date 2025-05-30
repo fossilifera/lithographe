@@ -1,5 +1,4 @@
-import {inject, Injectable, signal, WritableSignal} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {computed, inject, Injectable, signal, WritableSignal} from '@angular/core';
 import {LoggerService} from './logger.service';
 import {Specimen} from '../model/specimen';
 import {ColumnMetadata} from '../model/column-metadata';
@@ -14,10 +13,11 @@ export class InventoryService {
   private storageService: StorageService = inject(StorageService);
 
   private columns: ColumnMetadata[] = [];
-  private specimens: Specimen[] = [];
-  private selectionSubject = new BehaviorSubject<number[]>([]);
+  readonly specimens: WritableSignal<Specimen[]> = signal([]);
 
   readonly isInventoryLoaded: WritableSignal<boolean> = signal(false);
+  readonly isAllSpecimensSelected = computed(() => this.specimens().every(specimen => specimen.selected));
+
 
   public getInventoryFileName(): string | null {
     return this.storageService.getInventoryFileName();
@@ -32,33 +32,17 @@ export class InventoryService {
   }
 
   public getInventorySize(): number {
-    return this.specimens.length;
+    return this.specimens().length;
   }
 
-  public getSpecimens(): Specimen[] {
-    return this.specimens;
-  }
 
   public getSpecimenById(id: number): Specimen | undefined {
-    return this.specimens.find(specimen => specimen.id === id);
-  }
-
-  /**
-   * @deprecated
-   */
-  public getSpeciemenSelectedIds(): Observable<number[]> {
-    // TODO enlever
-    return this.selectionSubject.asObservable();
-  }
-
-  public getSpeciemenSelectedIdsSync(): number[] {
-    return this.selectionSubject.getValue();
+    return this.specimens().find(specimen => specimen.id === id);
   }
 
   private loadInventory(columns: ColumnMetadata[], specimens: Specimen[]): void {
     this.columns = columns;
-    this.specimens = specimens;
-    this.selectAllSpecimens();
+    this.specimens.set(specimens);
     this.isInventoryLoaded.set(true);
   }
 
@@ -87,27 +71,23 @@ export class InventoryService {
 
   public toggleSpecimenSelection(id: number): void {
     this.logger.debug(`Toggle selection for id ${id}`);
-    if (this.selectionSubject.getValue().includes(id)) {
-      this.selectionSubject.next(this.selectionSubject.getValue().filter((value: number) => value !== id));
-    } else {
-      this.selectionSubject.next(this.selectionSubject.getValue().concat(id))
-    }
+    this.specimens.update(specimens =>
+      specimens.map(specimen => {
+        if (specimen.id === id) {
+          specimen.selected = !specimen.selected;
+        }
+        return specimen;
+      })
+    );
   }
 
   public toggleAllSpecimen(): void {
-    if (this.specimens.length === this.selectionSubject.getValue().length) {
-      this.logger.debug('Unselect all specimens');
-      this.selectionSubject.next([]);
-    } else {
-      this.logger.debug('Select all specimens');
-      this.selectAllSpecimens();
-    }
+    const boolTarget: boolean = !this.isAllSpecimensSelected();
+      this.specimens.update(specimens => specimens.map(specimen => {
+        specimen.selected = boolTarget;
+        return specimen;
+      }))
   }
 
-  private selectAllSpecimens(): void {
-    this.selectionSubject.next(
-      this.specimens.map((specimen: Specimen) => specimen.id)
-    );
-  }
 
 }

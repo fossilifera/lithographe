@@ -1,7 +1,7 @@
 @if (this.inventoryService.isInventoryLoaded()) {
   <p-table
     class="table-container"
-    [value]="this.inventoryService.getSpecimens()"
+    [value]="this.inventoryService.specimens()"
     dataKey="id"
     scrollable="true"
     scrollHeight="flex"
@@ -13,7 +13,7 @@
     <ng-template #header>
       <tr>
         <th class="column-head">
-          <p-checkbox [ngModel]="isAllSpecimensSelected()" binary="true" (onChange)="toggleAllSpecimens()"/>
+          <p-checkbox [ngModel]="this.inventoryService.isAllSpecimensSelected()" binary="true" (onChange)="this.inventoryService.toggleAllSpecimen()"/>
         </th>
         @for (column of this.inventoryService.getColumns(); track column.position) {
           <th class="column-head">{{ column.displayName }}</th>
@@ -23,8 +23,8 @@
     <ng-template #body let-specimen>
       <tr>
         <td>
-          <p-checkbox [ngModel]="this.selectedSpecimens().includes(specimen.id)" binary="true"
-                      (onChange)="toggleSelect(specimen.id)"/>
+          <p-checkbox [ngModel]="specimen.selected" binary="true"
+                      (onChange)="this.inventoryService.toggleSpecimenSelection(specimen.id)"/>
         </td>
         @for (column of this.inventoryService.getColumns(); track column.position) {
           <td>{{ specimen.data[column.jsonName] }}</td>

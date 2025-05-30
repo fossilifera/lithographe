@@ -33,30 +33,29 @@ export class PdfGeneratorService {
     });
     console.log("FONTS = ", doc.getFontList());
 
-    const speciemenSelectedIds: number[] = this.inventoryService.getSpeciemenSelectedIdsSync();
-
-    speciemenSelectedIds.forEach((id: number) => {
-      let specimen = this.inventoryService.getSpecimenById(id);
-      if (specimen) {
-        console.log(specimen);
-        if (index % template.tagsPerLine !== 0) {
-          // shift tag to the right
-          coordTagX += template.tagWidth;
-        } else {
-          // new line, return to the left margin
-          coordTagX = template.marginX;
-          if (index % nbTagsPerPage !== 0) {
-            // breaking line
-            coordTagY += template.tagHeight;
-          } else {
-            // last line reached, need a new page
-            if (index !== 0) doc.addPage(); // no new page for the first tag
-            coordTagY = template.marginY;
-          }
-        }
-        this.drawTag(template, doc, specimen, coordTagX, coordTagY);
-        index++;
+    this.inventoryService.specimens().forEach(specimen => {
+      if (!specimen.selected) {
+        return;
       }
+      console.log(specimen);
+      if (index % template.tagsPerLine !== 0) {
+        // shift tag to the right
+        coordTagX += template.tagWidth;
+      } else {
+        // new line, return to the left margin
+        coordTagX = template.marginX;
+        if (index % nbTagsPerPage !== 0) {
+          // breaking line
+          coordTagY += template.tagHeight;
+        } else {
+          // last line reached, need a new page
+          if (index !== 0) doc.addPage(); // no new page for the first tag
+          coordTagY = template.marginY;
+        }
+      }
+      this.drawTag(template, doc, specimen, coordTagX, coordTagY);
+      index++;
+
     });
 
     doc.save(`tags-${dateForFileNameFormat()}.pdf`);
