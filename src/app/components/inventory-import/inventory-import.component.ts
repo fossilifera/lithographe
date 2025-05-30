@@ -7,7 +7,7 @@ import {ToggleSwitch} from 'primeng/toggleswitch';
 import {FormsModule} from '@angular/forms';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {CsvImportParam} from '../../model/csv-import-param';
-import {first, map} from 'rxjs';
+import {first} from 'rxjs';
 import {InventoryImportPreviewComponent} from '../inventory-import-preview/inventory-import-preview.component';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {Divider} from 'primeng/divider';
@@ -68,7 +68,7 @@ export class InventoryImportComponent {
     this.modalService.displayModal(
       {title: "Ouverture inventaire", message: "Veuillez patientez", displaySpinner: true}
     );
-    if(this.inventoryService.loadInventoryFromStorage()) {
+    if (this.inventoryService.loadInventoryFromStorage()) {
       this.router.navigate(['/inventory']);
       this.modalService.hideModal();
     } else {

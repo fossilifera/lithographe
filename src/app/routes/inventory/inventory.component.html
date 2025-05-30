@@ -1,11 +1,39 @@
-<div id="inventory-view-grid" class="view view-grid">
-  @if (this.isInventoryLoaded()) {
+<div id="inventory-view-grid" class="view">
+  <!--  TODO gérer si on arrive sur cette page et qu'que l'inventaire n'est pas chargé -->
 
-    <ltg-inventory-side-bar/>
-    <inventory-table class="table-container"/>
+  <p-table
+    class="table-container"
+    [value]="specimens"
+    dataKey="id"
+    scrollable="true"
+    scrollHeight="flex"
+    [virtualScroll]="true"
+    [virtualScrollItemSize]="46"
+    resizableColumns="true"
+    stripedRows
+    showGridlines>
+    <ng-template #header>
+      <tr>
+        <th class="column-head" >
+          <p-checkbox [ngModel]="isAllSpecimensSelected()" binary="true" (onChange)="toggleAllSpecimens()"/>
+        </th>
+        @for (column of columns(); track column.position) {
+          <th class="column-head">{{ column.displayName }}</th>
+        }
+      </tr>
+    </ng-template>
+    <ng-template #body let-specimen>
+      <tr>
+        <td>
+          <p-checkbox [ngModel]="this.selectedSpecimens().includes(specimen.id)" binary="true"
+                      (onChange)="toggleSelect(specimen.id)"/>
+        </td>
+        @for (column of columns(); track column.position) {
+          <td>{{ specimen.data[column.jsonName] }}</td>
+        }
+      </tr>
+    </ng-template>
+  </p-table>
 
-  } @else {
-    <!--  TODO gérer si on arrive sur cette page et qu'que l'inventaire n'est pas chargé -->
-    <h1>?</h1>
-  }
+
 </div>

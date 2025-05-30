@@ -74,14 +74,9 @@ h1 {
   overflow: scroll;
 }
 
-.view-grid {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-
-  .table-container {
-    overflow: hidden;
-    height: 100%;
-  }
+.table-container {
+  overflow: hidden;
+  height: 100%;
 }
 
 .about-card {
