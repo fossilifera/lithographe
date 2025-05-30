@@ -1,10 +1,11 @@
-import {ChangeDetectionStrategy, Component, computed, inject, Signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, inject, OnInit} from '@angular/core';
 import {InventoryService} from '../../services/inventory.service';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {Checkbox} from 'primeng/checkbox';
 import {TableModule} from 'primeng/table';
 import {FormsModule} from '@angular/forms';
-import {Specimen} from '../../model/specimen';
+import {Router} from '@angular/router';
+import {LoggerService} from '../../services/logger.service';
 
 @Component({
   selector: 'ltg-inventory-view',
@@ -14,15 +15,31 @@ import {Specimen} from '../../model/specimen';
     TableModule,
   ],
   templateUrl: './inventory.component.html',
+  host: {'class': 'view'},
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InventoryComponent {
-  private readonly inventoryService: InventoryService = inject(InventoryService);
+export class InventoryComponent implements OnInit {
 
-  readonly columns = toSignal(this.inventoryService.getColumns(), {initialValue: []});
-  readonly specimens: Specimen[] = this.inventoryService.getSpecimens();
-  readonly selectedSpecimens = toSignal(this.inventoryService.getSpeciemenSelectedIds(), {initialValue: []});
-  readonly isAllSpecimensSelected = computed(() => this.inventoryService.getInventorySize() === this.selectedSpecimens().length);
+  protected readonly inventoryService: InventoryService = inject(InventoryService);
+  private logger: LoggerService = inject(LoggerService);
+  private readonly router = inject(Router);
+
+  protected readonly columns = toSignal(this.inventoryService.getColumns(), {initialValue: []});
+  protected readonly selectedSpecimens = toSignal(this.inventoryService.getSpeciemenSelectedIds(), {initialValue: []});
+  protected readonly isAllSpecimensSelected = computed(() => this.inventoryService.getInventorySize() === this.selectedSpecimens().length);
+
+
+  ngOnInit(): void {
+    if (!this.inventoryService.isInventoryLoaded()) {
+      if (this.inventoryService.isImportInventoryAvailableInStorage()) {
+        // Open the inventory available in local storage
+        this.inventoryService.loadInventoryFromStorage();
+      } else {
+        this.logger.info("No inventory available in storage, redirection to home page");
+        this.router.navigate(['/']);
+      }
+    }
+  }
 
   public toggleSelect(id: number) {
     this.inventoryService.toggleSpecimenSelection(id);
@@ -32,6 +49,4 @@ export class InventoryComponent {
     this.inventoryService.toggleAllSpecimen();
   }
 
-  // FIXME toujours utile?
-  protected isInventoryLoaded: Signal<boolean> = toSignal(this.inventoryService.isInventoryLoaded(), {requireSync: true});
 }

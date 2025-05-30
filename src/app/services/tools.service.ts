@@ -27,10 +27,9 @@ export class ToolsService {
           displaySpinner: true
         });
         this.localStorageService.deleteAllData();
-        this.inventoryService.resetData();
         this.modalService.displayModal({
-          title: "Effacement terminé",
-          closable: true
+          title: "Effacement terminé - Recharger la page",
+          closable: false
         });
       }
     })

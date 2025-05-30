@@ -1,9 +1,7 @@
-<div id="inventory-view-grid" class="view">
-  <!--  TODO gérer si on arrive sur cette page et qu'que l'inventaire n'est pas chargé -->
-
+@if (this.inventoryService.isInventoryLoaded()) {
   <p-table
     class="table-container"
-    [value]="specimens"
+    [value]="this.inventoryService.getSpecimens()"
     dataKey="id"
     scrollable="true"
     scrollHeight="flex"
@@ -14,7 +12,7 @@
     showGridlines>
     <ng-template #header>
       <tr>
-        <th class="column-head" >
+        <th class="column-head">
           <p-checkbox [ngModel]="isAllSpecimensSelected()" binary="true" (onChange)="toggleAllSpecimens()"/>
         </th>
         @for (column of columns(); track column.position) {
@@ -34,6 +32,4 @@
       </tr>
     </ng-template>
   </p-table>
-
-
-</div>
+}

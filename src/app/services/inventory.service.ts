@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {inject, Injectable, signal, WritableSignal} from '@angular/core';
 import {BehaviorSubject, map, Observable} from 'rxjs';
 import {LoggerService} from './logger.service';
 import {InventoryMetadata} from '../model/inventory-metadata';
@@ -14,18 +14,13 @@ export class InventoryService {
   private logger: LoggerService = inject(LoggerService);
   private storageService: StorageService = inject(StorageService);
 
-  private inventoryLoadingState = new BehaviorSubject<boolean>(false);
   // FIXME à retirer
   private metadataSubject = new BehaviorSubject<InventoryMetadata | undefined>(undefined)
 
   private specimens: Specimen[] = [];
   private selectionSubject = new BehaviorSubject<number[]>([]);
 
-
-  public isInventoryLoaded(): Observable<boolean> {
-    return this.inventoryLoadingState.asObservable();
-  }
-
+  readonly isInventoryLoaded: WritableSignal<boolean> = signal(false);
 
   public getInventoryFileName(): string | null {
     return this.storageService.getInventoryFileName();
@@ -76,7 +71,7 @@ export class InventoryService {
     this.metadataSubject.next(metadata);
     this.specimens = specimens;
     this.selectAllSpecimens();
-    this.inventoryLoadingState.next(true);
+    this.isInventoryLoaded.set(true);
   }
 
   public loadInventoryFromStorage(): boolean {
@@ -101,10 +96,6 @@ export class InventoryService {
     this.storageService.persistSpecimens(specimens);
   }
 
-  public triggerImportNewInventory(): void {
-    this.inventoryLoadingState.next(false);
-  }
-
   public toggleSpecimenSelection(id: number): void {
     this.logger.debug(`Toggle selection for id ${id}`);
     if (this.selectionSubject.getValue().includes(id)) {
@@ -122,13 +113,6 @@ export class InventoryService {
       this.logger.debug('Select all specimens');
       this.selectAllSpecimens();
     }
-  }
-
-  public resetData(): void {
-    this.inventoryLoadingState.next(false);
-    this.metadataSubject.next(undefined);
-    this.specimens = [];
-    this.selectionSubject.next([]);
   }
 
   private selectAllSpecimens(): void {
