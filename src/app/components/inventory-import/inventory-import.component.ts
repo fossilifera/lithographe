@@ -7,11 +7,13 @@ import {ToggleSwitch} from 'primeng/toggleswitch';
 import {FormsModule} from '@angular/forms';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {CsvImportParam} from '../../model/csv-import-param';
-import { first} from 'rxjs';
+import {first, map} from 'rxjs';
 import {InventoryImportPreviewComponent} from '../inventory-import-preview/inventory-import-preview.component';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {Divider} from 'primeng/divider';
 import {InventoryService} from '../../services/inventory.service';
+import {ModalService} from '../../services/modal.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'inventory-import',
@@ -32,15 +34,14 @@ export class InventoryImportComponent {
 
   protected readonly importInventoryService: ImportInventoryService = inject(ImportInventoryService);
   protected readonly inventoryService: InventoryService = inject(InventoryService);
+  private readonly modalService: ModalService = inject(ModalService);
+  private readonly router = inject(Router);
 
 
   protected inventoryPreview = toSignal(this.importInventoryService.getColumnMetadataList());
   protected displayImportConfiguration = signal(false);
   csvImportParams: CsvImportParam = {firstLineAsHeader: true, separator: ';'};
 
-  openStoredInventory(): void {
-    this.inventoryService.loadInventoryFromStorage();
-  }
 
   triggerCsvImport(event: FileSelectEvent): void {
     console.log("trigger csv import");
@@ -62,7 +63,23 @@ export class InventoryImportComponent {
 
   }
 
-  importCsv(): void {
+
+  protected openStoredInventory(): void {
+    this.modalService.displayModal(
+      {title: "Ouverture inventaire", message: "Veuillez patientez", displaySpinner: true}
+    );
+    if(this.inventoryService.loadInventoryFromStorage()) {
+      this.router.navigate(['/inventory']);
+      this.modalService.hideModal();
+    } else {
+      this.modalService.displayModal({
+        title: "Une erreur s'est produite pendant l'ouverture du fichier, merci d'importer un nouveau fichier.",
+        closable: true
+      });
+    }
+  }
+
+  protected importCsv(): void {
     this.importInventoryService.importCsvInventory(this.csvImportParams);
   }
 

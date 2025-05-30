@@ -1,20 +1,19 @@
-<p-card class="import-choice-card">
-  @if (this.inventoryService.isImportInventoryAvailableInStorage()) {
-    <div class="import-choice-option">
-      <P>Ouvrir l'inventaire précédemment importé : {{this.inventoryService.getInventoryFileName()}}</P>
-      <p-button  label="Ouvrir" icon="pi pi-check" (onClick)="openStoredInventory()" />
+@if (!this.displayImportConfiguration()) {
+  <p-card class="import-choice-card">
+    @if (this.inventoryService.isImportInventoryAvailableInStorage()) {
+      <div class="import-choice-option">
+        <P>Ouvrir l'inventaire précédemment importé : {{ this.inventoryService.getInventoryFileName() }}</P>
+        <p-button label="Ouvrir" icon="pi pi-check" (onClick)="openStoredInventory()"/>
+      </div>
+      <p-divider layout="vertical"/>
+    }
+    <div>
+      <P>Importer un fichier au format CSV, celui-ci sera sauvegardé dans votre navigateur</P>
+      <p-fileupload mode="basic" chooseIcon="pi pi-upload" accept="text/csv" (onSelect)="triggerCsvImport($event)"
+                    [auto]="true" chooseLabel="Choisir le fichier"/>
     </div>
-    <p-divider layout="vertical"/>
-  }
-  <div>
-    <P>Importer un fichier au format CSV, celui-ci sera sauvegardé dans votre navigateur</P>
-    <p-fileupload mode="basic" chooseIcon="pi pi-upload" accept="text/csv" (onSelect)="triggerCsvImport($event)"
-                  [auto]="true" chooseLabel="Choisir le fichier"/>
-  </div>
-</p-card>
-@if (this.displayImportConfiguration()) {
-
-
+  </p-card>
+} @else {
   <div class="flex-display-row">
     <div class="flex-display-columns">
       <p-card header="Configuration du fichier CSV" class="import-option-card">

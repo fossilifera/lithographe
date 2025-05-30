@@ -79,7 +79,7 @@ export class InventoryService {
     this.inventoryLoadingState.next(true);
   }
 
-  public loadInventoryFromStorage(): void {
+  public loadInventoryFromStorage(): boolean {
     this.logger.info("Open inventory from storage");
     const metadata: InventoryMetadata | undefined = this.storageService.getMetadataFromStorage();
     // FIXME revoir gestion erreurs
@@ -87,8 +87,10 @@ export class InventoryService {
       const specimens = this.storageService.getSpecimensFromStorage();
       if (specimens) {
         this.loadInventory(metadata, specimens);
+        return true;
       }
     }
+    return false;
   }
 
   public loadNewInventory(fileName: string, columns: ColumnMetadata[], specimens: Specimen[]): void {
