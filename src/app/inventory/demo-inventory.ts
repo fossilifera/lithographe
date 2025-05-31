@@ -4,24 +4,25 @@ import {ColumnMetadata} from './column-metadata';
 export const DEMO_INVENTORY_NAME: string = 'demoInventory';
 
 export const DEMO_INVENTORY_COLUMNS: ColumnMetadata[] = [
-  new ColumnMetadata(0, "Number"),
-  new ColumnMetadata(1, "Phyllum"),
-  new ColumnMetadata(2, "Class"),
-  new ColumnMetadata(3, "Order"),
-  new ColumnMetadata(4, "Genus"),
-  new ColumnMetadata(5, "Species"),
-  new ColumnMetadata(6, "Author"),
-  new ColumnMetadata(7, "Age"),
-  new ColumnMetadata(8, "Country"),
-  new ColumnMetadata(9, "Locality"),
+  {position: 0, displayName: "Number", jsonName: "number"},
+  {position: 1, displayName: "Phylum", jsonName: "phylum"},
+  {position: 2, displayName: "Class", jsonName: "class"},
+  {position: 3, displayName: "Order", jsonName: "order"},
+  {position: 4, displayName: "Genus", jsonName: "genus"},
+  {position: 5, displayName: "Species", jsonName: "species"},
+  {position: 6, displayName: "Author", jsonName: "author"},
+  {position: 7, displayName: "Age", jsonName: "age"},
+  {position: 8, displayName: "Country", jsonName: "country"},
+  {position: 9, displayName: "Locality", jsonName: "locality"},
 ];
 
 export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
-  {id: 0,
+  {
+    id: 0,
     selected: true,
     data: {
       number: 'LTG-001',
-      phyllum: 'Mollusca',
+      phylum: 'Mollusca',
       class: 'Cephalopoda',
       order: 'Ammonitida',
       genus: "Hildoceras",
@@ -33,11 +34,12 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     }
   },
 
-  {id: 1,
+  {
+    id: 1,
     selected: true,
     data: {
       number: 'LTG-002',
-      phyllum: 'Cnidaria',
+      phylum: 'Cnidaria',
       class: 'Anthozoa',
       order: 'Scleractinia',
       genus: 'Chondrocoenia',
@@ -48,11 +50,12 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
       locality: 'Amellagou'
     }
   },
-  {id: 2,
+  {
+    id: 2,
     selected: true,
     data: {
       number: 'LTG-003',
-      phyllum: 'Cnidaria',
+      phylum: 'Cnidaria',
       class: 'Anthozoa',
       order: 'Hexanthiniaria ?',
       genus: 'Hispaniastraea',
@@ -63,11 +66,12 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
       locality: 'Amellagou'
     }
   },
-  {id: 3,
+  {
+    id: 3,
     selected: true,
     data: {
       number: 'LTG-004',
-      phyllum: 'Cnidaria',
+      phylum: 'Cnidaria',
       class: 'Anthozoa',
       order: 'Scleractinia',
       genus: 'Coryphyllia',
@@ -78,11 +82,12 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
       locality: 'Amellagou'
     }
   },
-  {id: 4,
+  {
+    id: 4,
     selected: true,
     data: {
       number: 'LTG-005',
-      phyllum: 'Cnidaria',
+      phylum: 'Cnidaria',
       class: 'Anthozoa',
       order: 'Hexanthiniaria ?',
       genus: 'Hispaniastraea',
@@ -93,11 +98,12 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
       locality: 'Amellagou'
     }
   },
-  {id: 5,
+  {
+    id: 5,
     selected: true,
     data: {
       number: 'LTG-006',
-      phyllum: 'Cnidaria',
+      phylum: 'Cnidaria',
       class: 'Anthozoa',
       order: 'Scleractinia',
       genus: 'Phacelostylophyllum',
@@ -108,11 +114,12 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
       locality: 'Amellagou'
     }
   },
-  {id: 6,
+  {
+    id: 6,
     selected: true,
     data: {
       number: 'LTG-007',
-      phyllum: 'Cnidaria',
+      phylum: 'Cnidaria',
       class: 'Anthozoa',
       order: 'Scleractinia',
       genus: 'Phacelostylophyllum',
@@ -123,11 +130,12 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
       locality: 'Amellagou'
     }
   },
-  {id: 7,
+  {
+    id: 7,
     selected: true,
     data: {
       number: 'LTG-008',
-      phyllum: 'Cnidaria',
+      phylum: 'Cnidaria',
       class: 'Anthozoa',
       order: 'Scleractinia',
       genus: 'Vallimeandropsis',
@@ -138,11 +146,12 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
       locality: 'Amellagou'
     }
   },
-  {id: 8,
+  {
+    id: 8,
     selected: true,
     data: {
       number: 'LTG-009',
-      phyllum: 'Cnidaria',
+      phylum: 'Cnidaria',
       class: 'Anthozoa',
       order: 'Scleractinia',
       genus: 'Coryphyllia',
@@ -153,11 +162,12 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
       locality: 'Amellagou'
     }
   },
-  {id: 9,
+  {
+    id: 9,
     selected: true,
     data: {
       number: 'LTG-010',
-      phyllum: 'Cnidaria',
+      phylum: 'Cnidaria',
       class: 'Anthozoa',
       order: 'Scleractinia',
       genus: 'Proleptophyllia',
@@ -168,11 +178,12 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
       locality: 'Amellagou'
     }
   },
-  {id: 10,
+  {
+    id: 10,
     selected: true,
     data: {
       number: 'LTG-011',
-      phyllum: 'Cnidaria',
+      phylum: 'Cnidaria',
       class: 'Anthozoa',
       order: 'Scleractinia',
       genus: 'Chondrocoenia',
@@ -183,11 +194,12 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
       locality: 'Amellagou'
     }
   },
-  {id: 11,
+  {
+    id: 11,
     selected: true,
     data: {
       number: 'LTG-012',
-      phyllum: 'Cnidaria',
+      phylum: 'Cnidaria',
       class: 'Anthozoa',
       order: 'Scleractinia',
       genus: 'Parastraeomorpha',

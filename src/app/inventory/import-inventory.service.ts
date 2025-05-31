@@ -156,9 +156,11 @@ export class ImportInventoryService implements OnInit {
     }
     const lineHeaders = parse(this.readTextFile, {...options, to_line: 1});
     return lineHeaders[0].map((value: any, index: number) => {
-      return new ColumnMetadata(index,
-        firstLineAsHeader ? value : ("Column_" + (index + 1))
-      );
+      return {
+        position: index,
+        displayName: firstLineAsHeader ? value : ("Column " + (index + 1)),
+        jsonName: firstLineAsHeader ? value : ((index + 1)),
+      } as ColumnMetadata;
     });
   }
 

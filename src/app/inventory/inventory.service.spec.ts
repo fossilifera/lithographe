@@ -8,8 +8,12 @@ describe('InventoryService', () => {
   let service: InventoryService;
 
   const fileName = 'demoInventory';
-  const columns =  [new ColumnMetadata(0, 'Code'), new ColumnMetadata(1, 'Genus'), new ColumnMetadata(2, 'Species')];
-  const specimens: Specimen[] = [{id: 0, selected: true, data:{code:"LTG-001", genus:'Hildoceras', species:'bifrons'}}]
+  const columns: ColumnMetadata[] =  [
+    {position: 0, displayName: 'Code', jsonName:'_id'},
+    {position: 1, displayName: 'Genus', jsonName:'_genus'},
+    {position: 2, displayName: 'Species', jsonName:'_species'}
+    ];
+  const specimens: Specimen[] = [{id: 0, selected: true, data:{_id:"LTG-001", _genus:'Hildoceras', _species:'bifrons'}}]
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
