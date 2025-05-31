@@ -44,23 +44,22 @@ export class InventoryImportComponent {
 
 
   triggerCsvImport(event: FileSelectEvent): void {
-    console.log("trigger csv import");
+
+    this.modalService.displayModal(
+      {title: "Lecture fichier CSV", message: "Veuillez patientez pendant l'import du fichier", displaySpinner: true}
+    );
+
     this.importInventoryService.openCsvFile(event.files[0])
       .pipe(first())
       .subscribe(() => {
         this.displayImportConfiguration.set(true);
-        // FIXME virer le timer
-        setTimeout(() => {
-
-          this.updatePreview();
-        }, 1000);
+        this.updatePreview();
+        this.modalService.hideModal();
       });
   }
 
   updatePreview(): void {
-    console.log("TOTO");
     this.importInventoryService.getOrUpdatePreview(this.csvImportParams);
-
   }
 
 
@@ -80,7 +79,18 @@ export class InventoryImportComponent {
   }
 
   protected importCsv(): void {
-    this.importInventoryService.importCsvInventory(this.csvImportParams);
+    this.modalService.displayModal(
+      {title: "Import fichier CSV", message: "Veuillez patientez pendant l'import du fichier", displaySpinner: true}
+    );
+    if (this.importInventoryService.importCsvInventory(this.csvImportParams)) {
+      this.modalService.hideModal();
+      this.router.navigate(['/inventory']);
+    } else {
+      this.modalService.displayModal({
+        title: "Une erreur s'est produite durant l'import du fichier csv. Merci de recharger l'application et vérifier le fichier.",
+        closable: false
+      });
+    }
   }
 
 }

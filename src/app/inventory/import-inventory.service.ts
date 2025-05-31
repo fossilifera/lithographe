@@ -2,7 +2,6 @@ import {inject, Injectable, OnInit} from '@angular/core';
 import {InventoryService} from './inventory.service';
 import {DEMO_INVENTORY_COLUMNS, DEMO_INVENTORY_NAME, DEMO_INVENTORY_SPECIMENS} from './demo-inventory';
 import {LoggerService} from '../shared/logger/logger.service';
-import {ModalService} from '../shared/modal/modal.service';
 import {BehaviorSubject, fromEvent, map, Observable} from 'rxjs';
 import {Options, parse} from 'csv-parse/browser/esm/sync';
 import {CsvImportParam} from './csv-import-param';
@@ -18,7 +17,6 @@ export class ImportInventoryService implements OnInit {
 
   private logger: LoggerService = inject(LoggerService);
   private inventoryService: InventoryService = inject(InventoryService);
-  private modalService: ModalService = inject(ModalService);
   private readonly router = inject(Router);
 
   private fileName: string | undefined;
@@ -39,18 +37,12 @@ export class ImportInventoryService implements OnInit {
     this.router.navigate(['/inventory']);
   }
 
-  public openCsvFile(csvFile: File): Observable<void> {
-    this.fileName = csvFile.name;
-
+  public openCsvFile(csvFile: File): Observable<boolean> {
     this.logger.info("Open csv file");
-    this.modalService.displayModal(
-      {title: "Lecture fichier CSV", message: "Veuillez patientez pendant l'import du fichier", displaySpinner: true}
-    );
-
+    this.fileName = csvFile.name;
     return this.readFile(csvFile).pipe(map(file => {
       this.readTextFile = file;
-      console.log(file);
-      this.modalService.hideModal();
+      return true;
     }));
   }
 
@@ -83,28 +75,20 @@ export class ImportInventoryService implements OnInit {
       });
 
     } catch (error) {
-      this.logger.warn("Error during parsing csv file for preview, the parameters must not be right.");
+      this.logger.errorWithError("Error during parsing csv file for preview, the parameters must not be right.", error);
       preview.isError = true;
     } finally {
       this.inventoryPreviewSubject.next(preview);
     }
   }
 
-  public importCsvInventory(params: CsvImportParam): void {
+  public importCsvInventory(params: CsvImportParam): boolean {
     if (!this.fileName || !this.readTextFile) {
       console.error("Error csv file not read before call importation");
-      this.modalService.displayModal({
-        title: "Une erreur s'est produite durant l'import du fichier csv. Merci de recharger l'application et vérifier le fichier.",
-        closable: false
-      });
-      return;
+      return false;
     }
 
     this.logger.info("Import csv file");
-    this.modalService.displayModal(
-      {title: "Import fichier CSV", message: "Veuillez patientez pendant l'import du fichier", displaySpinner: true}
-    );
-
     let globalOptions: Options = {
       delimiter: params.separator,
     };
@@ -128,15 +112,11 @@ export class ImportInventoryService implements OnInit {
           return {id: i++, selected: true, data: values} as Specimen;
         })
       );
-      this.modalService.hideModal();
-      this.router.navigate(['/inventory']);
     } catch (error) {
       this.logger.errorWithError("Error during parsing csv file", error);
-      this.modalService.displayModal({
-        title: "Une erreur s'est produite durant l'import du fichier csv. Merci de vérifier le fichier et les options d'import.",
-        closable: true
-      });
+      return false
     }
+    return true;
   }
 
   private readFile(textFile: File): Observable<string> {
@@ -158,8 +138,8 @@ export class ImportInventoryService implements OnInit {
     return lineHeaders[0].map((value: any, index: number) => {
       return {
         position: index,
-        displayName: firstLineAsHeader ? value : ("Column " + (index + 1)),
-        jsonName: firstLineAsHeader ? value : ((index + 1)),
+        displayName: firstLineAsHeader ? value : "Column " + (index + 1),
+        jsonName: firstLineAsHeader ? value : "col_" + (index + 1),
       } as ColumnMetadata;
     });
   }
