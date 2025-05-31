@@ -1,8 +1,8 @@
 import {TestBed} from '@angular/core/testing';
 
 import {InventoryService} from './inventory.service';
-import {ColumnMetadata} from '../model/column-metadata';
-import {Specimen} from '../model/specimen';
+import {ColumnMetadata} from './column-metadata';
+import {Specimen} from './specimen';
 
 describe('InventoryService', () => {
   let service: InventoryService;

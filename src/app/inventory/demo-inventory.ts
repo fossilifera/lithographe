@@ -1,5 +1,5 @@
-import {Specimen} from '../model/specimen';
-import {ColumnMetadata} from '../model/column-metadata';
+import {Specimen} from './specimen';
+import {ColumnMetadata} from './column-metadata';
 
 export const DEMO_INVENTORY_NAME: string = 'demoInventory';
 

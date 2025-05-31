@@ -1,8 +1,8 @@
 import {inject, Injectable} from '@angular/core';
-import {KeysLocalStorage} from '../enums/local-storage-keys';
-import {Specimen} from '../model/specimen';
-import {LoggerService} from './logger.service';
-import {ColumnMetadata} from '../model/column-metadata';
+import {KeysLocalStorage} from './local-storage-keys';
+import {Specimen} from '../inventory/specimen';
+import {LoggerService} from '../shared/logger/logger.service';
+import {ColumnMetadata} from '../inventory/column-metadata';
 
 @Injectable({
   providedIn: 'root'

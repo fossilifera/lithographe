@@ -1,6 +1,6 @@
-import {Template} from '../app/model/templates/template';
-import {Rectangle} from '../app/model/templates/rectangle';
-import {VariableText} from '../app/model/templates/variable-text';
+import {Template} from '../app/pdf/templates/template';
+import {Rectangle} from '../app/pdf/templates/rectangle';
+import {VariableText} from '../app/pdf/templates/variable-text';
 
 export const BigTags: Template = {
   name: "Grandes étiquettes",

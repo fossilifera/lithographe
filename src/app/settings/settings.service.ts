@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {LogLevel} from '../enums/log-level';
+import {LogLevel} from '../shared/logger/log-level';
 
 @Injectable({
   providedIn: 'root'

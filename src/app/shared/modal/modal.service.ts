@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject, filter, Observable, tap} from 'rxjs';
-import {ModalContent} from '../model/modal-content';
-import {LoggerService} from './logger.service';
+import {ModalContent} from './modal-content';
+import {LoggerService} from '../logger/logger.service';
 
 @Injectable({
   providedIn: 'root'

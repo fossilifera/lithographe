@@ -1,7 +1,6 @@
 import {inject, Injectable} from '@angular/core';
-import {StorageService} from './storage.service';
-import {InventoryService} from './inventory.service';
-import {ModalService} from './modal.service';
+import {StorageService} from '../storage/storage.service';
+import {ModalService} from '../shared/modal/modal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +8,6 @@ import {ModalService} from './modal.service';
 export class ToolsService {
 
   private localStorageService: StorageService = inject(StorageService);
-  private inventoryService: InventoryService = inject(InventoryService);
   private modalService: ModalService = inject(ModalService);
 
   public deleteAllData() {

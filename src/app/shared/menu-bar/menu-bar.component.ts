@@ -2,12 +2,12 @@ import {Component, inject, OnInit} from '@angular/core';
 import {Button, ButtonDirective, ButtonLabel} from 'primeng/button';
 import {RouterLink} from '@angular/router';
 import {Ripple} from 'primeng/ripple';
-import {PdfGeneratorService} from '../../services/pdf-generator.service';
+import {PdfGeneratorService} from '../../pdf/pdf-generator.service';
 import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
 import {IftaLabel} from 'primeng/iftalabel';
 import {TemplateRegistry} from '@templates/template-registry';
-import {Template} from '../../model/templates/template';
+import {Template} from '../../pdf/templates/template';
 import {Menubar} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
 

@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { StorageService } from './storage.service';
-import {KeysLocalStorage} from '../enums/local-storage-keys';
-import {Specimen} from '../model/specimen';
+import {KeysLocalStorage} from './local-storage-keys';
+import {Specimen} from '../inventory/specimen';
 
 describe('StorageService', () => {
   let service: StorageService;

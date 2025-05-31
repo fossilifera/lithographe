@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
-import {LogLevel} from '../enums/log-level';
-import {SettingsService} from './settings.service';
+import {LogLevel} from './log-level';
+import {SettingsService} from '../../settings/settings.service';
 
 @Injectable({
   providedIn: 'root'

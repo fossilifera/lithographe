@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {InventoryComponent} from './inventory.component';
-import {InventoryService} from '../../services/inventory.service';
+import {InventoryService} from '../../inventory/inventory.service';
 import {BehaviorSubject, of} from 'rxjs';
 import {provideHttpClient} from '@angular/common/http';
 import {provideAnimations} from '@angular/platform-browser/animations';

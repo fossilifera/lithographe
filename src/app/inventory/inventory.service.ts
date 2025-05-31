@@ -1,8 +1,8 @@
 import {computed, inject, Injectable, signal, WritableSignal} from '@angular/core';
-import {LoggerService} from './logger.service';
-import {Specimen} from '../model/specimen';
-import {ColumnMetadata} from '../model/column-metadata';
-import {StorageService} from './storage.service';
+import {LoggerService} from '../shared/logger/logger.service';
+import {Specimen} from './specimen';
+import {ColumnMetadata} from './column-metadata';
+import {StorageService} from '../storage/storage.service';
 
 @Injectable({
   providedIn: 'root'

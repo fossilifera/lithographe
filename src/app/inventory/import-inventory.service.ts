@@ -1,14 +1,14 @@
 import {inject, Injectable, OnInit} from '@angular/core';
 import {InventoryService} from './inventory.service';
 import {DEMO_INVENTORY_COLUMNS, DEMO_INVENTORY_NAME, DEMO_INVENTORY_SPECIMENS} from './demo-inventory';
-import {LoggerService} from './logger.service';
-import {ModalService} from './modal.service';
+import {LoggerService} from '../shared/logger/logger.service';
+import {ModalService} from '../shared/modal/modal.service';
 import {BehaviorSubject, fromEvent, map, Observable} from 'rxjs';
 import {Options, parse} from 'csv-parse/browser/esm/sync';
-import {CsvImportParam} from '../model/csv-import-param';
-import {ColumnMetadata} from '../model/column-metadata';
-import {Specimen} from '../model/specimen';
-import {InventoryPreview} from '../model/inventory-preview';
+import {CsvImportParam} from './csv-import-param';
+import {ColumnMetadata} from './column-metadata';
+import {Specimen} from './specimen';
+import {InventoryPreview} from './inventory-preview';
 import {Router} from '@angular/router';
 
 @Injectable({

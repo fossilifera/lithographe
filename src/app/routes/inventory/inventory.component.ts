@@ -1,10 +1,10 @@
-import {ChangeDetectionStrategy, Component, computed, inject, OnInit} from '@angular/core';
-import {InventoryService} from '../../services/inventory.service';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
+import {InventoryService} from '../../inventory/inventory.service';
 import {Checkbox} from 'primeng/checkbox';
 import {TableModule} from 'primeng/table';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
-import {LoggerService} from '../../services/logger.service';
+import {LoggerService} from '../../shared/logger/logger.service';
 
 @Component({
   selector: 'ltg-inventory-view',

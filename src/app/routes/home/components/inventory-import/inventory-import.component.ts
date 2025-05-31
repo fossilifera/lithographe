@@ -1,18 +1,18 @@
-import {ChangeDetectionStrategy, Component, computed, inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
 import {Button} from 'primeng/button';
-import {ImportInventoryService} from '../../../../services/import-inventory.service';
+import {ImportInventoryService} from '../../../../inventory/import-inventory.service';
 import {Card} from 'primeng/card';
 import {FileSelectEvent, FileUpload} from 'primeng/fileupload';
 import {ToggleSwitch} from 'primeng/toggleswitch';
 import {FormsModule} from '@angular/forms';
 import {RadioButtonModule} from 'primeng/radiobutton';
-import {CsvImportParam} from '../../../../model/csv-import-param';
+import {CsvImportParam} from '../../../../inventory/csv-import-param';
 import {first} from 'rxjs';
 import {InventoryImportPreviewComponent} from '../inventory-import-preview/inventory-import-preview.component';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {Divider} from 'primeng/divider';
-import {InventoryService} from '../../../../services/inventory.service';
-import {ModalService} from '../../../../services/modal.service';
+import {InventoryService} from '../../../../inventory/inventory.service';
+import {ModalService} from '../../../../shared/modal/modal.service';
 import {Router} from '@angular/router';
 
 @Component({

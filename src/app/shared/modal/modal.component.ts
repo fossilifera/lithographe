@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {Dialog} from 'primeng/dialog';
-import {ModalService} from '../../services/modal.service';
+import {ModalService} from './modal.service';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {ProgressSpinner} from 'primeng/progressspinner';
 import {Button} from 'primeng/button';
