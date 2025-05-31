@@ -3,6 +3,7 @@ export class ColumnMetadata {
   readonly displayName: string;
   readonly jsonName: string;
 
+  // TODO passer en interface
   constructor(position: number, displayName: string, jsonName: string = this.transformToAsciiSafeName(displayName)) {
     this.position = position;
     this.displayName = displayName;

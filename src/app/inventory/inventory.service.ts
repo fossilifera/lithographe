@@ -28,15 +28,6 @@ export class InventoryService {
   }
 
 
-  public getInventorySize(): number {
-    return this.specimens().length;
-  }
-
-
-  public getSpecimenById(id: number): Specimen | undefined {
-    return this.specimens().find(specimen => specimen.id === id);
-  }
-
   private loadInventory(columns: ColumnMetadata[], specimens: Specimen[]): void {
     this.columns.set(columns);
     this.specimens.set(specimens);

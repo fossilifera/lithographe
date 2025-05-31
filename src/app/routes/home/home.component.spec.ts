@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import {HomeComponent} from './home.component';
+import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+import {provideHttpClient} from '@angular/common/http';
 
 describe('HomeViewComponent', () => {
   let component: HomeComponent;
@@ -8,9 +10,13 @@ describe('HomeViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeComponent]
+      imports: [HomeComponent],
+      providers: [
+        provideHttpClient(),
+        provideAnimationsAsync()
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;

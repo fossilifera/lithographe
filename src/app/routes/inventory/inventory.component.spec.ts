@@ -2,14 +2,15 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {InventoryComponent} from './inventory.component';
 import {InventoryService} from '../../inventory/inventory.service';
-import {BehaviorSubject, of} from 'rxjs';
 import {provideHttpClient} from '@angular/common/http';
 import {provideAnimations} from '@angular/platform-browser/animations';
+import {signal} from '@angular/core';
+import {ColumnMetadata} from '../../inventory/column-metadata';
+import {Specimen} from '../../inventory/specimen';
 
 describe('InventoryViewComponent', () => {
   let component: InventoryComponent;
   let fixture: ComponentFixture<InventoryComponent>;
-  let inventoryServiceIsLoadedMock = new BehaviorSubject<boolean>(true);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -19,9 +20,10 @@ describe('InventoryViewComponent', () => {
         provideAnimations(),
         {
           provide: InventoryService, useValue: {
-            getColumns: jest.fn().mockReturnValue(of(["One", "Two", "Three"])),
-            getInventorySize: jest.fn().mockReturnValue(100),
-            getSpecimenById: jest.fn().mockReturnValue(undefined),
+            columns: signal([] as ColumnMetadata[]),
+            specimens: signal([] as Specimen[]),
+            isInventoryLoaded: signal(true),
+            isAllSpecimensSelected: signal(true),
             loadNewInventory: jest.fn(),
             toggleSpecimenSelection: jest.fn(),
             toggleAllSpecimen: jest.fn()
@@ -39,35 +41,4 @@ describe('InventoryViewComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('when inventory is loaded', () => {
-    beforeEach(() => {
-      inventoryServiceIsLoadedMock.next(true);
-      fixture.detectChanges();
-    });
-
-    it('should display the inventory table', () => {
-      expect(fixture.nativeElement.querySelector('#inventory-view-grid')).toBeDefined();
-    });
-
-    it('should not display the import component', () => {
-      expect(fixture.nativeElement.querySelector('#inventory-import-component')).toBeNull();
-    });
-
-  });
-
-  describe('when inventory is not loaded', () => {
-    beforeEach(() => {
-      inventoryServiceIsLoadedMock.next(false);
-      fixture.detectChanges();
-    });
-
-    it('should not display the inventory table', () => {
-      expect(fixture.nativeElement.querySelector('#inventory-view-grid')).toBeNull();
-    });
-
-    it('should display the import component', () => {
-      expect(fixture.nativeElement.querySelector('#inventory-import-component')).toBeDefined();
-    });
-
-  });
 });

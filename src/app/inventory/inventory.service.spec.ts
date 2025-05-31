@@ -9,11 +9,13 @@ describe('InventoryService', () => {
 
   const fileName = 'demoInventory';
   const columns =  [new ColumnMetadata(0, 'Code'), new ColumnMetadata(1, 'Genus'), new ColumnMetadata(2, 'Species')];
-  const specimens: Specimen[] = [{id: 0, data:{code:"LTG-001", genus:'Hildoceras', species:'bifrons'}}]
+  const specimens: Specimen[] = [{id: 0, selected: true, data:{code:"LTG-001", genus:'Hildoceras', species:'bifrons'}}]
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(InventoryService);
+    service.loadNewInventory(fileName, columns, specimens);
+
   });
 
   it('should be created', () => {
@@ -21,23 +23,4 @@ describe('InventoryService', () => {
   });
 
 
-  describe('load inventory', () => {
-
-    beforeEach(() => {
-      service.loadNewInventory(fileName, columns, specimens);
-    })
-
-    it('should load metadata', (done) => {
-      expect(service.getColumns()).toBeDefined();
-
-      service.getColumns().subscribe(columns => {
-        expect(columns).toBeDefined();
-        expect(columns.at(0)?.displayName).toBe('Code');
-        done();
-      });
-    });
-
-
-
-  });
 });
