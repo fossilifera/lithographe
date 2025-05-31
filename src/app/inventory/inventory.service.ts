@@ -37,16 +37,19 @@ export class InventoryService {
   public loadInventoryFromStorage(): boolean {
     this.logger.info("Open inventory from storage");
     const columns: ColumnMetadata[] | null = this.storageService.getColumnMetadata();
-    // FIXME revoir gestion erreurs
 
-    if (columns) {
-      const specimens = this.storageService.getSpecimensFromStorage();
-      if (specimens) {
-        this.loadInventory(columns, specimens);
-        return true;
-      }
+    if (!columns) {
+      this.logger.error("Error during load inventory from storage: columns are null");
+      return false;
     }
-    return false;
+
+    const specimens = this.storageService.getSpecimensFromStorage();
+    if (!specimens) {
+      this.logger.error("Error during load inventory from storage: specimens are null");
+      return false;
+    }
+    this.loadInventory(columns, specimens);
+    return true;
   }
 
   public loadNewInventory(fileName: string, columns: ColumnMetadata[], specimens: Specimen[]): void {
@@ -71,10 +74,10 @@ export class InventoryService {
 
   public toggleAllSpecimen(): void {
     const boolTarget: boolean = !this.isAllSpecimensSelected();
-      this.specimens.update(specimens => specimens.map(specimen => {
-        specimen.selected = boolTarget;
-        return specimen;
-      }))
+    this.specimens.update(specimens => specimens.map(specimen => {
+      specimen.selected = boolTarget;
+      return specimen;
+    }))
   }
 
 

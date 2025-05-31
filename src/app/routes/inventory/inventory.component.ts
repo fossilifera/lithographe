@@ -27,7 +27,9 @@ export class InventoryComponent implements OnInit {
     if (!this.inventoryService.isInventoryLoaded()) {
       if (this.inventoryService.isImportInventoryAvailableInStorage()) {
         // Open the inventory available in local storage
-        this.inventoryService.loadInventoryFromStorage();
+        if (!this.inventoryService.loadInventoryFromStorage()) {
+          this.router.navigate(['/']);
+        }
       } else {
         this.logger.info("No inventory available in storage, redirection to home page");
         this.router.navigate(['/']);

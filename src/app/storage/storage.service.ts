@@ -23,6 +23,7 @@ export class StorageService {
   public getColumnMetadata(): ColumnMetadata[] | null {
     const columnsInStorage = window.localStorage.getItem(KeysLocalStorage.inventoryColumns);
     if(!columnsInStorage) {
+      this.logger.warn("No columns metadata in local storage");
       return null;
     }
     try {
