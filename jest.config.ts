@@ -5,6 +5,5 @@ export default {
   ...presets.createCjsPreset(),
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   moduleNameMapper: {
-    '^@templates/(.*)$': '<rootDir>/src/templates/$1'
   }
 } satisfies Config;

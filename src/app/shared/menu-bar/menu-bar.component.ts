@@ -6,8 +6,8 @@ import {PdfGeneratorService} from '../../pdf/pdf-generator.service';
 import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
 import {IftaLabel} from 'primeng/iftalabel';
-import {TemplateRegistry} from '@templates/template-registry';
-import {Template} from '../../pdf/templates/template';
+import {TemplateRegistry} from '../../pdf/templates/template-registry';
+import {Template} from '../../pdf/model/template';
 import {Menubar} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
 
