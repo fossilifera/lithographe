@@ -12,7 +12,7 @@ export class InventoryService {
   private logger: LoggerService = inject(LoggerService);
   private storageService: StorageService = inject(StorageService);
 
-  private columns: ColumnMetadata[] = [];
+  readonly columns: WritableSignal<ColumnMetadata[]> = signal([]);
   readonly specimens: WritableSignal<Specimen[]> = signal([]);
 
   readonly isInventoryLoaded: WritableSignal<boolean> = signal(false);
@@ -27,9 +27,6 @@ export class InventoryService {
     return this.getInventoryFileName() !== null;
   }
 
-  public getColumns(): ColumnMetadata[] {
-    return this.columns;
-  }
 
   public getInventorySize(): number {
     return this.specimens().length;
@@ -41,7 +38,7 @@ export class InventoryService {
   }
 
   private loadInventory(columns: ColumnMetadata[], specimens: Specimen[]): void {
-    this.columns = columns;
+    this.columns.set(columns);
     this.specimens.set(specimens);
     this.isInventoryLoaded.set(true);
   }
