@@ -95,13 +95,14 @@ export class ImportInventoryService implements OnInit {
 
     try {
       const columnMetadataList: ColumnMetadata[] = this.getColumnsHeaders(globalOptions, params.firstLineAsHeader);
+      this.mapColumns(columnMetadataList, params);
 
       const listSpecimens = parse(this.readTextFile, {
         ...globalOptions,
         columns: columnMetadataList.map(columnMetadata => columnMetadata.jsonName),
         from: params.firstLineAsHeader ? 2 : 1 // if the first line is header, begin the extract to second line (begin to 1 and not 0 with csv.js)
       });
-
+      // FIXME faire une passe sur tous les console log
       console.log(columnMetadataList);
       console.log(listSpecimens);
       let i: number = 0;
@@ -143,5 +144,19 @@ export class ImportInventoryService implements OnInit {
       } as ColumnMetadata;
     });
   }
+
+  private mapColumns(columns: ColumnMetadata[], params: CsvImportParam): void {
+      // Genus
+      let mapping = params.columnsMapper.genus;
+      if(mapping) {
+        columns.map((column: ColumnMetadata) => {
+          if (column.position === mapping.position) {
+            column.jsonName = "_genus";
+          }
+        });
+      }
+  }
+
+
 
 }

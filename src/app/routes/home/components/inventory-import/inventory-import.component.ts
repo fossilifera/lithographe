@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, inject, Signal, signal} from '@angular/core';
 import {Button} from 'primeng/button';
 import {ImportInventoryService} from '../../../../inventory/import-inventory.service';
 import {Card} from 'primeng/card';
@@ -14,6 +14,7 @@ import {Divider} from 'primeng/divider';
 import {InventoryService} from '../../../../inventory/inventory.service';
 import {ModalService} from '../../../../shared/modal/modal.service';
 import {Router} from '@angular/router';
+import {Select} from 'primeng/select';
 
 @Component({
   selector: 'inventory-import',
@@ -25,7 +26,8 @@ import {Router} from '@angular/router';
     ToggleSwitch,
     RadioButtonModule,
     InventoryImportPreviewComponent,
-    Divider
+    Divider,
+    Select
   ],
   templateUrl: './inventory-import.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -40,7 +42,14 @@ export class InventoryImportComponent {
 
   protected inventoryPreview = toSignal(this.importInventoryService.getColumnMetadataList());
   protected displayImportConfiguration = signal(false);
-  csvImportParams: CsvImportParam = {firstLineAsHeader: true, separator: ';'};
+  protected csvImportParams: CsvImportParam = {
+    firstLineAsHeader: true,
+    separator: ';',
+    columnsMapper: {
+      genus: undefined,
+      species: undefined
+    }
+  };
 
 
   triggerCsvImport(event: FileSelectEvent): void {
