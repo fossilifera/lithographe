@@ -1,11 +1,7 @@
-import {ColumnMetadata} from './column-metadata';
+import {ColumnsMapping} from './columns-mapping';
 
 export interface CsvImportParam {
   firstLineAsHeader: boolean;
   separator: string;
-  columnsMapper: {
-    genus: ColumnMetadata | undefined;
-    species: ColumnMetadata | undefined;
-  }
-
+  columnsMapping: ColumnsMapping;
 }

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, computed, input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, input} from '@angular/core';
 import {TableModule} from 'primeng/table';
 import {Message} from 'primeng/message';
 import {Skeleton} from 'primeng/skeleton';
@@ -16,8 +16,6 @@ import {InventoryPreview} from '../../../../inventory/inventory-preview';
 })
 export class InventoryImportPreviewComponent {
 
-  inventoryPreview = input<InventoryPreview | undefined>(undefined)
-  protected columns = computed(() => this.inventoryPreview()?.columns ?? []);
-  protected specimens = computed(() => this.inventoryPreview()?.specimens ?? []);
+  inventoryPreview = input<InventoryPreview>({columns: [], data: [], isLoaded: false});
 
 }

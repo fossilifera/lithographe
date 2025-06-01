@@ -38,25 +38,97 @@
       </p-card>
       <p-card header="Configuration de l'inventaire" class="import-option-card">
         <P>Indiquez les colonnes correspondantes aux attributs suivants. (laisser vide si non utilisé).</P>
-        <p-divider align="left" type="solid">Identification</p-divider>
+        <div class="form-options">
+          <label for="column_id">Numéro d'identification</label>
+          <p-select id="column_id" [options]="this.importInventoryService.inventoryPreview().columns"
+                    [(ngModel)]="csvImportParams.columnsMapping.id" [checkmark]="true" [showClear]="true"
+                    placeholder="Choisir une colonne"/>
+        </div>
+        <p-divider align="left" type="solid">Nom binomial</p-divider>
         <div class="form-options">
           <label for="column_genus">Genre</label>
-          <p-select id="column_genus" [options]="inventoryPreview()?.columns" [(ngModel)]="csvImportParams.columnsMapper.genus" [checkmark]="true" optionLabel="displayName" [showClear]="true" placeholder="Choisir une colonne" />
+          <p-select id="column_genus" [options]="this.importInventoryService.inventoryPreview().columns"
+                    [(ngModel)]="csvImportParams.columnsMapping.genus" [checkmark]="true" [showClear]="true"
+                    placeholder="Choisir une colonne"/>
         </div>
         <div class="form-options">
           <label for="column_species">Espèce</label>
-          <p-select id="column_species" [options]="inventoryPreview()?.columns" [(ngModel)]="csvImportParams.columnsMapper.species" [checkmark]="true" optionLabel="displayName" [showClear]="true" placeholder="Choisir une colonne" />
+          <p-select id="column_species" [options]="this.importInventoryService.inventoryPreview().columns"
+                    [(ngModel)]="csvImportParams.columnsMapping.species" [checkmark]="true" [showClear]="true"
+                    placeholder="Choisir une colonne"/>
         </div>
-
+        <div class="form-options">
+          <label for="column_author">Auteur</label>
+          <p-select id="column_author" [options]="this.importInventoryService.inventoryPreview().columns"
+                    [(ngModel)]="csvImportParams.columnsMapping.author" [checkmark]="true" [showClear]="true"
+                    placeholder="Choisir une colonne"/>
+        </div>
+        <div class="form-options">
+          <label for="column_year">Année de publication</label>
+          <p-select id="column_year" [options]="this.importInventoryService.inventoryPreview().columns"
+                    [(ngModel)]="csvImportParams.columnsMapping.year" [checkmark]="true" [showClear]="true"
+                    placeholder="Choisir une colonne"/>
+        </div>
+        <p-divider align="left" type="solid">Classification</p-divider>
+        <div class="form-options">
+          <label for="column_phylum">Phylum</label>
+          <p-select id="column_phylum" [options]="this.importInventoryService.inventoryPreview().columns"
+                    [(ngModel)]="csvImportParams.columnsMapping.phylum" [checkmark]="true" [showClear]="true"
+                    placeholder="Choisir une colonne"/>
+        </div>
+        <div class="form-options">
+          <label for="column_class">Classe</label>
+          <p-select id="column_class" [options]="this.importInventoryService.inventoryPreview().columns"
+                    [(ngModel)]="csvImportParams.columnsMapping.class" [checkmark]="true" [showClear]="true"
+                    placeholder="Choisir une colonne"/>
+        </div>
+        <div class="form-options">
+          <label for="column_order">Ordre</label>
+          <p-select id="column_order" [options]="this.importInventoryService.inventoryPreview().columns"
+                    [(ngModel)]="csvImportParams.columnsMapping.order" [checkmark]="true" [showClear]="true"
+                    placeholder="Choisir une colonne"/>
+        </div>
+        <div class="form-options">
+          <label for="column_family">Famille</label>
+          <p-select id="column_family" [options]="this.importInventoryService.inventoryPreview().columns"
+                    [(ngModel)]="csvImportParams.columnsMapping.family" [checkmark]="true" [showClear]="true"
+                    placeholder="Choisir une colonne"/>
+        </div>
+        <p-divider align="left" type="solid">Datation</p-divider>
+        <div class="form-options">
+          <label for="column_age">Âge</label>
+          <p-select id="column_age" [options]="this.importInventoryService.inventoryPreview().columns"
+                    [(ngModel)]="csvImportParams.columnsMapping.age" [checkmark]="true" [showClear]="true"
+                    placeholder="Choisir une colonne"/>
+        </div>
+        <p-divider align="left" type="solid">Localisation</p-divider>
+        <div class="form-options">
+          <label for="column_country">Pays</label>
+          <p-select id="column_country" [options]="this.importInventoryService.inventoryPreview().columns"
+                    [(ngModel)]="csvImportParams.columnsMapping.country" [checkmark]="true" [showClear]="true"
+                    placeholder="Choisir une colonne"/>
+        </div>
+        <div class="form-options">
+          <label for="column_region">Région</label>
+          <p-select id="column_region" [options]="this.importInventoryService.inventoryPreview().columns"
+                    [(ngModel)]="csvImportParams.columnsMapping.region" [checkmark]="true" [showClear]="true"
+                    placeholder="Choisir une colonne"/>
+        </div>
+        <div class="form-options">
+          <label for="column_location">Localité</label>
+          <p-select id="column_location" [options]="this.importInventoryService.inventoryPreview().columns"
+                    [(ngModel)]="csvImportParams.columnsMapping.location" [checkmark]="true" [showClear]="true"
+                    placeholder="Choisir une colonne"/>
+        </div>
       </p-card>
     </div>
     <div class="flex-display-columns">
       <p-card header="Aperçu de l'inventaire" class="inventory_preview_card">
-        <ltg-inventory-import-preview [inventoryPreview]="this.inventoryPreview()"/>
+        <ltg-inventory-import-preview [inventoryPreview]="this.importInventoryService.inventoryPreview()"/>
       </p-card>
       <div class="import-confirmation-button">
         <p-button label="Valider et importer" icon="pi pi-check" severity="success"
-                  [disabled]="!this.inventoryPreview() || this.inventoryPreview()?.isError"
+                  [disabled]="!this.importInventoryService.inventoryPreview() || this.importInventoryService.inventoryPreview().isError"
                   (onClick)="this.importCsv()"/>
       </div>
     </div>

@@ -7,7 +7,7 @@ import {Specimen} from '../inventory/specimen';
 describe('StorageService', () => {
   let service: StorageService;
 
-  const specimens: Specimen[] = [{id: 0, data:{code:"LTG-001", genus:'Hildoceras', species:'bifrons'}}]
+  const specimens: Specimen[] = [{id: 0, selected: true, data:{code:"LTG-001", genus:'Hildoceras', species:'bifrons'}}]
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

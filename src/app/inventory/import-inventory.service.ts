@@ -1,36 +1,34 @@
-import {inject, Injectable, OnInit} from '@angular/core';
+import {inject, Injectable, signal, WritableSignal} from '@angular/core';
 import {InventoryService} from './inventory.service';
 import {DEMO_INVENTORY_COLUMNS, DEMO_INVENTORY_NAME, DEMO_INVENTORY_SPECIMENS} from './demo-inventory';
 import {LoggerService} from '../shared/logger/logger.service';
-import {BehaviorSubject, fromEvent, map, Observable} from 'rxjs';
+import {fromEvent, map, Observable} from 'rxjs';
 import {Options, parse} from 'csv-parse/browser/esm/sync';
 import {CsvImportParam} from './csv-import-param';
 import {ColumnMetadata} from './column-metadata';
 import {Specimen} from './specimen';
 import {InventoryPreview} from './inventory-preview';
 import {Router} from '@angular/router';
+import {ColumnMapperService} from './column-mapper.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ImportInventoryService implements OnInit {
+export class ImportInventoryService {
 
   private logger: LoggerService = inject(LoggerService);
   private inventoryService: InventoryService = inject(InventoryService);
+  private columnMapperService: ColumnMapperService = inject(ColumnMapperService);
   private readonly router = inject(Router);
 
   private fileName: string | undefined;
   private readTextFile: string | undefined;
-  private inventoryPreviewSubject = new BehaviorSubject<InventoryPreview | undefined>(undefined);
+  readonly inventoryPreview: WritableSignal<InventoryPreview> = signal({
+    columns: [],
+    data: [],
+    isLoaded: false
+  } as InventoryPreview);
 
-
-  ngOnInit(): void {
-  }
-
-
-  public getColumnMetadataList(): Observable<InventoryPreview | undefined> {
-    return this.inventoryPreviewSubject.asObservable();
-  }
 
   public loadDemoInventory(): void {
     this.inventoryService.loadNewInventory(DEMO_INVENTORY_NAME, DEMO_INVENTORY_COLUMNS, DEMO_INVENTORY_SPECIMENS);
@@ -48,37 +46,31 @@ export class ImportInventoryService implements OnInit {
 
   public getOrUpdatePreview(params: CsvImportParam): void {
 
-
     if (!this.readTextFile) {
-      this.inventoryPreviewSubject.next({columns: [], specimens: []});
+      this.inventoryPreview.set({columns: [], data: [], isLoaded: false});
       return;
     }
 
-    let options: Options = {
-      delimiter: params.separator,
-    };
-
     let preview: InventoryPreview = {
       columns: [],
-      specimens: [],
-      isError: false
+      data: [],
+      isError: false,
+      isLoaded: true
     };
 
     try {
-      preview.columns = this.getColumnsHeaders(options, params.firstLineAsHeader);
-
-      preview.specimens = parse(this.readTextFile, {
-        ...options,
-        columns: preview.columns.map(columnMetadata => columnMetadata.jsonName),
+      preview.columns = this.getColumns(params);
+      preview.data = parse(this.readTextFile, {
+        ...this.csvImportParamsToOptions(params),
+        columns: preview.columns,
         from: params.firstLineAsHeader ? 2 : 1, // if the first line is header, begin the extract to second line (begin to 1 and not 0 with csv.js)
         to_line: params.firstLineAsHeader ? 6 : 5,
       });
-
     } catch (error) {
       this.logger.errorWithError("Error during parsing csv file for preview, the parameters must not be right.", error);
       preview.isError = true;
     } finally {
-      this.inventoryPreviewSubject.next(preview);
+      this.inventoryPreview.set(preview);
     }
   }
 
@@ -89,16 +81,15 @@ export class ImportInventoryService implements OnInit {
     }
 
     this.logger.info("Import csv file");
-    let globalOptions: Options = {
-      delimiter: params.separator,
-    };
 
     try {
-      const columnMetadataList: ColumnMetadata[] = this.getColumnsHeaders(globalOptions, params.firstLineAsHeader);
-      this.mapColumns(columnMetadataList, params);
+      const columnMetadataList: ColumnMetadata[] = this.columnMapperService.buildColumns(
+        this.getColumns(params),
+        params.columnsMapping
+      );
 
       const listSpecimens = parse(this.readTextFile, {
-        ...globalOptions,
+        ...this.csvImportParamsToOptions(params),
         columns: columnMetadataList.map(columnMetadata => columnMetadata.jsonName),
         from: params.firstLineAsHeader ? 2 : 1 // if the first line is header, begin the extract to second line (begin to 1 and not 0 with csv.js)
       });
@@ -131,32 +122,21 @@ export class ImportInventoryService implements OnInit {
     return readerLoadEnd;
   }
 
-  private getColumnsHeaders(options: Options, firstLineAsHeader: boolean): ColumnMetadata[] {
+  private getColumns(params: CsvImportParam): string[] {
     if (!this.readTextFile) {
+      this.logger.warn("Try to get columns before read csv file");
       return [];
     }
-    const lineHeaders = parse(this.readTextFile, {...options, to_line: 1});
-    return lineHeaders[0].map((value: any, index: number) => {
-      return {
-        position: index,
-        displayName: firstLineAsHeader ? value : "Column " + (index + 1),
-        jsonName: firstLineAsHeader ? value : "col_" + (index + 1),
-      } as ColumnMetadata;
-    });
+    const lineHeaders = parse(this.readTextFile, {...this.csvImportParamsToOptions(params), to_line: 1});
+    return lineHeaders[0].map((value: any, index: number) =>
+      params.firstLineAsHeader ? value : "Column " + (index + 1)
+    );
   }
 
-  private mapColumns(columns: ColumnMetadata[], params: CsvImportParam): void {
-      // Genus
-      let mapping = params.columnsMapper.genus;
-      if(mapping) {
-        columns.map((column: ColumnMetadata) => {
-          if (column.position === mapping.position) {
-            column.jsonName = "_genus";
-          }
-        });
-      }
+  private csvImportParamsToOptions(params: CsvImportParam): Options {
+    return {
+      delimiter: params.separator,
+    } as Options;
   }
-
-
 
 }

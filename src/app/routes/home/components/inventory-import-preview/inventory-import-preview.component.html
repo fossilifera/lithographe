@@ -1,17 +1,17 @@
-@if (this.inventoryPreview()) {
-  @if (!this.inventoryPreview()?.isError) {
-    <p-table [value]="this.specimens()" showGridlines [scrollable]="true">
+@if (this.inventoryPreview().isLoaded) {
+  @if (!this.inventoryPreview().isError) {
+    <p-table [value]="this.inventoryPreview().data" showGridlines [scrollable]="true">
       <ng-template #header>
         <tr>
-          @for (column of this.columns(); track column.position) {
-            <th>{{ column.displayName }}</th>
+          @for (column of this.inventoryPreview().columns; track  $index) {
+            <th>{{ column }}</th>
           }
         </tr>
       </ng-template>
-      <ng-template #body let-specimen>
+      <ng-template #body let-data>
         <tr>
-          @for (column of this.columns(); track column.position) {
-            <td>{{ specimen[column.jsonName] }}</td>
+          @for (column of this.inventoryPreview().columns; track $index) {
+            <td>{{ data[column] }}</td>
           }
         </tr>
       </ng-template>

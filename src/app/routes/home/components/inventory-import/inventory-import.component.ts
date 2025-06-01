@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, computed, inject, Signal, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
 import {Button} from 'primeng/button';
 import {ImportInventoryService} from '../../../../inventory/import-inventory.service';
 import {Card} from 'primeng/card';
@@ -9,7 +9,6 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {CsvImportParam} from '../../../../inventory/csv-import-param';
 import {first} from 'rxjs';
 import {InventoryImportPreviewComponent} from '../inventory-import-preview/inventory-import-preview.component';
-import {toSignal} from '@angular/core/rxjs-interop';
 import {Divider} from 'primeng/divider';
 import {InventoryService} from '../../../../inventory/inventory.service';
 import {ModalService} from '../../../../shared/modal/modal.service';
@@ -40,15 +39,11 @@ export class InventoryImportComponent {
   private readonly router = inject(Router);
 
 
-  protected inventoryPreview = toSignal(this.importInventoryService.getColumnMetadataList());
   protected displayImportConfiguration = signal(false);
   protected csvImportParams: CsvImportParam = {
     firstLineAsHeader: true,
     separator: ';',
-    columnsMapper: {
-      genus: undefined,
-      species: undefined
-    }
+    columnsMapping: {}
   };
 
 
