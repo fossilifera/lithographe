@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, signal, WritableSignal} from '@angular/core';
 import {Button} from 'primeng/button';
 import {ImportInventoryService} from '../../../../import/import-inventory.service';
 import {Card} from 'primeng/card';
@@ -45,7 +45,7 @@ export class InventoryImportComponent {
     separator: ';',
     columnsMapping: {}
   };
-
+  protected readonly authorAndYearSeparately: WritableSignal<boolean> = signal(false);
 
   triggerCsvImport(event: FileSelectEvent): void {
 
@@ -66,6 +66,9 @@ export class InventoryImportComponent {
     this.importInventoryService.getOrUpdatePreview(this.csvImportParams);
   }
 
+  toogleAuthorAndYearSeparately(): void {
+    this.authorAndYearSeparately.update(value => !value);
+  }
 
   protected openStoredInventory(): void {
     this.modalService.displayModal(

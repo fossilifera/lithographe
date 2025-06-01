@@ -42,6 +42,7 @@
           <label for="column_id">Numéro d'identification</label>
           <p-select id="column_id" [options]="this.importInventoryService.inventoryPreview().columns"
                     [(ngModel)]="csvImportParams.columnsMapping.number" [checkmark]="true" [showClear]="true"
+                    optionLabel="name"
                     placeholder="Choisir une colonne"/>
         </div>
         <p-divider align="left" type="solid">Nom binomial</p-divider>
@@ -49,49 +50,74 @@
           <label for="column_genus">Genre</label>
           <p-select id="column_genus" [options]="this.importInventoryService.inventoryPreview().columns"
                     [(ngModel)]="csvImportParams.columnsMapping.genus" [checkmark]="true" [showClear]="true"
+                    optionLabel="name"
                     placeholder="Choisir une colonne"/>
         </div>
         <div class="form-options">
           <label for="column_species">Espèce</label>
           <p-select id="column_species" [options]="this.importInventoryService.inventoryPreview().columns"
                     [(ngModel)]="csvImportParams.columnsMapping.species" [checkmark]="true" [showClear]="true"
+                    optionLabel="name"
                     placeholder="Choisir une colonne"/>
         </div>
         <div class="form-options">
-          <label for="column_author">Auteur</label>
-          <p-select id="column_author" [options]="this.importInventoryService.inventoryPreview().columns"
-                    [(ngModel)]="csvImportParams.columnsMapping.author" [checkmark]="true" [showClear]="true"
-                    placeholder="Choisir une colonne"/>
+          <label class="label-text" for="author_year_separately">Auteur et année de publication séparés</label>
+          <p-toggleswitch
+            [ngModel]="authorAndYearSeparately()"
+            (ngModelChange)="toogleAuthorAndYearSeparately()"
+            id="author_year_separately"/>
         </div>
-        <div class="form-options">
-          <label for="column_year">Année de publication</label>
-          <p-select id="column_year" [options]="this.importInventoryService.inventoryPreview().columns"
-                    [(ngModel)]="csvImportParams.columnsMapping.year" [checkmark]="true" [showClear]="true"
-                    placeholder="Choisir une colonne"/>
-        </div>
+        @if (authorAndYearSeparately()) {
+          <div class="form-options">
+            <label for="column_author">Auteur</label>
+            <p-select id="column_author" [options]="this.importInventoryService.inventoryPreview().columns"
+                      [(ngModel)]="csvImportParams.columnsMapping.authorOnly" [checkmark]="true" [showClear]="true"
+                      optionLabel="name"
+                      placeholder="Choisir une colonne"/>
+          </div>
+          <div class="form-options">
+            <label for="column_year">Année de publication</label>
+            <p-select id="column_year" [options]="this.importInventoryService.inventoryPreview().columns"
+                      [(ngModel)]="csvImportParams.columnsMapping.yearOnly" [checkmark]="true" [showClear]="true"
+                      optionLabel="name"
+                      placeholder="Choisir une colonne"/>
+          </div>
+        } @else {
+          <div class="form-options">
+            <label for="column_author_year">Auteur et année de publication</label>
+            <p-select id="column_author_year" [options]="this.importInventoryService.inventoryPreview().columns"
+                      [(ngModel)]="csvImportParams.columnsMapping.authorAndYear" [checkmark]="true" [showClear]="true"
+                      optionLabel="name"
+                      placeholder="Choisir une colonne"/>
+          </div>
+        }
         <p-divider align="left" type="solid">Classification</p-divider>
         <div class="form-options">
           <label for="column_phylum">Phylum</label>
           <p-select id="column_phylum" [options]="this.importInventoryService.inventoryPreview().columns"
                     [(ngModel)]="csvImportParams.columnsMapping.phylum" [checkmark]="true" [showClear]="true"
+                    optionLabel="name"
                     placeholder="Choisir une colonne"/>
         </div>
         <div class="form-options">
           <label for="column_class">Classe</label>
           <p-select id="column_class" [options]="this.importInventoryService.inventoryPreview().columns"
                     [(ngModel)]="csvImportParams.columnsMapping.class" [checkmark]="true" [showClear]="true"
+                    optionLabel="name"
                     placeholder="Choisir une colonne"/>
         </div>
         <div class="form-options">
           <label for="column_order">Ordre</label>
           <p-select id="column_order" [options]="this.importInventoryService.inventoryPreview().columns"
                     [(ngModel)]="csvImportParams.columnsMapping.order" [checkmark]="true" [showClear]="true"
+                    optionLabel="name"
                     placeholder="Choisir une colonne"/>
         </div>
         <div class="form-options">
           <label for="column_family">Famille</label>
           <p-select id="column_family" [options]="this.importInventoryService.inventoryPreview().columns"
                     [(ngModel)]="csvImportParams.columnsMapping.family" [checkmark]="true" [showClear]="true"
+                    optionLabel="name"
                     placeholder="Choisir une colonne"/>
         </div>
         <p-divider align="left" type="solid">Datation</p-divider>
@@ -99,6 +125,14 @@
           <label for="column_age">Âge</label>
           <p-select id="column_age" [options]="this.importInventoryService.inventoryPreview().columns"
                     [(ngModel)]="csvImportParams.columnsMapping.age" [checkmark]="true" [showClear]="true"
+                    optionLabel="name"
+                    placeholder="Choisir une colonne"/>
+        </div>
+        <div class="form-options">
+          <label for="column_lithostratigraphy">Lithostratigraphie</label>
+          <p-select id="column_lithostratigraphy" [options]="this.importInventoryService.inventoryPreview().columns"
+                    [(ngModel)]="csvImportParams.columnsMapping.lithostratigraphy" [checkmark]="true" [showClear]="true"
+                    optionLabel="name"
                     placeholder="Choisir une colonne"/>
         </div>
         <p-divider align="left" type="solid">Localisation</p-divider>
@@ -106,18 +140,21 @@
           <label for="column_country">Pays</label>
           <p-select id="column_country" [options]="this.importInventoryService.inventoryPreview().columns"
                     [(ngModel)]="csvImportParams.columnsMapping.country" [checkmark]="true" [showClear]="true"
+                    optionLabel="name"
                     placeholder="Choisir une colonne"/>
         </div>
         <div class="form-options">
           <label for="column_region">Région</label>
           <p-select id="column_region" [options]="this.importInventoryService.inventoryPreview().columns"
                     [(ngModel)]="csvImportParams.columnsMapping.region" [checkmark]="true" [showClear]="true"
+                    optionLabel="name"
                     placeholder="Choisir une colonne"/>
         </div>
         <div class="form-options">
           <label for="column_location">Localité</label>
           <p-select id="column_location" [options]="this.importInventoryService.inventoryPreview().columns"
                     [(ngModel)]="csvImportParams.columnsMapping.location" [checkmark]="true" [showClear]="true"
+                    optionLabel="name"
                     placeholder="Choisir une colonne"/>
         </div>
       </p-card>

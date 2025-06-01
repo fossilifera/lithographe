@@ -1,5 +1,7 @@
+import {TableColumn} from './table-column';
+
 export interface TablePreview {
-  columns: string[];
+  columns: TableColumn[];
   data: Record<string, string>[];
   isLoaded: boolean;
   isError?: boolean;

@@ -1,18 +1,21 @@
+import {TableColumn} from './table-column';
+
 export interface ColumnsMapping {
   // FIXME à virer
-  [key: string]: string|undefined;
-  number?: string;
-  phylum?: string;
-  class?: string;
-  order?: string;
-  family?: string;
-  genus?: string;
-  species?: string;
-  author?: string;
-  year?: string;
-  country?: string;
-  region?: string;
-  location?: string;
-  age?: string;
-  lithostratigraphy?: string;
+  [key: string]: TableColumn|undefined;
+  number?: TableColumn;
+  phylum?: TableColumn;
+  class?: TableColumn;
+  order?: TableColumn;
+  family?: TableColumn;
+  genus?: TableColumn;
+  species?: TableColumn;
+  authorAndYear?: TableColumn;
+  authorOnly?: TableColumn;
+  yearOnly?: TableColumn;
+  country?: TableColumn;
+  region?: TableColumn;
+  location?: TableColumn;
+  age?: TableColumn;
+  lithostratigraphy?: TableColumn;
 }

@@ -3,15 +3,15 @@
     <p-table [value]="this.inventoryPreview().data" showGridlines [scrollable]="true">
       <ng-template #header>
         <tr>
-          @for (column of this.inventoryPreview().columns; track  $index) {
-            <th>{{ column }}</th>
+          @for (column of this.inventoryPreview().columns; track  column.index) {
+            <th>{{ column.name }}</th>
           }
         </tr>
       </ng-template>
       <ng-template #body let-data>
         <tr>
-          @for (column of this.inventoryPreview().columns; track $index) {
-            <td>{{ data[column] }}</td>
+          @for (column of this.inventoryPreview().columns; track column.index) {
+            <td>{{ data[column.index] }}</td>
           }
         </tr>
       </ng-template>

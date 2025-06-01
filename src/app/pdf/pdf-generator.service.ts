@@ -100,8 +100,7 @@ export class PdfGeneratorService {
     doc.setFontSize(variableText.fontSize ?? 11);
     doc.setTextColor(variableText.fontColor ?? "#000")
     // FIXME remplacer par nouveau système orienté métier
-    let text: string = '';
-    variableText.variables.forEach(variable => text += specimen.data[variable] ?? ' ');
+    let text: string = specimen.number;
     doc.text(text,
       tagCoordX + variableText.xOffset, // Coordinate against left edge of the page
       tagCoordY + variableText.yOffset, // Coordinate against upper edge of the page

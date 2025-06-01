@@ -1,7 +1,6 @@
 import {computed, inject, Injectable, signal, WritableSignal} from '@angular/core';
 import {LoggerService} from '../shared/logger/logger.service';
 import {Specimen} from './specimen';
-import {ColumnMetadata} from './column-metadata';
 import {StorageService} from '../storage/storage.service';
 
 @Injectable({
@@ -12,7 +11,6 @@ export class InventoryService {
   private logger: LoggerService = inject(LoggerService);
   private storageService: StorageService = inject(StorageService);
 
-  readonly columns: WritableSignal<ColumnMetadata[]> = signal([]);
   readonly specimens: WritableSignal<Specimen[]> = signal([]);
 
   readonly isInventoryLoaded: WritableSignal<boolean> = signal(false);
@@ -28,35 +26,27 @@ export class InventoryService {
   }
 
 
-  private loadInventory(columns: ColumnMetadata[], specimens: Specimen[]): void {
-    this.columns.set(columns);
+  private loadInventory(specimens: Specimen[]): void {
     this.specimens.set(specimens);
     this.isInventoryLoaded.set(true);
   }
 
   public loadInventoryFromStorage(): boolean {
     this.logger.info("Open inventory from storage");
-    const columns: ColumnMetadata[] | null = this.storageService.getColumnMetadata();
-
-    if (!columns) {
-      this.logger.error("Error during load inventory from storage: columns are null");
-      return false;
-    }
 
     const specimens = this.storageService.getSpecimensFromStorage();
     if (!specimens) {
       this.logger.error("Error during load inventory from storage: specimens are null");
       return false;
     }
-    this.loadInventory(columns, specimens);
+    this.loadInventory(specimens);
     return true;
   }
 
-  public loadNewInventory(fileName: string, columns: ColumnMetadata[], specimens: Specimen[]): void {
+  public loadNewInventory(fileName: string, specimens: Specimen[]): void {
     this.logger.info("Load new inventory");
-    this.loadInventory(columns, specimens);
+    this.loadInventory(specimens);
     this.storageService.persistInventoryFileName(fileName);
-    this.storageService.persistColumns(columns);
     this.storageService.persistSpecimens(specimens);
   }
 

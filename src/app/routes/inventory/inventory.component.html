@@ -13,11 +13,22 @@
     <ng-template #header>
       <tr>
         <th class="column-head">
-          <p-checkbox [ngModel]="this.inventoryService.isAllSpecimensSelected()" binary="true" (onChange)="this.inventoryService.toggleAllSpecimen()"/>
+          <p-checkbox [ngModel]="this.inventoryService.isAllSpecimensSelected()" binary="true"
+                      (onChange)="this.inventoryService.toggleAllSpecimen()"/>
         </th>
-        @for (column of this.inventoryService.columns(); track column.position) {
-          <th class="column-head">{{ column.displayName }}</th>
-        }
+        <th class="column-head">n°</th>
+        <th class="column-head">Embranchement</th>
+        <th class="column-head">Classe</th>
+        <th class="column-head">Ordre</th>
+        <th class="column-head">Famille</th>
+        <th class="column-head">Genre</th>
+        <th class="column-head">espèce</th>
+        <th class="column-head">Auteur</th>
+        <th class="column-head">Pays</th>
+        <th class="column-head">Région</th>
+        <th class="column-head">Localité</th>
+        <th class="column-head">Âge</th>
+        <th class="column-head">Lithostratigraphie</th>
       </tr>
     </ng-template>
     <ng-template #body let-specimen>
@@ -26,9 +37,19 @@
           <p-checkbox [ngModel]="specimen.selected" binary="true"
                       (onChange)="this.inventoryService.toggleSpecimenSelection(specimen.id)"/>
         </td>
-        @for (column of this.inventoryService.columns(); track column.position) {
-          <td>{{ specimen.data[column.jsonName] }}</td>
-        }
+        <td><b>{{ specimen.number }}</b></td>
+        <td>{{ specimen.phylum }}</td>
+        <td>{{ specimen.class }}</td>
+        <td>{{ specimen.order }}</td>
+        <td>{{ specimen.family }}</td>
+        <td><i>{{ specimen.genus }}</i></td>
+        <td><i>{{ specimen.species }}</i></td>
+        <td>{{ specimen.author }}</td>
+        <td>{{ specimen.country }}</td>
+        <td>{{ specimen.region }}</td>
+        <td>{{ specimen.location }}</td>
+        <td>{{ specimen.age }}</td>
+        <td>{{ specimen.lithostratigraphy }}</td>
       </tr>
     </ng-template>
   </p-table>

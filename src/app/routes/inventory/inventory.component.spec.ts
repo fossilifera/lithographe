@@ -5,7 +5,6 @@ import {InventoryService} from '../../inventory/inventory.service';
 import {provideHttpClient} from '@angular/common/http';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {signal} from '@angular/core';
-import {ColumnMetadata} from '../../inventory/column-metadata';
 import {Specimen} from '../../inventory/specimen';
 
 describe('InventoryViewComponent', () => {
@@ -20,7 +19,6 @@ describe('InventoryViewComponent', () => {
         provideAnimations(),
         {
           provide: InventoryService, useValue: {
-            columns: signal([] as ColumnMetadata[]),
             specimens: signal([] as Specimen[]),
             isInventoryLoaded: signal(true),
             isAllSpecimensSelected: signal(true),

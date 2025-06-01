@@ -2,7 +2,6 @@ import {inject, Injectable} from '@angular/core';
 import {KeysLocalStorage} from './local-storage-keys';
 import {Specimen} from '../inventory/specimen';
 import {LoggerService} from '../shared/logger/logger.service';
-import {ColumnMetadata} from '../inventory/column-metadata';
 
 @Injectable({
   providedIn: 'root'
@@ -19,25 +18,6 @@ export class StorageService {
     window.localStorage.setItem(KeysLocalStorage.inventoryFileName, fileName);
   }
 
-
-  public getColumnMetadata(): ColumnMetadata[] | null {
-    const columnsInStorage = window.localStorage.getItem(KeysLocalStorage.inventoryColumns);
-    if(!columnsInStorage) {
-      this.logger.warn("No columns metadata in local storage");
-      return null;
-    }
-    try {
-      return JSON.parse(columnsInStorage) as ColumnMetadata[];
-    } catch (e) {
-      this.logger.errorWithError("Error during parsing columns from local storage", e);
-      return null;
-    }
-  }
-
-  public persistColumns(columns: ColumnMetadata[]): void {
-    this.logger.debug("Saving columns metadata in local storage")
-    window.localStorage.setItem(KeysLocalStorage.inventoryColumns, JSON.stringify(columns));
-  }
 
   public getSpecimensFromStorage(): Specimen[] | undefined {
     const specimenLocalStorage = window.localStorage.getItem(KeysLocalStorage.inventorySpecimens);
