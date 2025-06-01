@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ColumnMetadata} from './column-metadata';
+import {ColumnMetadata} from '../inventory/column-metadata';
 import {ColumnsMapping} from './columns-mapping';
 
 @Injectable({

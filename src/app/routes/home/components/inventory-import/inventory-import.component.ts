@@ -1,12 +1,12 @@
 import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
 import {Button} from 'primeng/button';
-import {ImportInventoryService} from '../../../../inventory/import-inventory.service';
+import {ImportInventoryService} from '../../../../import/import-inventory.service';
 import {Card} from 'primeng/card';
 import {FileSelectEvent, FileUpload} from 'primeng/fileupload';
 import {ToggleSwitch} from 'primeng/toggleswitch';
 import {FormsModule} from '@angular/forms';
 import {RadioButtonModule} from 'primeng/radiobutton';
-import {CsvImportParam} from '../../../../inventory/csv-import-param';
+import {CsvImportParam} from '../../../../import/csv-import-param';
 import {first} from 'rxjs';
 import {InventoryImportPreviewComponent} from '../inventory-import-preview/inventory-import-preview.component';
 import {Divider} from 'primeng/divider';

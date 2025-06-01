@@ -1,13 +1,13 @@
 import {inject, Injectable, signal, WritableSignal} from '@angular/core';
-import {InventoryService} from './inventory.service';
-import {DEMO_INVENTORY_COLUMNS, DEMO_INVENTORY_NAME, DEMO_INVENTORY_SPECIMENS} from './demo-inventory';
+import {InventoryService} from '../inventory/inventory.service';
+import {DEMO_INVENTORY_COLUMNS, DEMO_INVENTORY_NAME, DEMO_INVENTORY_SPECIMENS} from '../inventory/demo-inventory';
 import {LoggerService} from '../shared/logger/logger.service';
 import {fromEvent, map, Observable} from 'rxjs';
 import {Options, parse} from 'csv-parse/browser/esm/sync';
 import {CsvImportParam} from './csv-import-param';
-import {ColumnMetadata} from './column-metadata';
-import {Specimen} from './specimen';
-import {InventoryPreview} from './inventory-preview';
+import {ColumnMetadata} from '../inventory/column-metadata';
+import {Specimen} from '../inventory/specimen';
+import {TablePreview} from './table-preview';
 import {Router} from '@angular/router';
 import {ColumnMapperService} from './column-mapper.service';
 
@@ -23,11 +23,11 @@ export class ImportInventoryService {
 
   private fileName: string | undefined;
   private readTextFile: string | undefined;
-  readonly inventoryPreview: WritableSignal<InventoryPreview> = signal({
+  readonly inventoryPreview: WritableSignal<TablePreview> = signal({
     columns: [],
     data: [],
     isLoaded: false
-  } as InventoryPreview);
+  } as TablePreview);
 
 
   public loadDemoInventory(): void {
@@ -51,7 +51,7 @@ export class ImportInventoryService {
       return;
     }
 
-    let preview: InventoryPreview = {
+    let preview: TablePreview = {
       columns: [],
       data: [],
       isError: false,

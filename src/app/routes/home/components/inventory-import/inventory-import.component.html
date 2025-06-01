@@ -41,7 +41,7 @@
         <div class="form-options">
           <label for="column_id">Numéro d'identification</label>
           <p-select id="column_id" [options]="this.importInventoryService.inventoryPreview().columns"
-                    [(ngModel)]="csvImportParams.columnsMapping.id" [checkmark]="true" [showClear]="true"
+                    [(ngModel)]="csvImportParams.columnsMapping.number" [checkmark]="true" [showClear]="true"
                     placeholder="Choisir une colonne"/>
         </div>
         <p-divider align="left" type="solid">Nom binomial</p-divider>
@@ -123,7 +123,7 @@
       </p-card>
     </div>
     <div class="flex-display-columns">
-      <p-card header="Aperçu de l'inventaire" class="inventory_preview_card">
+      <p-card header="Aperçu du fichier" class="inventory_preview_card">
         <ltg-inventory-import-preview [inventoryPreview]="this.importInventoryService.inventoryPreview()"/>
       </p-card>
       <div class="import-confirmation-button">

@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {Button, ButtonLabel} from 'primeng/button';
 import {ToolsService} from '../../settings/tools.service';
 import {Card} from 'primeng/card';
-import {ImportInventoryService} from '../../inventory/import-inventory.service';
+import {ImportInventoryService} from '../../import/import-inventory.service';
 
 @Component({
   selector: 'ltg-settings-view',

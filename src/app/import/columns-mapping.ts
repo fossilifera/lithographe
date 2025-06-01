@@ -1,6 +1,7 @@
 export interface ColumnsMapping {
+  // FIXME à virer
   [key: string]: string|undefined;
-  id?: string;
+  number?: string;
   phylum?: string;
   class?: string;
   order?: string;
@@ -9,10 +10,9 @@ export interface ColumnsMapping {
   species?: string;
   author?: string;
   year?: string;
-  location?: string;
-  region?: string;
   country?: string;
+  region?: string;
+  location?: string;
   age?: string;
-  period?: string;
-  era?: string;
+  lithostratigraphy?: string;
 }
