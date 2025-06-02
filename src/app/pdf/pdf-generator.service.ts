@@ -3,10 +3,10 @@ import {InventoryService} from '../inventory/inventory.service';
 import {LoggerService} from '../shared/logger/logger.service';
 import {jsPDF} from 'jspdf';
 import {Specimen} from '../inventory/specimen';
-import {TagItem} from './model/tag-item';
-import {Rectangle} from './model/rectangle';
-import {VariableText} from './model/variable-text';
-import {Template} from './model/template';
+import {TagItem} from './templates/tag-item';
+import {Rectangle} from './templates/rectangle';
+import {VariableText} from './templates/variable-text';
+import {Template} from './templates/template';
 import {dateForFileNameFormat} from '../shared/utils';
 
 @Injectable({

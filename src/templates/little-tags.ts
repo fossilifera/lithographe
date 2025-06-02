@@ -1,6 +1,6 @@
-import {Template} from "../model/template";
-import {Rectangle} from '../model/rectangle';
-import {VariableText} from '../model/variable-text';
+import {Template} from "../app/pdf/templates/template";
+import {Rectangle} from '../app/pdf/templates/rectangle';
+import {VariableText} from '../app/pdf/templates/variable-text';
 
 export const LittleTags: Template = {
   name: "Petites étiquettes",
