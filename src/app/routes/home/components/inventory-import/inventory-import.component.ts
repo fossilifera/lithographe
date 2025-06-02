@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, signal, WritableSignal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
 import {Button} from 'primeng/button';
 import {ImportInventoryService} from '../../../../import/import-inventory.service';
 import {Card} from 'primeng/card';
@@ -14,6 +14,7 @@ import {InventoryService} from '../../../../inventory/inventory.service';
 import {ModalService} from '../../../../shared/modal/modal.service';
 import {Router} from '@angular/router';
 import {Select} from 'primeng/select';
+import {StorageService} from '../../../../storage/storage.service';
 
 @Component({
   selector: 'inventory-import',
@@ -31,11 +32,13 @@ import {Select} from 'primeng/select';
   templateUrl: './inventory-import.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InventoryImportComponent {
+export class InventoryImportComponent implements OnInit {
+
 
   protected readonly importInventoryService: ImportInventoryService = inject(ImportInventoryService);
   protected readonly inventoryService: InventoryService = inject(InventoryService);
   private readonly modalService: ModalService = inject(ModalService);
+  private readonly storageService: StorageService = inject(StorageService);
   private readonly router = inject(Router);
 
 
@@ -46,6 +49,10 @@ export class InventoryImportComponent {
     columnsMapping: {}
   };
   protected readonly authorAndYearSeparately: WritableSignal<boolean> = signal(false);
+
+  ngOnInit(): void {
+    this.prefillCsvParams();
+  }
 
   triggerCsvImport(event: FileSelectEvent): void {
 
@@ -89,6 +96,7 @@ export class InventoryImportComponent {
     this.modalService.displayModal(
       {title: "Import fichier CSV", message: "Veuillez patientez pendant l'import du fichier", displaySpinner: true}
     );
+    this.storageService.persistCsvImportParams(this.csvImportParams);
     if (this.importInventoryService.importCsvInventory(this.csvImportParams)) {
       this.modalService.hideModal();
       this.router.navigate(['/inventory']);
@@ -97,6 +105,18 @@ export class InventoryImportComponent {
         title: "Une erreur s'est produite durant l'import du fichier csv. Merci de recharger l'application et vérifier le fichier.",
         closable: false
       });
+    }
+  }
+
+  private prefillCsvParams(): void {
+    console.log("read csv parms");
+    const csvParamsStorage = this.storageService.getCsvImportParamsFromStorage();
+    console.log("csvParamsStorage", csvParamsStorage);
+    if (csvParamsStorage) {
+      this.csvImportParams = csvParamsStorage;
+      if(csvParamsStorage.columnsMapping.authorOnly && csvParamsStorage.columnsMapping.yearOnly) {
+        this.authorAndYearSeparately.set(true);
+      }
     }
   }
 
