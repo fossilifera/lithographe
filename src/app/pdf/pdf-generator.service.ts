@@ -14,13 +14,13 @@ export class PdfGeneratorService {
 
   public generatePDF(template: Template): void {
     this.logger.info(`Generating PDF with template ${template.name}`);
+
     const pdfDoc = new PdfDocument(template, this.logger);
-    this.inventoryService.specimens().forEach(specimen => {
-      if (!specimen.selected) {
-        return;
-      }
-      pdfDoc.addSpecimenTag(specimen);
-    });
+    this.inventoryService.specimens()
+      .filter(specimen => specimen.selected)
+      .forEach(specimen =>
+        pdfDoc.addTagForSpecimen(specimen)
+      );
 
     pdfDoc.finaliseAndOpen();
     this.logger.info(`End of pdf generation`);

@@ -1,5 +1,3 @@
-import {TagItem} from './tag-item';
-
 /**
  * @prop {number} xOffset offset against left edge of the tag
  * @prop {number} yOffset offset against upper edge of the tag
@@ -7,7 +5,7 @@ import {TagItem} from './tag-item';
  * @prop {number} height - Height of the rectangle
  * @prop {number} lineWidth - Thickness of the border line
  */
-export interface Rectangle extends TagItem {
+export interface RectangleParams {
   xOffset: number;
   yOffset: number;
   width: number;

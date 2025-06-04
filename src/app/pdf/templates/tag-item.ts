@@ -1,3 +1,3 @@
 export interface TagItem {
-  type: 'Rectangle' | 'VariableText';
+  type: 'VariableText';
 }

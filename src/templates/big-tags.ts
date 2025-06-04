@@ -1,5 +1,4 @@
 import {Template} from '../app/pdf/templates/template';
-import {Rectangle} from '../app/pdf/templates/rectangle';
 import {VariableText} from '../app/pdf/templates/variable-text';
 
 export const BigTags: Template = {
@@ -11,34 +10,39 @@ export const BigTags: Template = {
   marginY: 20,
   tagsPerLine: 2,
   tagsPerColumns: 4,
-  items: [
+  borders: [
     {
-      type: 'Rectangle',
       xOffset: 0,
       yOffset: 0,
       width: 111,
       height: 40,
       lineWidth: 0.75
-    } as Rectangle,
+    },
     {
-      type: 'Rectangle',
       xOffset: 2,
       yOffset: 2,
       width: 107,
       height: 36,
       lineWidth: 0.15
-    } as Rectangle,
-    {
-      type: 'VariableText',
-      xOffset: 55.5, // center of tag
-      yOffset: 6,
-      align: 'center',
-      value: '<<genus>> <<species>>',
-      variables: ['genus', 'species'],
-      fontName: 'helvetica',
-      fontStyle: 'italic',
-      fontSize: 11
-    } as VariableText,
+    }
+  ],
+  idNumber: {
+    xOffset: 5,
+    yOffset: 5,
+    align: 'left',
+    fontName: 'helvetica',
+    fontStyle: 'normal',
+    fontSize: 11
+  },
+  identification: {
+    xOffset: 55.5, // center of tag
+    yOffset: 6,
+    align: 'center',
+    fontName: 'helvetica',
+    fontStyle: 'italic',
+    fontSize: 11
+  },
+  items: [
     {
       type: 'VariableText',
       xOffset: 55.5, // center of tag
@@ -68,17 +72,6 @@ export const BigTags: Template = {
       align: 'center',
       value: '<<age>>',
       variables: ['age'],
-      fontName: 'helvetica',
-      fontStyle: 'normal',
-      fontSize: 11
-    } as VariableText,
-    {
-      type: 'VariableText',
-      xOffset: 55.5, // center of tag
-      yOffset: 26,
-      align: 'center',
-      value: '<<number>>',
-      variables: ['number'],
       fontName: 'helvetica',
       fontStyle: 'normal',
       fontSize: 11

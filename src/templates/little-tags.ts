@@ -1,5 +1,4 @@
 import {Template} from "../app/pdf/templates/template";
-import {Rectangle} from '../app/pdf/templates/rectangle';
 import {VariableText} from '../app/pdf/templates/variable-text';
 
 export const LittleTags: Template = {
@@ -11,34 +10,38 @@ export const LittleTags: Template = {
   marginY: 28.5,
   tagsPerLine: 3,
   tagsPerColumns: 6,
-  items: [
+  borders: [
     {
-      type: 'Rectangle',
       xOffset: 0,
       yOffset: 0,
       width: 54,
       height: 40,
       lineWidth: 0.75
-    } as Rectangle,
+    },
     {
-      type: 'Rectangle',
       xOffset: 2,
       yOffset: 2,
       width: 50,
       height: 36,
       lineWidth: 0.15
-    } as Rectangle,
-    {
-      type: 'VariableText',
-      xOffset: 27, // center of tag
-      yOffset: 7,
-      align: 'center',
-      value: '<<genus>> <<species>>',
-      variables: ['genus', 'species'],
-      fontName: 'helvetica',
-      fontStyle: 'italic',
-      fontSize: 11
-    } as VariableText,
+    }
+  ],
+  idNumber: {
+    xOffset: 5,
+    yOffset: 5,
+    align: 'left',
+    fontName: 'helvetica',
+    fontSize: 11
+  },
+  identification: {
+    xOffset: 27, // center of tag
+    yOffset: 12,
+    align: 'center',
+    fontName: 'helvetica',
+    fontSize: 11,
+    maxTextWidth: 48
+  },
+  items: [
     {
       type: 'VariableText',
       xOffset: 27, // center of tag
