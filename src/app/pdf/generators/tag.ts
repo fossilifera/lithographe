@@ -29,6 +29,7 @@ export class Tag {
     this.drawAuthorAndYear();
     this.drawLocation();
     this.drawDatation();
+    this.drawStatus();
   }
 
   private drawBorder(border: RectangleParams): void {
@@ -101,6 +102,12 @@ export class Tag {
         text = this.specimen.lithostratigraphy;
       }
       this.writeText(text, this.template.datation);
+    }
+  }
+
+  private drawStatus(): void {
+    if(this.template.status) {
+      this.writeText(this.specimen.status, this.template.status);
     }
   }
 

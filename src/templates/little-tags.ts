@@ -66,6 +66,5 @@ export const LittleTags: Template = {
     fontStyle: 'normal',
     fontSize: 11,
     maxTextWidth: 48
-  },
-  items: []
+  }
 }

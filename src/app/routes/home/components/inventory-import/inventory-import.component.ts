@@ -15,6 +15,7 @@ import {ModalService} from '../../../../shared/modal/modal.service';
 import {Router} from '@angular/router';
 import {Select} from 'primeng/select';
 import {StorageService} from '../../../../storage/storage.service';
+import {Textarea} from 'primeng/textarea';
 
 @Component({
   selector: 'inventory-import',
@@ -27,7 +28,8 @@ import {StorageService} from '../../../../storage/storage.service';
     RadioButtonModule,
     InventoryImportPreviewComponent,
     Divider,
-    Select
+    Select,
+    Textarea
   ],
   templateUrl: './inventory-import.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

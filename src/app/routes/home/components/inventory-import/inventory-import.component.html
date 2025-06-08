@@ -157,6 +157,18 @@
                     optionLabel="name"
                     placeholder="Choisir une colonne"/>
         </div>
+        <p-divider align="left" type="solid">Statut</p-divider>
+        <div class="form-options">
+          <label for="column_status">Statut</label>
+          <p-select id="column_status" [options]="this.importInventoryService.inventoryPreview().columns"
+                    [(ngModel)]="csvImportParams.columnsMapping.status" [checkmark]="true" [showClear]="true"
+                    optionLabel="name"
+                    placeholder="Choisir une colonne"/>
+        </div>
+        <div class="form-options">
+          <label for="status_ignored">Status à ignorer (texte qui ne sera pas pris en compte)</label>
+          <textarea id="status_ignored" rows="5" cols="30" pTextarea [(ngModel)]="csvImportParams.columnsMapping.statusToIgnore"></textarea>
+        </div>
       </p-card>
     </div>
     <div class="flex-display-columns">

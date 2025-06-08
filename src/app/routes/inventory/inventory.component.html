@@ -29,6 +29,7 @@
         <th class="column-head">Localité</th>
         <th class="column-head">Âge</th>
         <th class="column-head">Lithostratigraphie</th>
+        <th class="column-head">Statut</th>
       </tr>
     </ng-template>
     <ng-template #body let-specimen>
@@ -50,6 +51,7 @@
         <td>{{ specimen.location }}</td>
         <td>{{ specimen.age }}</td>
         <td>{{ specimen.lithostratigraphy }}</td>
+        <td>{{ specimen.status }}</td>
       </tr>
     </ng-template>
   </p-table>

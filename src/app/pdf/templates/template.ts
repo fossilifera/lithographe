@@ -1,11 +1,9 @@
-import { RectangleParams } from './rectangleParams';
-import {TagItem} from './tag-item';
+import {RectangleParams} from './rectangleParams';
 import {TextParams} from './textParams';
 
 export interface Template {
   name: string;
-  items: TagItem[];
-    tagWidth: number;
+  tagWidth: number;
   tagHeight: number;
   orientation?: 'portrait' | 'landscape';
   marginX: number;
@@ -18,4 +16,5 @@ export interface Template {
   authorAndYear?: TextParams;
   location?: TextParams;
   datation?: TextParams;
+  status?: TextParams;
 }

@@ -18,7 +18,8 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     lithostratigraphy: 'Calcaire',
     country: "France",
     region: "Bourgogne",
-    location: "Pouillenay"
+    location: "Pouillenay",
+    status: ""
   },
 
   {
@@ -36,7 +37,8 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     lithostratigraphy: 'Calcaire',
     country: 'Morocco',
     region: "Haut Atlas",
-    location: 'Amellagou'
+    location: 'Amellagou',
+    status: "Figuré"
   },
   {
     id: 2,
@@ -53,7 +55,8 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     lithostratigraphy: 'Calcaire',
     country: 'Morocco',
     region: "Haut Atlas",
-    location: 'Amellagou'
+    location: 'Amellagou',
+    status: "Figuré"
   },
   {
     id: 3,
@@ -70,7 +73,8 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     lithostratigraphy: 'Calcaire',
     country: 'Morocco',
     region: "Haut Atlas",
-    location: 'Amellagou'
+    location: 'Amellagou',
+    status: "Faux type"
   },
   {
     id: 4,
@@ -87,7 +91,8 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     lithostratigraphy: 'Calcaire',
     country: 'Morocco',
     region: "Haut Atlas",
-    location: 'Amellagou'
+    location: 'Amellagou',
+    status: ""
   },
   {
     id: 5,
@@ -104,7 +109,8 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     lithostratigraphy: 'Calcaire',
     country: 'Morocco',
     region: "Haut Atlas",
-    location: 'Amellagou'
+    location: 'Amellagou',
+    status: ""
   },
   {
     id: 6,
@@ -121,7 +127,8 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     lithostratigraphy: 'Calcaire',
     country: 'Morocco',
     region: "Haut Atlas",
-    location: 'Amellagou'
+    location: 'Amellagou',
+    status: ""
   },
   {
     id: 7,
@@ -138,7 +145,8 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     lithostratigraphy: 'Calcaire',
     country: 'Morocco',
     region: "Haut Atlas",
-    location: 'Amellagou'
+    location: 'Amellagou',
+    status: ""
   },
   {
     id: 8,
@@ -155,7 +163,8 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     lithostratigraphy: 'Calcaire',
     country: 'Morocco',
     region: "Haut Atlas",
-    location: 'Amellagou'
+    location: 'Amellagou',
+    status: ""
   },
   {
     id: 9,
@@ -172,7 +181,8 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     lithostratigraphy: 'Calcaire',
     country: 'Morocco',
     region: "Haut Atlas",
-    location: 'Amellagou'
+    location: 'Amellagou',
+    status: ""
   },
   {
     id: 10,
@@ -189,7 +199,8 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     lithostratigraphy: 'Calcaire',
     country: 'Morocco',
     region: "Haut Atlas",
-    location: 'Amellagou'
+    location: 'Amellagou',
+    status: ""
   },
   {
     id: 11,
@@ -206,6 +217,7 @@ export const DEMO_INVENTORY_SPECIMENS: Specimen[] = [
     lithostratigraphy: 'Calcaire',
     country: 'Morocco',
     region: "Haut Atlas",
-    location: 'Amellagou'
+    location: 'Amellagou',
+    status: ""
   },
 ];

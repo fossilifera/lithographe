@@ -23,7 +23,8 @@ export class SpecimenMapperService {
       region: this.getValue(values, mappings.region?.index),
       location: this.getValue(values, mappings.location?.index),
       age: this.getValue(values, mappings.age?.index),
-      lithostratigraphy: this.getValue(values, mappings.lithostratigraphy?.index)
+      lithostratigraphy: this.getValue(values, mappings.lithostratigraphy?.index),
+      status: this.getStatus(values, mappings)
     };
   }
 
@@ -54,6 +55,16 @@ export class SpecimenMapperService {
       }
     }
     return '';
+  }
+
+  private getStatus(values: Record<string, string>, mappings: ColumnsMapping): string {
+    let value: string = this.getValue(values, mappings.status?.index);
+    if(mappings.statusToIgnore) {
+      mappings.statusToIgnore.split('\n').forEach((strToIgnore: string) => {
+          value = value.replace(strToIgnore, '');
+      })
+    }
+    return value;
   }
 
   private cleanString(str: string): string {

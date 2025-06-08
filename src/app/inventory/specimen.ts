@@ -14,4 +14,5 @@ export interface Specimen {
   location: string;
   age: string;
   lithostratigraphy: string;
+  status: string;
 }

@@ -1,8 +1,6 @@
 import {TableColumn} from './table-column';
 
 export interface ColumnsMapping {
-  // FIXME à virer
-  [key: string]: TableColumn|undefined;
   number?: TableColumn;
   phylum?: TableColumn;
   class?: TableColumn;
@@ -18,4 +16,6 @@ export interface ColumnsMapping {
   location?: TableColumn;
   age?: TableColumn;
   lithostratigraphy?: TableColumn;
+  status?: TableColumn;
+  statusToIgnore?: string;
 }
