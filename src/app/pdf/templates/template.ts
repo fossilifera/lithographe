@@ -16,4 +16,6 @@ export interface Template {
   idNumber?: TextParams;
   identification?: TextParams;
   authorAndYear?: TextParams;
+  location?: TextParams;
+  datation?: TextParams;
 }

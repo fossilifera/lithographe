@@ -1,5 +1,4 @@
 import {Template} from "../app/pdf/templates/template";
-import {VariableText} from '../app/pdf/templates/variable-text';
 
 export const LittleTags: Template = {
   name: "Petites étiquettes",
@@ -31,11 +30,11 @@ export const LittleTags: Template = {
     yOffset: 5,
     align: 'left',
     fontName: 'helvetica',
-    fontSize: 11
+    fontSize: 12
   },
   identification: {
     xOffset: 27, // center of tag
-    yOffset: 12,
+    yOffset: 15,
     align: 'center',
     fontName: 'helvetica',
     fontSize: 11,
@@ -43,46 +42,30 @@ export const LittleTags: Template = {
   },
   authorAndYear: {
     xOffset: 27, // center of tag
-    yOffset: 17,
+    yOffset: 20,
     align: 'center',
     fontName: 'helvetica',
     fontStyle: 'normal',
     fontSize: 11,
     maxTextWidth: 48
   },
-  items: [
-    {
-      type: 'VariableText',
-      xOffset: 27, // center of tag
-      yOffset: 17,
-      align: 'center',
-      value: '<<locality>>',
-      variables: ['locality'],
-      fontName: 'helvetica',
-      fontStyle: 'normal',
-      fontSize: 11
-    } as VariableText,
-    {
-      type: 'VariableText',
-      xOffset: 27, // center of tag
-      yOffset: 22,
-      align: 'center',
-      value: '<<age>>',
-      variables: ['age'],
-      fontName: 'helvetica',
-      fontStyle: 'normal',
-      fontSize: 11
-    } as VariableText,
-    {
-      type: 'VariableText',
-      xOffset: 27, // center of tag
-      yOffset: 27,
-      align: 'center',
-      value: '<<number>>',
-      variables: ['number'],
-      fontName: 'helvetica',
-      fontStyle: 'normal',
-      fontSize: 11
-    } as VariableText
-  ]
+  location: {
+    xOffset: 27, // center of tag
+    yOffset: 25,
+    align: 'center',
+    fontName: 'helvetica',
+    fontStyle: 'normal',
+    fontSize: 11,
+    maxTextWidth: 48
+  },
+  datation: {
+    xOffset: 27, // center of tag
+    yOffset: 30,
+    align: 'center',
+    fontName: 'helvetica',
+    fontStyle: 'normal',
+    fontSize: 11,
+    maxTextWidth: 48
+  },
+  items: []
 }

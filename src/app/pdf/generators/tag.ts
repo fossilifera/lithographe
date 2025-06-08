@@ -27,6 +27,8 @@ export class Tag {
     this.drawCollectionNumber();
     this.drawIdentification();
     this.drawAuthorAndYear();
+    this.drawLocation();
+    this.drawDatation();
   }
 
   private drawBorder(border: RectangleParams): void {
@@ -72,7 +74,33 @@ export class Tag {
   private drawAuthorAndYear(): void {
     if(this.template.authorAndYear) {
       this.writeText(this.specimen.author, this.template.authorAndYear);
+    }
+  }
 
+  private drawLocation(): void {
+    if(this.template.location) {
+      let text: string;
+      if (this.isPresent(this.specimen.location)) {
+        text = this.specimen.location;
+      } else if(this.isPresent(this.specimen.region)) {
+        text = this.specimen.region;
+      } else {
+        text = this.specimen.country;
+      }
+      this.writeText(text, this.template.location);
+    }
+  }
+
+
+  private drawDatation(): void {
+    if(this.template.datation) {
+      let text: string;
+      if (this.isPresent(this.specimen.age)) {
+        text = this.specimen.age;
+      } else {
+        text = this.specimen.lithostratigraphy;
+      }
+      this.writeText(text, this.template.datation);
     }
   }
 
