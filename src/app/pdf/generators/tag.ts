@@ -26,6 +26,7 @@ export class Tag {
     );
     this.drawCollectionNumber();
     this.drawIdentification();
+    this.drawAuthorAndYear();
   }
 
   private drawBorder(border: RectangleParams): void {
@@ -68,12 +69,20 @@ export class Tag {
     }
   }
 
+  private drawAuthorAndYear(): void {
+    if(this.template.authorAndYear) {
+      this.writeText(this.specimen.author, this.template.authorAndYear);
+
+    }
+  }
+
   private writeText(text: string, params: TextParams): void {
     this.pdf.setFont(
       params.fontName ?? 'helvetica',
       params.fontStyle ?? 'normal',
       400 // font weight
     );
+
     let fontSize = params.fontSize ?? params.fontSize;
     console.log(params);
     if (params.maxTextWidth) {

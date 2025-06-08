@@ -41,18 +41,16 @@ export const LittleTags: Template = {
     fontSize: 11,
     maxTextWidth: 48
   },
+  authorAndYear: {
+    xOffset: 27, // center of tag
+    yOffset: 17,
+    align: 'center',
+    fontName: 'helvetica',
+    fontStyle: 'normal',
+    fontSize: 11,
+    maxTextWidth: 48
+  },
   items: [
-    {
-      type: 'VariableText',
-      xOffset: 27, // center of tag
-      yOffset: 12,
-      align: 'center',
-      value: '<<author>> <<year>>',
-      variables: ['author', 'year'],
-      fontName: 'helvetica',
-      fontStyle: 'normal',
-      fontSize: 11
-    } as VariableText,
     {
       type: 'VariableText',
       xOffset: 27, // center of tag

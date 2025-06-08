@@ -15,4 +15,5 @@ export interface Template {
   borders: RectangleParams[];
   idNumber?: TextParams;
   identification?: TextParams;
+  authorAndYear?: TextParams;
 }

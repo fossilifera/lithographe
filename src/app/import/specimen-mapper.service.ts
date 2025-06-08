@@ -29,14 +29,14 @@ export class SpecimenMapperService {
 
   private getValue(values: Record<string, string>, columnIndex: number | undefined): string {
     if (columnIndex && values[columnIndex]) {
-      return values[columnIndex];
+      return this.cleanString(values[columnIndex]);
     }
     return '';
   }
 
   private getAuthorYear(values: Record<string, string>, mappings: ColumnsMapping): string {
     if (mappings.authorAndYear) {
-      return values[mappings.authorAndYear.index];
+      return this.cleanString(values[mappings.authorAndYear.index]);
     } else if (
       mappings.authorOnly
       && values[mappings.authorOnly.index]
@@ -47,13 +47,18 @@ export class SpecimenMapperService {
       if (withParenthesis) {
         const regexAuthor = values[mappings.authorOnly.index].match(/\(([^)]+)\)/);
         if (regexAuthor) {
-          return "(" + regexAuthor[1] + ", " + values[mappings.yearOnly.index] + ")";
+          return this.cleanString("(" + regexAuthor[1] + ", " + values[mappings.yearOnly.index] + ")");
         }
       } else {
-        return values[mappings.authorOnly.index] + ", " + values[mappings.yearOnly.index];
+        return this.cleanString(values[mappings.authorOnly.index] + ", " + values[mappings.yearOnly.index]);
       }
     }
     return '';
+  }
+
+  private cleanString(str: string): string {
+    // remove breaklines
+    return str.replace(/\n/g, ' ');
   }
 
 }
