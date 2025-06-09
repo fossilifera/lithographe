@@ -91,7 +91,7 @@
                       placeholder="Choisir une colonne"/>
           </div>
         }
-        <p-divider align="left" type="solid">Classification</p-divider>
+        <p-divider align="left" type="solid">Classification<i class="pi pi-question-circle help-tooltip" pTooltip="Sera utilisé pour remplacer le genre et l'espèce si ces derniers son absents (le niveau le plus fin disponible sera utilisé)"></i></p-divider>
         <div class="form-options">
           <label for="column_phylum">Phylum</label>
           <p-select id="column_phylum" [options]="this.importInventoryService.inventoryPreview().columns"
@@ -120,7 +120,7 @@
                     optionLabel="name"
                     placeholder="Choisir une colonne"/>
         </div>
-        <p-divider align="left" type="solid">Datation</p-divider>
+        <p-divider align="left" type="solid">Datation<i class="pi pi-question-circle help-tooltip" pTooltip="L'âge sera utilisée et remplacée par la lithostratigraphie si cette dernière est absente."></i></p-divider>
         <div class="form-options">
           <label for="column_age">Âge</label>
           <p-select id="column_age" [options]="this.importInventoryService.inventoryPreview().columns"
@@ -135,7 +135,7 @@
                     optionLabel="name"
                     placeholder="Choisir une colonne"/>
         </div>
-        <p-divider align="left" type="solid">Localisation</p-divider>
+        <p-divider align="left" type="solid">Localisation<i class="pi pi-question-circle help-tooltip" pTooltip="Le niveau le plus précis disponible sera utilisé."></i></p-divider>
         <div class="form-options">
           <label for="column_country">Pays</label>
           <p-select id="column_country" [options]="this.importInventoryService.inventoryPreview().columns"
@@ -166,7 +166,7 @@
                     placeholder="Choisir une colonne"/>
         </div>
         <div class="form-options">
-          <label for="status_ignored">Status à ignorer (texte qui ne sera pas pris en compte)</label>
+          <label for="status_ignored">Status à ignorer<i class="pi pi-question-circle help-tooltip" pTooltip="Les valeurs indiquées ne seront pas prises en compte et n'apparaitront pas dans les étiquettes. (par exemple: pas de statut)"></i></label>
           <textarea id="status_ignored" rows="5" cols="30" pTextarea [(ngModel)]="csvImportParams.columnsMapping.statusToIgnore"></textarea>
         </div>
       </p-card>

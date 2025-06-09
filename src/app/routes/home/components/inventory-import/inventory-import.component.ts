@@ -16,6 +16,7 @@ import {Router} from '@angular/router';
 import {Select} from 'primeng/select';
 import {StorageService} from '../../../../storage/storage.service';
 import {Textarea} from 'primeng/textarea';
+import {TooltipModule} from 'primeng/tooltip';
 
 @Component({
   selector: 'inventory-import',
@@ -29,7 +30,8 @@ import {Textarea} from 'primeng/textarea';
     InventoryImportPreviewComponent,
     Divider,
     Select,
-    Textarea
+    Textarea,
+    TooltipModule
   ],
   templateUrl: './inventory-import.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
