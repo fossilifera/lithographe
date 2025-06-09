@@ -85,7 +85,12 @@
           "builder": "@angular/build:extract-i18n"
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "https://fossilifera.github.io/lithographe/",
+            "name": "Fossilifera",
+            "email": "fossilifera@gmail.com"
+          }
         }
       }
     }
