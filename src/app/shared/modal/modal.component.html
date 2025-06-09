@@ -1,0 +1,15 @@
+<p-dialog [header]="this.modalService.modalContent()?.title" [modal]="true" [visible]="this.modalService.isVisible()" closable="false" draggable="false">
+  <p>{{ this.modalService.modalContent()?.message }}</p>
+  @if (this.modalService.modalContent()?.displaySpinner ?? false) {
+    <p-progress-spinner aria-label="Loading"/>
+  }
+  @if (this.modalService.modalContent()?.closable ?? false) {
+    <p-button [label]="this.modalService.modalContent()?.confirmationMessage ?? 'OK'" (click)="closeModal()"/>
+
+  } @else if (this.modalService.modalContent()?.answerable ?? false) {
+    <div class="modal-question-buttons">
+      <p-button [label]="this.modalService.modalContent()?.answerFalse" severity="secondary" (click)="awswer(false)"/>
+      <p-button [label]="this.modalService.modalContent()?.answerTrue" (click)="awswer(true)"/>
+    </div>
+  }
+</p-dialog>

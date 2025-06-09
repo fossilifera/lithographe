@@ -1,0 +1,20 @@
+<div class="view">
+  @if (this.isDevMode()) {
+    <p-card header="Inventaire de démonstration">
+      <p>Ouvrir un inventaire de démonstration pour tester l'application</p>
+      <i class="pi pi-lightbulb icon-import-choice-cards"></i>
+      <p-button (onClick)="importDemoInventory()"><span pButtonLabel>Ouvrir</span></p-button>
+    </p-card>
+  }
+  <p-card header="Configuration de l'application">
+    <div class="form-options">
+      <label for="log_level">Niveau des logs</label>
+      <p-select id="log_level" [options]="logLevels" [(ngModel)]="logLevel"/>
+    </div>
+    <p-button label="Appliquer les paramètres"  (onClick)="applySettings()"/>
+  </p-card>
+  <p-card header="Données locales">
+    <p>En cas de problème avec les données stockées dans le navigateur</p>
+    <p-button label="Supprimer toutes les données locales" severity="danger" (onClick)="deleteAllData()"/>
+  </p-card>
+</div>

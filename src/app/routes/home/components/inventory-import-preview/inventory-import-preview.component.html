@@ -1,0 +1,28 @@
+@if (this.inventoryPreview().isLoaded) {
+  @if (!this.inventoryPreview().isError) {
+    <p-table [value]="this.inventoryPreview().data" showGridlines [scrollable]="true">
+      <ng-template #header>
+        <tr>
+          @for (column of this.inventoryPreview().columns; track  column.index) {
+            <th>{{ column.name }}</th>
+          }
+        </tr>
+      </ng-template>
+      <ng-template #body let-data>
+        <tr>
+          @for (column of this.inventoryPreview().columns; track column.index) {
+            <td>{{ data[column.index] }}</td>
+          }
+        </tr>
+      </ng-template>
+    </p-table>
+  } @else {
+    <p-message severity="error">La lecture du fichier CSV a échouée, merci de vérifier la configuration.</p-message>
+  }
+} @else {
+  <div class="skeleton-table">
+    @for (i of ' '.repeat(20); track $index) {
+      <p-skeleton borderRadius="16px"/>
+    }
+  </div>
+}

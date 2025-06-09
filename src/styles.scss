@@ -1,1 +1,196 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+
+$menubar-height: 75px;
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: large;
+}
+
+.flex-display-columns {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.flex-display-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.menubar {
+  height: $menubar-height;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 10px;
+
+  .app-title {
+    font-size: x-large;
+    font-weight: 800;
+    color: var(--ltg-primary-600);
+  }
+
+  .menu-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .menu-block-template {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-right: 50px;
+
+      button {
+        margin-left: 25px;
+      }
+    }
+  }
+}
+
+
+.view {
+  position: absolute;
+  top: $menubar-height + 20px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 25px;
+  overflow: scroll;
+}
+
+.table-container {
+  overflow: hidden;
+  height: 100%;
+}
+
+.about-card {
+  padding: 15px 15px 35px 15px;
+}
+
+inventory-import {
+
+  .import-choice-card {
+    .p-card-content {
+      display: flex;
+      justify-content: space-around;
+
+      .import-choice-option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+
+  .import-option-card {
+
+    .p-card-content {
+
+      margin: 15px;
+
+
+    }
+  }
+
+  .inventory_preview_card {
+    max-width: 60vw;
+
+    .p-card-content {
+
+      margin: 15px;
+
+      .skeleton-table {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+
+        p-skeleton {
+          margin: 5px;
+        }
+
+      }
+    }
+  }
+
+  .import-confirmation-button {
+    margin: 25px auto;
+  }
+}
+
+.inventory-sidebar-container {
+  margin-right: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p-card {
+    margin-bottom: 15px;
+  }
+
+  .variables-unmapped-message {
+
+    margin: 20px 0;
+
+    .message-description {
+      margin: 5px 15px;
+    }
+
+    .variable-tag {
+      margin: 7px;
+    }
+  }
+
+}
+
+.table-container {
+
+  .column-head {
+    background: var(--ltg-amber-500);
+    color: white;
+    text-align: center;
+    font-weight: 800;
+  }
+
+}
+
+.form-options {
+  display: flex;
+  align-items: center;
+  padding-bottom: 15px;
+
+  > * {
+    padding-right: 10px;
+  }
+}
+
+.popover-selection-variables-options {
+  padding: 5px;
+}
+
+.ui-table-scrollable-wrapper {
+  overflow: auto !important;
+}
+
+.ui-table-scrollable-header, .ui-table-scrollable-body, .ui-table-scrollable-footer {
+  overflow: visible !important;
+}
+
+.help-tooltip {
+  color: var(--ltg-primary-500);
+  padding: 5px;
+}
