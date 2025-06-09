@@ -113,9 +113,7 @@ export class InventoryImportComponent implements OnInit {
   }
 
   private prefillCsvParams(): void {
-    console.log("read csv parms");
     const csvParamsStorage = this.storageService.getCsvImportParamsFromStorage();
-    console.log("csvParamsStorage", csvParamsStorage);
     if (csvParamsStorage) {
       this.csvImportParams = csvParamsStorage;
       if(csvParamsStorage.columnsMapping.authorOnly && csvParamsStorage.columnsMapping.yearOnly) {

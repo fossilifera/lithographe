@@ -26,8 +26,6 @@ export class PdfDocument {
       orientation: this.template.orientation ?? 'portrait'
     });
     this.nbTagsPerPage = template.tagsPerLine * template.tagsPerColumns;
-
-    console.log("FONTS = ", this.pdf.getFontList());
   }
 
   public addTagForSpecimen(specimen: Specimen): void {

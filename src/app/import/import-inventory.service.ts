@@ -85,8 +85,6 @@ export class ImportInventoryService {
         ...this.csvImportParamsToOptions(params),
         from: params.firstLineAsHeader ? 2 : 1 // if the first line is header, begin the extract to second line (begin to 1 and not 0 with csv.js)
       });
-      // FIXME faire une passe sur tous les console log
-      console.log(listSpecimens);
       this.inventoryService.loadNewInventory(
         this.fileName,
         listSpecimens.map((data: Record<string, string>, i: number) =>
@@ -102,8 +100,7 @@ export class ImportInventoryService {
 
   private readFile(textFile: File): Observable<string> {
     const reader = new FileReader();
-    const readerLoadEnd = fromEvent(reader, 'loadend').pipe(map((event) => {
-      console.log(event);
+    const readerLoadEnd = fromEvent(reader, 'loadend').pipe(map(() => {
       this.logger.debug("Reading csv file ended");
       return reader.result as string;
     }));

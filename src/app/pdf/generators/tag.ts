@@ -122,7 +122,6 @@ export class Tag {
     );
 
     let fontSize = params.fontSize ?? params.fontSize;
-    console.log(params);
     if (params.maxTextWidth) {
       const mawWithInPoints: number = params.maxTextWidth * 2.8125;
       while (this.pdf.getStringUnitWidth(text) * fontSize >= mawWithInPoints) {
@@ -132,7 +131,6 @@ export class Tag {
           // if the size reaches a critical minimum, the text is cut
           while(this.pdf.getStringUnitWidth(text+"[...]") * fontSize >= mawWithInPoints) {
             text = text.slice(0, -1);
-            console.log(">>>   ", text);
           }
           text = text + "[...]";
           break;
