@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {computed, inject, Injectable} from '@angular/core';
 import {InventoryService} from '../inventory/inventory.service';
 import {Logger} from '../shared/logger/logger';
 import {Template} from './templates/template';
@@ -11,6 +11,11 @@ export class PdfGeneratorService {
 
   private inventoryService: InventoryService = inject(InventoryService);
   private logger: Logger = new Logger('PdfGeneratorService');
+
+  public readonly isCreateTagsReady = computed(() => {
+    return this.inventoryService.isInventoryLoaded() && !this.inventoryService.isNoneSpecimenSelected();
+  });
+
 
   public generatePDF(template: Template): void {
     this.logger.info(`Generating PDF with template ${template.name}`);

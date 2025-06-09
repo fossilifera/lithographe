@@ -15,6 +15,7 @@ export class InventoryService {
 
   readonly isInventoryLoaded: WritableSignal<boolean> = signal(false);
   readonly isAllSpecimensSelected = computed(() => this.specimens().every(specimen => specimen.selected));
+  readonly isNoneSpecimenSelected = computed(() => !this.specimens().some(specimen => specimen.selected));
 
 
   public getInventoryFileName(): string | null {

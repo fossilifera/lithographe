@@ -25,7 +25,7 @@
             class="w-full md:w-56"/>
           <label for="template">Modèle d'étiquette</label>
         </p-iftalabel>
-        <button pButton pRipple severity="success" (click)="createLabels()">
+        <button pButton pRipple severity="success" [disabled]="!this.pdfGeneratorService.isCreateTagsReady()" (click)="createLabels()">
           <span class="pi pi-play"></span>
           <span pButtonLabel>Créer les étiquettes</span>
         </button>

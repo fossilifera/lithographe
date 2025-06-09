@@ -10,6 +10,7 @@ import {TemplateRegistry} from '../../../templates/template-registry';
 import {Template} from '../../pdf/templates/template';
 import {Menubar} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
+import {ModalService} from '../modal/modal.service';
 
 @Component({
   selector: 'ltg-menu-bar',
@@ -28,8 +29,8 @@ import {MenuItem} from 'primeng/api';
   templateUrl: './menu-bar.component.html'
 })
 export class MenuBarComponent implements OnInit {
-  private pdfGeneratorService: PdfGeneratorService = inject(PdfGeneratorService);
-
+  protected readonly pdfGeneratorService: PdfGeneratorService = inject(PdfGeneratorService);
+  private readonly modalService: ModalService = inject(ModalService);
   protected links: MenuItem[] | undefined;
 
   protected templatesOptions = TemplateRegistry;
@@ -50,7 +51,13 @@ export class MenuBarComponent implements OnInit {
   }
 
   protected createLabels(): void {
+    this.modalService.displayModal({
+      title: "Création des étiquettes",
+      message: "Veuillez patienter",
+      displaySpinner: true
+    });
     this.pdfGeneratorService.generatePDF(this.templateSelected);
+    this.modalService.hideModal();
   }
 
 }
