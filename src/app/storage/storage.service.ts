@@ -3,6 +3,7 @@ import {KeysLocalStorage} from './local-storage-keys';
 import {Specimen} from '../inventory/specimen';
 import {Logger} from '../shared/logger/logger';
 import {CsvImportParam} from '../import/csv-import-param';
+import {LogLevel} from '../shared/logger/log-levels';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,15 @@ export class StorageService {
   public persistCsvImportParams(params: CsvImportParam): void {
     this.logger.debug("Saving csv import params in local storage");
     window.localStorage.setItem(KeysLocalStorage.csvImportParams, JSON.stringify(params));
+  }
+
+  public getLogLevel(): LogLevel | undefined {
+    return window.localStorage.getItem(KeysLocalStorage.logLevel) as LogLevel;
+  }
+
+  public persistLogLevel(level: LogLevel): void {
+    this.logger.debug("Saving log level in local storage");
+    window.localStorage.setItem(KeysLocalStorage.logLevel, level);
   }
 
   public deleteAllData(): void {

@@ -1,4 +1,4 @@
-import {LOG_LEVEL, LOG_LEVELS} from './log-levels';
+import {LogLevel, LOG_LEVELS} from './log-levels';
 import {KeysLocalStorage} from '../../storage/local-storage-keys';
 
 const DEFAULT_LOG_LEVEL: number = 300;
@@ -14,8 +14,8 @@ export class Logger {
   }
 
   public error(message: string): void {
-    if (this.logLevelConfigure >= (LOG_LEVELS.get(LOG_LEVEL.ERROR) ?? 0) ) {
-      console.error(this.formatMessage(LOG_LEVEL.ERROR, message));
+    if (this.logLevelConfigure >= (LOG_LEVELS.get(LogLevel.ERROR) ?? 0) ) {
+      console.error(this.formatMessage(LogLevel.ERROR, message));
     }
   }
 
@@ -25,20 +25,20 @@ export class Logger {
   }
 
   public warn(message: string): void {
-    if (this.logLevelConfigure >= (LOG_LEVELS.get(LOG_LEVEL.WARN) ?? 0) ) {
-      console.warn(this.formatMessage(LOG_LEVEL.WARN, message));
+    if (this.logLevelConfigure >= (LOG_LEVELS.get(LogLevel.WARN) ?? 0) ) {
+      console.warn(this.formatMessage(LogLevel.WARN, message));
     }
   }
 
   public info(message: string): void {
-    if (this.logLevelConfigure >= (LOG_LEVELS.get(LOG_LEVEL.INFO) ?? 0) ) {
-      console.log(this.formatMessage(LOG_LEVEL.INFO, message));
+    if (this.logLevelConfigure >= (LOG_LEVELS.get(LogLevel.INFO) ?? 0) ) {
+      console.log(this.formatMessage(LogLevel.INFO, message));
     }
   }
 
   public debug(message: string): void {
-    if (this.logLevelConfigure >= (LOG_LEVELS.get(LOG_LEVEL.DEBUG) ?? 0) ) {
-      console.log(this.formatMessage(LOG_LEVEL.DEBUG, message));
+    if (this.logLevelConfigure >= (LOG_LEVELS.get(LogLevel.DEBUG) ?? 0) ) {
+      console.log(this.formatMessage(LogLevel.DEBUG, message));
     }
   }
 
@@ -49,7 +49,7 @@ export class Logger {
   private readLogLevel(): number {
     const key: string | null = window.localStorage.getItem(KeysLocalStorage.logLevel);
     if (key) {
-      return LOG_LEVELS.get(key as LOG_LEVEL) ?? DEFAULT_LOG_LEVEL;
+      return LOG_LEVELS.get(key as LogLevel) ?? DEFAULT_LOG_LEVEL;
     }
     return DEFAULT_LOG_LEVEL;
   }
