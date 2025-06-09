@@ -1,5 +1,5 @@
 import {computed, inject, Injectable, signal, WritableSignal} from '@angular/core';
-import {LoggerService} from '../shared/logger/logger.service';
+import {Logger} from '../shared/logger/logger';
 import {Specimen} from './specimen';
 import {StorageService} from '../storage/storage.service';
 
@@ -8,7 +8,7 @@ import {StorageService} from '../storage/storage.service';
 })
 export class InventoryService {
 
-  private logger: LoggerService = inject(LoggerService);
+  private logger = new Logger('InventoryService');
   private storageService: StorageService = inject(StorageService);
 
   readonly specimens: WritableSignal<Specimen[]> = signal([]);

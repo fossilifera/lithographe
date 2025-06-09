@@ -1,7 +1,7 @@
 import {inject, Injectable, signal, WritableSignal} from '@angular/core';
 import {InventoryService} from '../inventory/inventory.service';
 import {DEMO_INVENTORY_NAME, DEMO_INVENTORY_SPECIMENS} from '../inventory/demo-inventory';
-import {LoggerService} from '../shared/logger/logger.service';
+import {Logger} from '../shared/logger/logger';
 import {fromEvent, map, Observable} from 'rxjs';
 import {Options, parse} from 'csv-parse/browser/esm/sync';
 import {CsvImportParam} from './csv-import-param';
@@ -15,7 +15,7 @@ import {SpecimenMapperService} from './specimen-mapper.service';
 })
 export class ImportInventoryService {
 
-  private logger: LoggerService = inject(LoggerService);
+  private logger = new Logger('ImportInventoryService');
   private inventoryService: InventoryService = inject(InventoryService);
   private specimenMapper: SpecimenMapperService = inject(SpecimenMapperService);
   private readonly router = inject(Router);

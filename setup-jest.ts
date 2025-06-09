@@ -7,9 +7,6 @@ jest.mock('csv-parse/browser/esm/sync', () => ({
   parse: jest.fn()
 }));
 
-jest.mock('jspdf', () => ({
-}));
-
 // matchMedia is not implemented in JSDOM (cf. https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom)
 Object.defineProperty(window, 'matchMedia', {
   writable: true,

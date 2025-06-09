@@ -3,12 +3,14 @@ import {Template} from '../templates/template';
 import {Specimen} from '../../inventory/specimen';
 import {RectangleParams} from '../templates/rectangleParams';
 import {TextParams} from '../templates/textParams';
+import {Logger} from '../../shared/logger/logger';
 
 export class Tag {
 
   private readonly specimen: Specimen;
   private readonly pdf: jsPDF;
   private readonly template: Template;
+  private logger: Logger = new Logger("Tag");
   private readonly coordX: number;
   private readonly coordY: number;
 
@@ -21,7 +23,8 @@ export class Tag {
   }
 
   public draw(): void {
-    this.template.borders.forEach(
+    this.logger.debug(`Draw tag for specimen id ${this.specimen.id} - number ${this.specimen.number} - at coordinates: X ${this.coordX} Y ${this.coordY}`);
+        this.template.borders.forEach(
       border => this.drawBorder(border)
     );
     this.drawCollectionNumber();

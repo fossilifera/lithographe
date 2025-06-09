@@ -1,25 +1,25 @@
-import {inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, filter, Observable, tap} from 'rxjs';
 import {ModalContent} from './modal-content';
-import {LoggerService} from '../logger/logger.service';
+import {Logger} from '../logger/logger';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
 
-  private logger: LoggerService = inject(LoggerService);
+  private logger: Logger = new Logger('ModalService');
 
   private visibleModalSubject = new BehaviorSubject<boolean>(false);
-  private modalContentSubject = new BehaviorSubject<ModalContent|undefined>(undefined);
-  private responseToQuestionSubject = new BehaviorSubject<boolean|undefined>(undefined);
+  private modalContentSubject = new BehaviorSubject<ModalContent | undefined>(undefined);
+  private responseToQuestionSubject = new BehaviorSubject<boolean | undefined>(undefined);
 
 
   public isVisible(): Observable<boolean> {
     return this.visibleModalSubject.asObservable();
   }
 
-  public getModalContent(): Observable<ModalContent|undefined> {
+  public getModalContent(): Observable<ModalContent | undefined> {
     return this.modalContentSubject.asObservable();
   }
 
@@ -32,7 +32,7 @@ export class ModalService {
   public displayModalQuestion(modalContent: ModalContent): Observable<boolean> {
     this.displayModal(modalContent);
     return this.responseToQuestionSubject.asObservable().pipe(
-      filter(value => value!== undefined),
+      filter(value => value !== undefined),
       tap(() => {
         this.hideModal();
         this.responseToQuestionSubject.next(undefined);

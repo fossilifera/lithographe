@@ -1,17 +1,18 @@
-import {inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {KeysLocalStorage} from './local-storage-keys';
 import {Specimen} from '../inventory/specimen';
-import {LoggerService} from '../shared/logger/logger.service';
+import {Logger} from '../shared/logger/logger';
 import {CsvImportParam} from '../import/csv-import-param';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-  private logger: LoggerService = inject(LoggerService);
+
+  private logger: Logger = new Logger('StorageService');
 
   public getInventoryFileName(): string | null {
-      return window.localStorage.getItem(KeysLocalStorage.inventoryFileName);
+    return window.localStorage.getItem(KeysLocalStorage.inventoryFileName);
   }
 
   public persistInventoryFileName(fileName: string): void {

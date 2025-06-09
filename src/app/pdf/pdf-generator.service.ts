@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {InventoryService} from '../inventory/inventory.service';
-import {LoggerService} from '../shared/logger/logger.service';
+import {Logger} from '../shared/logger/logger';
 import {Template} from './templates/template';
 import {PdfDocument} from './generators/pdf-document';
 
@@ -10,12 +10,12 @@ import {PdfDocument} from './generators/pdf-document';
 export class PdfGeneratorService {
 
   private inventoryService: InventoryService = inject(InventoryService);
-  private logger: LoggerService = inject(LoggerService);
+  private logger: Logger = new Logger('PdfGeneratorService');
 
   public generatePDF(template: Template): void {
     this.logger.info(`Generating PDF with template ${template.name}`);
 
-    const pdfDoc = new PdfDocument(template, this.logger);
+    const pdfDoc = new PdfDocument(template);
     this.inventoryService.specimens()
       .filter(specimen => specimen.selected)
       .forEach(specimen =>

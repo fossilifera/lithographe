@@ -2,14 +2,14 @@ import {Template} from '../templates/template';
 import {jsPDF} from 'jspdf';
 import {dateForFileNameFormat} from '../../shared/utils';
 import {Specimen} from '../../inventory/specimen';
-import {LoggerService} from '../../shared/logger/logger.service';
+import {Logger} from '../../shared/logger/logger';
 import {Tag} from './tag';
 
 export class PdfDocument {
 
   private readonly pdf: jsPDF;
   private readonly template: Template;
-  private readonly logger: LoggerService;
+  private readonly logger: Logger;
   private readonly nbTagsPerPage: number;
 
   // initialisation of positions and index of tags
@@ -17,9 +17,9 @@ export class PdfDocument {
   private coordY: number = 0;
   private index: number = 0;
 
-  constructor(template: Template, logger: LoggerService) {
+  constructor(template: Template) {
     this.template = template;
-    this.logger = logger;
+    this.logger = new Logger("PdfDocument");
     this.pdf = new jsPDF({
       unit: 'mm',
       format: 'a4',
@@ -32,7 +32,6 @@ export class PdfDocument {
 
   public addTagForSpecimen(specimen: Specimen): void {
     this.computedPositionNewTag();
-    this.logger.debug(`Draw tag for specimen id ${specimen.id} - number ${specimen.number} - at coordinates: X ${this.coordX} Y ${this.coordY}`);
     new Tag(specimen, this.pdf, this.template, this.coordX, this.coordY).draw();
     this.index++;
   }

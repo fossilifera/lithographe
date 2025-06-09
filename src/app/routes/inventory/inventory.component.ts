@@ -4,7 +4,7 @@ import {Checkbox} from 'primeng/checkbox';
 import {TableModule} from 'primeng/table';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
-import {LoggerService} from '../../shared/logger/logger.service';
+import {Logger} from '../../shared/logger/logger';
 
 @Component({
   selector: 'ltg-inventory-view',
@@ -20,7 +20,7 @@ import {LoggerService} from '../../shared/logger/logger.service';
 export class InventoryComponent implements OnInit {
 
   protected readonly inventoryService: InventoryService = inject(InventoryService);
-  private logger: LoggerService = inject(LoggerService);
+  private logger: Logger = new Logger("InventoryComponent");
   private readonly router = inject(Router);
 
   ngOnInit(): void {
