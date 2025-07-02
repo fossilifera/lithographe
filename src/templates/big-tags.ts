@@ -15,7 +15,7 @@ export const BigTags: Template = {
       yOffset: 0,
       width: 115,
       height: 40,
-      lineWidth: 0.75
+      lineWidth: 0.15
     },
     {
       xOffset: 2,
