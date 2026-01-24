@@ -1,6 +1,7 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
+import {beforeEach, describe, expect, it} from 'vitest';
 
-import { PdfGeneratorService } from './pdf-generator.service';
+import {PdfGeneratorService} from './pdf-generator.service';
 
 describe('PdfGeneratorService', () => {
   let service: PdfGeneratorService;

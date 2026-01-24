@@ -24,7 +24,6 @@ import {ModalService} from '../modal/modal.service';
     Button,
     IftaLabel,
     Menubar
-
   ],
   templateUrl: './menu-bar.component.html'
 })

@@ -79,6 +79,7 @@ export class ImportInventoryService {
     }
 
     this.logger.info("Import csv file");
+    this.logger.debug("import mappings: " + JSON.stringify(params));
 
     try {
       const listSpecimens = parse(this.readTextFile, {
@@ -87,7 +88,7 @@ export class ImportInventoryService {
       });
       this.inventoryService.loadNewInventory(
         this.fileName,
-        listSpecimens.map((data: Record<string, string>, i: number) =>
+        listSpecimens.map((data: string[], i: number) =>
           this.specimenMapper.toSpecimen(data, i, params.columnsMapping)
         )
       );

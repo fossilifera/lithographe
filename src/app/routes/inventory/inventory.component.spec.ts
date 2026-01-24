@@ -1,4 +1,5 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {beforeEach, describe, expect, it, vi} from 'vitest';
 
 import {InventoryComponent} from './inventory.component';
 import {InventoryService} from '../../inventory/inventory.service';
@@ -22,9 +23,9 @@ describe('InventoryViewComponent', () => {
             specimens: signal([] as Specimen[]),
             isInventoryLoaded: signal(true),
             isAllSpecimensSelected: signal(true),
-            loadNewInventory: jest.fn(),
-            toggleSpecimenSelection: jest.fn(),
-            toggleAllSpecimen: jest.fn()
+            loadNewInventory: vi.fn(),
+            toggleSpecimenSelection: vi.fn(),
+            toggleAllSpecimen: vi.fn()
           } as Partial<InventoryService>
         }
       ]

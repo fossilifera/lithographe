@@ -7,7 +7,7 @@ import {ColumnsMapping} from './columns-mapping';
 })
 export class SpecimenMapperService {
 
-  public toSpecimen(values: Record<string, string>, i: number, mappings: ColumnsMapping): Specimen {
+  public toSpecimen(values: string[], i: number, mappings: ColumnsMapping): Specimen {
     return {
       id: i,
       selected: true,
@@ -28,40 +28,44 @@ export class SpecimenMapperService {
     };
   }
 
-  private getValue(values: Record<string, string>, columnIndex: number | undefined): string {
-    if (columnIndex && values[columnIndex]) {
+  private getValue(values: string[], columnIndex: number | undefined): string {
+    if (columnIndex !== undefined && values[columnIndex] !== undefined) {
       return this.cleanString(values[columnIndex]);
     }
     return '';
   }
 
-  private getAuthorYear(values: Record<string, string>, mappings: ColumnsMapping): string {
-    if (mappings.authorAndYear) {
+  private getAuthorYear(values: string[], mappings: ColumnsMapping): string {
+    if (mappings.authorAndYear !== undefined) {
       return this.cleanString(values[mappings.authorAndYear.index]);
-    } else if (
-      mappings.authorOnly
-      && values[mappings.authorOnly.index]
-      && mappings.yearOnly
-      && values[mappings.yearOnly.index]
-    ) {
-      const withParenthesis: boolean = /^\(.*\)$/.test(values[mappings.authorOnly.index]);
-      if (withParenthesis) {
-        const regexAuthor = values[mappings.authorOnly.index].match(/\(([^)]+)\)/);
-        if (regexAuthor) {
-          return this.cleanString("(" + regexAuthor[1] + ", " + values[mappings.yearOnly.index] + ")");
-        }
-      } else {
-        return this.cleanString(values[mappings.authorOnly.index] + ", " + values[mappings.yearOnly.index]);
+    }
+
+    let author: string | undefined = (mappings.authorOnly !== undefined && values[mappings.authorOnly.index] !== undefined) ?
+      this.cleanString(values[mappings.authorOnly.index]) : undefined;
+    const year: string | undefined = (mappings.yearOnly !== undefined && values[mappings.yearOnly.index] !== undefined) ?
+      this.cleanString(values[mappings.yearOnly.index]) : undefined;
+    const withParenthesis: boolean = /^\(.*\)$/.test(author ?? '');
+
+    if (withParenthesis) {
+      const regexAuthor = author ? author.match(/\(([^)]+)\)/) : null;
+      if (regexAuthor) {
+        author = regexAuthor[1];
       }
     }
-    return '';
+
+    return [
+      withParenthesis ? "(" : "",
+      author ?? "",
+      year ? `, ${year}` : "",
+      withParenthesis ? ")" : "",
+    ].join('');
   }
 
-  private getStatus(values: Record<string, string>, mappings: ColumnsMapping): string {
+  private getStatus(values: string[], mappings: ColumnsMapping): string {
     let value: string = this.getValue(values, mappings.status?.index);
-    if(mappings.statusToIgnore) {
+    if (mappings.statusToIgnore) {
       mappings.statusToIgnore.split('\n').forEach((strToIgnore: string) => {
-          value = value.replace(strToIgnore, '');
+        value = value.replace(strToIgnore, '');
       })
     }
     return value;

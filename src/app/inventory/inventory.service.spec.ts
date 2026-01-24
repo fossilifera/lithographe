@@ -1,4 +1,5 @@
 import {TestBed} from '@angular/core/testing';
+import {beforeEach, describe, expect, it} from 'vitest';
 
 import {InventoryService} from './inventory.service';
 import {DEMO_INVENTORY_NAME, DEMO_INVENTORY_SPECIMENS} from './demo-inventory';

@@ -8,14 +8,13 @@ L'application est accessible ici: [https://fossilifera.github.io/lithographe/](h
 
 ## Développement
 
-+ Installer Node et Corepack
 + Installer les dépendances:
 ```bash
-pnpm install
+bun install
 ```
 + Lancer le projet en local
 ```bash
-pnpm run start
+bun run start
 ```
 
 Une fois démarré, ouvrir son navigateur sur [http://localhost:4200/](http://localhost:4200/).
@@ -24,9 +23,9 @@ Une fois démarré, ouvrir son navigateur sur [http://localhost:4200/](http://lo
 
 + pour déployer la page github:
 ```bash
-ng deploy
+bun run deploy
 ```
 + pour build le projet en local
 ```bash
-pnpm run build
+bun run build
 ```

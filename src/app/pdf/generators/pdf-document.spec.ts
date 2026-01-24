@@ -1,3 +1,4 @@
+import {describe, expect, it} from 'vitest';
 import {PdfDocument} from './pdf-document';
 import {LittleTags} from '../../../templates/little-tags';
 

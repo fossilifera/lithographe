@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {beforeEach, describe, expect, it} from 'vitest';
 
-import { SettingsComponent } from './settings.component';
+import {SettingsComponent} from './settings.component';
 
 describe('SettingsViewComponent', () => {
   let component: SettingsComponent;
@@ -10,7 +11,7 @@ describe('SettingsViewComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SettingsComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SettingsComponent);
     component = fixture.componentInstance;

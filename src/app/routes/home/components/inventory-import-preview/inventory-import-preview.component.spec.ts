@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {beforeEach, describe, expect, it} from 'vitest';
 
-import { InventoryImportPreviewComponent } from './inventory-import-preview.component';
+import {InventoryImportPreviewComponent} from './inventory-import-preview.component';
 
 describe('InventoryImportPreviewComponent', () => {
   let component: InventoryImportPreviewComponent;
@@ -10,7 +11,7 @@ describe('InventoryImportPreviewComponent', () => {
     await TestBed.configureTestingModule({
       imports: [InventoryImportPreviewComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(InventoryImportPreviewComponent);
     component = fixture.componentInstance;

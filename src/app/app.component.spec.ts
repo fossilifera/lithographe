@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import {provideRouter} from '@angular/router';
+import {beforeEach, describe, expect, it} from 'vitest';
 
 describe('AppComponent', () => {
   beforeEach(async () => {

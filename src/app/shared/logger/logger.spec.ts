@@ -1,4 +1,5 @@
 import {Logger} from './logger';
+import {describe, expect, it} from 'vitest';
 
 describe('LoggerService', () => {
 

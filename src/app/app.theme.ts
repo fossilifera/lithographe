@@ -19,12 +19,11 @@ export const appTheme = definePreset(Nora, {
   },
   components: {
     menubar: {
-      border: {
-        color: '{amber.500}',
-
-      },
-      padding: '10px 25px',
-      gap: '25px'
+      root: {
+        borderColor: '{amber.500}',
+        padding: '10px 25px',
+        gap: '25px'
+      }
     }
   }
 });
